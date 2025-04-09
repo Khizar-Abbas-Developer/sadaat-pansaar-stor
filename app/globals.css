@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@plugin "daisyui";
+
 /* globals.css */
 body {
   font-family: "Poppins", sans-serif;

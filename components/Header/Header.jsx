@@ -1,26 +1,19 @@
 "use client";
-import React, { useState } from "react";
-import { FaHeart, FaShoppingCart, FaBars } from "react-icons/fa";
+import React from "react";
+import { FaShoppingCart } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import logo from "@/public/assets/logo.png";
 import { navigationList } from "@/public/assets/assets";
-import { IoMdArrowDropdown } from "react-icons/io";
 import { RxHamburgerMenu } from "react-icons/rx";
 import "./Header.css";
-
-import { GiHamburgerMenu } from "react-icons/gi";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { usePathname } from "next/navigation";
+import { usePathname } from "next/navigation"; // Use this for server components
 import { FiHeart } from "react-icons/fi";
-
-import Image from "next/image";
 import Link from "next/link";
+import SideBar from "./SideBar";
 
 const Header = () => {
-  const pathname = usePathname();
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
-
+  const pathname = usePathname(); // Get the current pathname
   return (
     <>
       <div className="fixed top-0 left-0 w-full z-50">
@@ -33,15 +26,17 @@ const Header = () => {
               className="rounded-[9%] w-[135px] h-[89px] bg-[#c0cccc] shadow-[-2px_8px_8px_rgba(0,0,0,0.2)]"
             />
           </div>
-          <div className="absolute top-[48px] lg:hidden">
-            <GiHamburgerMenu className="text-2xl" onClick={toggleSidebar} />
+          <div className="absolute top-[48px] lg:hidden z-[9999]">
+            {/* //Mobile SideBar UI */}
+            <SideBar />
+            {/* //Mobile SideBar UI */}
           </div>
           <div />
           <div className="relative w-full max-w-md mx-auto px-4 hidden lg:block">
             <input
               type="text"
               placeholder="Search..."
-              className="w-[644px] pl-8 pr-10 rounded-full border border-gray-300 bg-gray-100 outline-none text-[14px]"
+              className="w-[644px] pl-8 pr-10 rounded-full border border-gray-300 bg-gray-100 outline-none text-[14px] text-black"
               style={{
                 paddingLeft: "20px",
                 paddingTop: "5px",
@@ -87,68 +82,6 @@ const Header = () => {
         <div className="h-[29.5px] text-sm lg:bg-[rgb(44,44,44)] bg-[#5FA800] lg:hidden flex justify-center items-center text-white text-center">
           🎉 Get Up To 10% OFF, Limited Time Only 🎉
         </div>
-        {/* //Mobile SideBar UI */}
-        {isSidebarOpen && (
-          <div
-            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-60 z-40"
-            onClick={toggleSidebar}
-          >
-            <div
-              className="absolute top-0 left-0 w-[80%] sm:w-[60%] md:w-[45%] h-full bg-white shadow-lg p-4"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex justify-between items-center mb-4">
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md"
-                />
-              </div>
-              <ul className="space-y-4 font-semibold text-[15px]">
-                <li>
-                  <Link href="/">HOME</Link>
-                </li>
-                <li>
-                  <Link href="/shop">SHOP</Link>
-                </li>
-                <li>
-                  <Link href="/about">ABOUT US</Link>
-                </li>
-                <li>
-                  <Link href="/contact">CONTACT US</Link>
-                </li>
-                <li>
-                  <Link href="/faqs">FAQS</Link>
-                </li>
-                <li>
-                  <Link href="/track-order">TRACK ORDER</Link>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Link href="/flash-sale">FLASH SALE</Link>
-                  <span className="bg-red-600 text-white px-1 text-xs rounded">
-                    NEW
-                  </span>
-                </li>
-              </ul>
-
-              <div className="flex justify-start gap-4 mt-6 ml-2">
-                <a href="#">
-                  <i className="fab fa-facebook" />
-                </a>
-                <a href="#">
-                  <i className="fab fa-instagram" />
-                </a>
-                <a href="#">
-                  <i className="fab fa-youtube" />
-                </a>
-                <a href="#">
-                  <i className="fas fa-envelope" />
-                </a>
-              </div>
-            </div>
-          </div>
-        )}
-        {/* //Mobile SideBar UI */}
         <div className="border-b border-gray-200 hidden lg:block">
           <div className="flex justify-center text-black items-center bg-white shadow-md h-[50px] gap-4">
             <div className="relative group">
