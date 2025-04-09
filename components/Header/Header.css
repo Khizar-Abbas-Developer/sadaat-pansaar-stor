@@ -1,0 +1,13 @@
+/* Base style for large screens and up */
+.singleHanded {
+  padding-left: 75px;
+  padding-right: 70px;
+}
+
+/* For screens smaller than lg (i.e., below 1024px) */
+@media screen and (max-width: 1080px) {
+  .singleHanded {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
