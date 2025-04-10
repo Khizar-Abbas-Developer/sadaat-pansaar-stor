@@ -19,13 +19,16 @@ const Header = () => {
       <div className="fixed top-0 left-0 w-full z-50">
         <div className="h-[29.5px] lg:bg-[rgb(44,44,44)] bg-[#5FA800]"></div>
         <div className="singleHanded flex justify-between items-center lg:bg-[#5FA800] bg-white h-[73px] lg:h-[65px]">
-          <div className="absolute top-[36px] hidden lg:block">
+          <Link
+            href="/"
+            className="absolute top-[36px] hidden lg:block cursor-pointer"
+          >
             <img
               src={logo.src}
               alt="Logo"
               className="rounded-[9%] w-[135px] h-[89px] bg-[#c0cccc] shadow-[-2px_8px_8px_rgba(0,0,0,0.2)]"
             />
-          </div>
+          </Link>
           <div className="absolute top-[48px] lg:hidden z-[9999]">
             {/* //Mobile SideBar UI */}
             <SideBar />
@@ -45,7 +48,8 @@ const Header = () => {
             />
             <FiSearch className="absolute top-1/2 -right-45 -translate-y-1/2 text-gray-500" />
           </div>
-          <div
+          <Link
+            href="/"
             className="absolute top-8 lg:hidden flex justify-center items-center w-full"
             style={{
               left: 0,
@@ -59,24 +63,24 @@ const Header = () => {
               alt="Logo"
               className="rounded-[9%] w-[90px] h-[60px] bg-[#c0cccc] shadow-[-2px_8px_8px_rgba(0,0,0,0.2)]"
             />
-          </div>
+          </Link>
 
           <div className="flex items-center gap-6 p-4">
             {/* Heart Icon with Badge */}
-            <div className="relative">
+            <Link href="/" className="relative">
               <FiHeart className="lg:text-white text-black text-xl" />
               <span className="absolute -top-2 -right-2 bg-black text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
                 2
               </span>
-            </div>
+            </Link>
 
             {/* Cart Icon */}
-            <div className="relative">
+            <Link href="/" className="relative">
               <FaShoppingCart className="lg:text-white text-black text-xl" />
               <span className="absolute -top-2 -right-2 bg-black text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
                 2
               </span>
-            </div>
+            </Link>
           </div>
         </div>
         <div className="h-[29.5px] text-sm lg:bg-[rgb(44,44,44)] bg-[#5FA800] lg:hidden flex justify-center items-center text-white text-center">
