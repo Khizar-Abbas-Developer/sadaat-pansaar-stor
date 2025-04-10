@@ -18,10 +18,7 @@ const SideBar = () => {
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
           {/* Hamburger Icon */}
-          <label
-            htmlFor="my-drawer"
-            className="drawer-button cursor-pointer p-4"
-          >
+          <label htmlFor="my-drawer" className="drawer-button cursor-pointer">
             <GiHamburgerMenu className="text-2xl text-black" />
           </label>
         </div>

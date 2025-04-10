@@ -30,9 +30,7 @@ const Header = () => {
             />
           </Link>
           <div className="absolute top-[48px] lg:hidden z-[9999]">
-            {/* //Mobile SideBar UI */}
             <SideBar />
-            {/* //Mobile SideBar UI */}
           </div>
           <div />
           <div className="relative w-full max-w-md mx-auto px-4 hidden lg:block">
