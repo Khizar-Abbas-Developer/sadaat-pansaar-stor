@@ -1,3 +1,5 @@
+import { navigationList } from "@/public/assets/assets";
+import Link from "next/link";
 import React from "react";
 import {
   FaFacebookF,
@@ -30,21 +32,21 @@ const SideBar = () => {
             {/* Close Button */}
             <label
               htmlFor="my-drawer"
-              className="absolute top-4 right-4 text-2xl cursor-pointer"
+              className="absolute top-4 right-6 text-3xl cursor-pointer"
             >
               <IoClose />
             </label>
-
             {/* Sidebar Top Content */}
-            <div>
+            <div className="flex flex-col gap-5" style={{ padding: "60px 0" }}>
               {/* Search Bar */}
-              <div className="mt-8 mb-6 relative">
+              <div className="mt-8 mb-6 relative" style={{ padding: "0 30px" }}>
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="input input-bordered w-full pr-10 bg-gray-100"
+                  className="input input-bordered w-full pr-10 bg-gray-100 rounded-full pl-3 py-2"
+                  style={{ padding: "10px 20px" }}
                 />
-                <button className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500">
+                <button className="absolute top-1/2 right-14 -translate-y-1/2 text-gray-500">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -63,51 +65,39 @@ const SideBar = () => {
               </div>
 
               {/* Menu Items */}
-              <ul className="space-y-4 font-semibold text-sm">
-                {[
-                  "HOME",
-                  "SHOP",
-                  "ABOUT US",
-                  "CONTACT US",
-                  "FAQS",
-                  "TRACK ORDER",
-                ].map((item) => (
-                  <li key={item}>
+              <ul className="text-sm flex flex-col gap-5">
+                {navigationList.map((item) => (
+                  <li
+                    key={item.title}
+                    className="hover:font-semibold hover:bg-[#EBEBEB] transition-all duration-300 ease-in-out"
+                    style={{ padding: "10px 40px" }}
+                  >
                     <label htmlFor="my-drawer" className="cursor-pointer">
-                      <a className="block">{item}</a>
+                      <Link className="block" href={item.path}>
+                        {item.title}
+                      </Link>
                     </label>
                   </li>
                 ))}
-
                 {/* Flash Sale with NEW Badge */}
-                <li>
-                  <label
-                    htmlFor="my-drawer"
-                    className="cursor-pointer flex items-center justify-between"
-                  >
-                    <a className="block">FLASH SALE</a>
-                    <span className="bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded">
-                      NEW
-                    </span>
-                  </label>
-                </li>
+                <div
+                  className="flex items-center gap-6"
+                  style={{ padding: "10px 33px" }}
+                >
+                  <li>
+                    <FaFacebookF className="text-xl" />
+                  </li>
+                  <li>
+                    <FaInstagram className="text-xl" />
+                  </li>
+                  <li>
+                    <FaEnvelope className="text-xl" />
+                  </li>
+                  <li>
+                    <FaYoutube className="text-2xl" />
+                  </li>
+                </div>
               </ul>
-            </div>
-
-            {/* Social Icons */}
-            <div className="flex items-center gap-4 text-xl mt-10 pt-6 border-t border-gray-200">
-              <a href="#" className="hover:text-primary">
-                <FaFacebookF />
-              </a>
-              <a href="#" className="hover:text-primary">
-                <FaInstagram />
-              </a>
-              <a href="#" className="hover:text-primary">
-                <FaEnvelope />
-              </a>
-              <a href="#" className="hover:text-primary">
-                <FaYoutube />
-              </a>
             </div>
           </div>
         </div>
