@@ -1,0 +1,27 @@
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-container {
+  overflow: hidden;
+  position: relative;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.marquee-content {
+  display: flex;
+  width: fit-content;
+  animation: marquee-scroll 50s linear infinite;
+}
+
+.marquee-group {
+  display: flex;
+  white-space: nowrap;
+}

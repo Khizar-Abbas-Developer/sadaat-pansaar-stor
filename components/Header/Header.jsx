@@ -11,13 +11,14 @@ import { usePathname } from "next/navigation"; // Use this for server components
 import { FiHeart } from "react-icons/fi";
 import Link from "next/link";
 import SideBar from "./SideBar";
+import Marquee from "../Marquee/Marquee";
 
 const Header = () => {
   const pathname = usePathname(); // Get the current pathname
   return (
     <>
       <div className="fixed top-0 left-0 w-full z-50">
-        <div className="h-[29.5px] lg:bg-[rgb(44,44,44)] bg-[#5FA800]"></div>
+        <Marquee />
         <div className="singleHanded flex justify-between items-center lg:bg-[#5FA800] bg-white h-[73px] lg:h-[65px]">
           <Link
             href="/"
