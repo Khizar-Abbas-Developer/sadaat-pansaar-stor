@@ -65,8 +65,6 @@ const Header = () => {
           </Link>
 
           <div className="flex items-center gap-6 p-4">
-            <p className="text-xl">{`1000${"$"}`}</p>
-
             {/* Heart Icon with Badge */}
             <Link href="/" className="relative">
               <FiHeart className="lg:text-white text-black text-xl" />

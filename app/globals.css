@@ -42,32 +42,3 @@ body {
 .home-margin {
   margin-top: 10px;
 }
-
-/* //CategoryList */
-.paddingCategoryList {
-  padding-top: 2.5rem; /* py-10 = 40px */
-  padding-bottom: 2.5rem;
-  padding-left: 1rem; /* px-4 = 16px */
-  padding-right: 1rem;
-}
-
-@media (min-width: 768px) {
-  .paddingCategoryList {
-    padding-left: 2.5rem; /* md:px-10 = 40px */
-    padding-right: 2.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .paddingCategoryList {
-    padding-left: 8rem; /* lg:px-32 = 128px */
-    padding-right: 8rem;
-  }
-}
-
-@media (min-width: 1280px) {
-  .paddingCategoryList {
-    padding-left: 9rem; /* xl:px-36 = 144px */
-    padding-right: 9rem;
-  }
-}

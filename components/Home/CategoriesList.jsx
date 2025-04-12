@@ -6,7 +6,7 @@ import { categoryCirclesList } from "@/public/assets/assets";
 
 const CategoriesList = () => {
   return (
-    <div className="bg-[#EFF5E9] paddingCategoryList">
+    <div className="bg-[#EFF5E9] py-10 px-4 md:px-10 lg:px-32 xl:px-36">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-300 pb-4">
         <div className="border-b-2 border-[#5FA800]">
