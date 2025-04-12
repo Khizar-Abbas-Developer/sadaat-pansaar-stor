@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { FaHeart, FaRegHeart, FaShoppingCart } from "react-icons/fa";
 import product1 from "@/public/assets/products/product-001.webp";
 import Image from "next/image";
-import categorySection1 from "@/public/assets/categorySection1.webp";
 
 const Card = ({ array }) => {
   return (
@@ -70,17 +69,6 @@ const Card = ({ array }) => {
             </React.Fragment>
           );
         })}
-        {/* Absolutely position the image so it doesn't affect Card layout */}
-        <div className="absolute top-0 right-0 z-0">
-          <Image
-            src={categorySection1}
-            alt="category"
-            width={350}
-            height={350}
-            quality={100}
-            className="object-cover rounded-lg"
-          />
-        </div>
       </div>
     </>
   );
