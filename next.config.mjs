@@ -4,7 +4,9 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   experimental: {
-    turbo: false,
+    turbo: {
+      enabled: false,
+    },
   },
 };
 

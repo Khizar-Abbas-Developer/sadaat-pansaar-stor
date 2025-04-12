@@ -8,6 +8,11 @@ import SecondLayout from "@/components/Home/SecondLayout";
 import CategoriesList from "@/components/Home/CategoriesList";
 import CategoryFirst from "@/components/Home/CategoryFirst";
 
+//CategorySEctionsImages imported from public folder
+import categorySection1 from "@/public/assets/categorySection1.webp";
+import categorySection2 from "@/public/assets/categorySection2.webp";
+import categorySection3 from "@/public/assets/categorySection3.webp";
+
 export default function Home() {
   return (
     <>
@@ -27,7 +32,21 @@ export default function Home() {
 
       {/* // */}
       <div className="flex flex-col gap-8 bg-white min-h-[60vh] home-padding">
-        <CategoryFirst />
+        <CategoryFirst
+          categorySectionImage={categorySection1}
+          heading="Dryfruit collections"
+          positionBeginning={false}
+        />
+        <CategoryFirst
+          categorySectionImage={categorySection2}
+          heading="Giftbox collections"
+          positionBeginning={true}
+        />
+        <CategoryFirst
+          categorySectionImage={categorySection3}
+          heading="Dates collection"
+          positionBeginning={false}
+        />
       </div>
     </>
   );
