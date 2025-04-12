@@ -4,11 +4,8 @@ import React from "react";
 
 const ServiceFeatures = () => {
   return (
-    <div className="px-4 md:px-12 py-10" style={{ marginTop: "50px" }}>
-      <div
-        className="flex flex-wrap justify-center gap-6 border border-gray-300 rounded-lg"
-        style={{ padding: "15px" }}
-      >
+    <div className="px-4 md:px-12 py-10 mt-[50px]">
+      <div className="flex flex-wrap justify-center gap-6 border border-gray-300 rounded-lg p-[15px]">
         {services.map((item) => (
           <div
             key={item.id}

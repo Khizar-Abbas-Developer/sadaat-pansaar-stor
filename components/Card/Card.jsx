@@ -12,10 +12,7 @@ const Card = ({ array }) => {
           const [liked, setLiked] = useState(false);
           return (
             <React.Fragment key={index}>
-              <div
-                className="relative group flex w-48 shadow-md flex-col gap-6 justify-between items-center mt-10 text-black border-2 rounded-2xl border-gray-300"
-                style={{ padding: "8px" }}
-              >
+              <div className="relative group p-[8px] flex w-48 shadow-md flex-col gap-6 justify-between items-center mt-10 text-black border-2 rounded-2xl border-gray-300">
                 <div
                   className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
                   onClick={() => setLiked(!liked)}
@@ -23,10 +20,7 @@ const Card = ({ array }) => {
                   {liked ? (
                     <FaHeart className="text-green-600 bg-white text-2xl cursor-pointer" />
                   ) : (
-                    <FaRegHeart
-                      className="text-white  bg-green-600 text-2xl cursor-pointer rounded-full"
-                      style={{ padding: "0 5px" }}
-                    />
+                    <FaRegHeart className="text-white px-[5px]  bg-green-600 text-2xl cursor-pointer rounded-full" />
                   )}
                 </div>
                 <div className="">
@@ -38,10 +32,7 @@ const Card = ({ array }) => {
                     className="rounded-lg"
                   />
                 </div>
-                <div
-                  className="flex flex-col gap-5"
-                  style={{ marginLeft: "8px" }}
-                >
+                <div className="flex flex-col gap-5 ml-[8px]">
                   <div className="flex flex-col gap-1">
                     <p className="text-left text-xs tracking-wider">
                       DRY FRUITS
@@ -57,10 +48,7 @@ const Card = ({ array }) => {
                       </span>
                       <span className="font-semibold">₨2,500</span>
                     </div>
-                    <span
-                      className="bg-[#5FA800] rounded-full"
-                      style={{ padding: "6px" }}
-                    >
+                    <span className="bg-[#5FA800] rounded-full p-[6px]">
                       <FaShoppingCart className="text-white text-lg" />
                     </span>
                   </div>

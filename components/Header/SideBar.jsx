@@ -34,14 +34,13 @@ const SideBar = () => {
               <IoClose />
             </label>
             {/* Sidebar Top Content */}
-            <div className="flex flex-col gap-5" style={{ padding: "60px 0" }}>
+            <div className="flex flex-col gap-5 py-[60px]">
               {/* Search Bar */}
-              <div className="mt-8 mb-6 relative" style={{ padding: "0 30px" }}>
+              <div className="mt-8 mb-6 relative px-[30px]">
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="input input-bordered w-full pr-10 bg-gray-100 rounded-full pl-3 py-2"
-                  style={{ padding: "10px 20px" }}
+                  className="input input-bordered w-full px-[20px] py-[10px] pr-10 bg-gray-100 rounded-full pl-3"
                 />
                 <button className="absolute top-1/2 right-14 -translate-y-1/2 text-gray-500">
                   <svg
@@ -66,8 +65,7 @@ const SideBar = () => {
                 {navigationList.map((item) => (
                   <li
                     key={item.title}
-                    className="hover:font-semibold hover:bg-[#EBEBEB] transition-all duration-300 ease-in-out"
-                    style={{ padding: "10px 40px" }}
+                    className="hover:font-semibold hover:bg-[#EBEBEB] transition-all duration-300 ease-in-out px-[40px] py-[10px]"
                   >
                     <label htmlFor="my-drawer" className="cursor-pointer">
                       <Link className="block" href={item.path}>
@@ -77,10 +75,7 @@ const SideBar = () => {
                   </li>
                 ))}
                 {/* Flash Sale with NEW Badge */}
-                <div
-                  className="flex items-center gap-6"
-                  style={{ padding: "10px 33px" }}
-                >
+                <div className="flex items-center gap-6 px-[33px] py-[10px]">
                   <li>
                     <FaFacebookF className="text-xl" />
                   </li>

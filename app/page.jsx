@@ -16,8 +16,8 @@ import categorySection3 from "@/public/assets/categorySection3.webp";
 export default function Home() {
   return (
     <>
-      <div className="bg-white min-h-screen home-padding home-margin">
-        <div className="" style={{ marginTop: "100px" }}>
+      <div className="bg-white min-h-screen px-[10px] sm:px-[20px] md:px-[40px] lg:px-[80px] xl:px-[130px] 2xl:px-[130px] home-margin">
+        <div className="mt-[105px]">
           <Banner />
         </div>
         <CategoryCards />
@@ -26,12 +26,12 @@ export default function Home() {
         <FirstLayout />
       </div>
       <CategoriesList />
-      <div className="bg-white home-padding">
+      <div className="bg-white px-[10px] sm:px-[20px] md:px-[40px] lg:px-[80px] xl:px-[130px] 2xl:px-[130px]">
         <SecondLayout />
       </div>
 
       {/* // */}
-      <div className="flex flex-col gap-8 bg-white min-h-[60vh] home-padding">
+      <div className="flex flex-col gap-8 bg-white min-h-[60vh] px-[10px] sm:px-[20px] md:px-[40px] lg:px-[80px] xl:px-[130px] 2xl:px-[130px]">
         <CategoryFirst
           categorySectionImage={categorySection1}
           heading="Dryfruit collections"

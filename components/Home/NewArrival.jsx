@@ -8,24 +8,13 @@ import Card from "../Card/Card";
 const NewArrivalCards = () => {
   return (
     <>
-      <div
-        className="flex flex-col gap-8 bg-white"
-        style={{
-          marginBottom: "60px",
-        }}
-      >
-        <div
-          className="flex justify-between items-center text-black h-auto w-full"
-          style={{ margin: "25px 10px" }}
-        >
+      <div className="flex flex-col gap-8 bg-white mb-[60px]">
+        <div className="flex justify-between items-center text-black h-auto w-full my-[25pxx] px-[10px]">
           <div className="border-b-[0.5px] border-gray-300 w-full flex justify-between items-center">
             <div className="border-b-3 border-[#5FA800]">
               <p className="text-sm md:text-xl lg:text-lg">New Arrivals</p>
             </div>
-            <div
-              className="border-b-3 flex justify-center items-center border-[#5FA800] cursor-pointer"
-              style={{ marginRight: "10px" }}
-            >
+            <div className="border-b-3 flex justify-center items-center border-[#5FA800] cursor-pointer mr-[10px]">
               <p className="text-sm md:text-xl lg:text-lg">View More</p>
               <span>
                 <MdOutlineKeyboardArrowRight className="text-gray-400 text-xl" />

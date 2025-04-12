@@ -10,20 +10,14 @@ const CategoryFirst = ({
   categorySectionImage,
 }) => {
   return (
-    <div style={{ width: "100%", padding: "16px 8px", color: "black" }}>
+    <div className="w-full px-[8px] py-[16px] text-black">
       {/* Header */}
-      <div
-        className="flex justify-between items-center text-black h-auto w-full"
-        style={{ margin: "25px 10px" }}
-      >
+      <div className="flex justify-between items-center text-black h-auto w-full mx-[10px] my-[25px]">
         <div className="border-b-[0.5px] border-gray-300 w-full flex justify-between items-center">
           <div className="border-b-3 border-[#5FA800]">
             <p className="text-sm md:text-xl lg:text-lg uppercase">{heading}</p>
           </div>
-          <div
-            className="border-b-3 flex justify-center items-center border-[#5FA800] cursor-pointer"
-            style={{ marginRight: "10px" }}
-          >
+          <div className="border-b-3 flex justify-center items-center border-[#5FA800] cursor-pointer mr-[10px]">
             <p className="text-sm md:text-xl lg:text-lg">View More</p>
             <span>
               <MdOutlineKeyboardArrowRight className="text-gray-400 text-xl" />
@@ -39,37 +33,19 @@ const CategoryFirst = ({
           // If positionBeginning is true, image comes first
           <>
             {/* Image container */}
-            <div
-              style={{
-                alignSelf: "center",
-                flexShrink: 0,
-              }}
-            >
+            <div className="self-center flex-shrink-0 lg:mt-12">
               <Image
                 src={categorySectionImage}
                 alt="category"
                 width={300}
                 height={300}
                 quality={100}
-                style={{
-                  objectFit: "cover",
-                  borderRadius: "8px",
-                  maxWidth: "100%",
-                  height: "auto",
-                }}
+                className="object-cover rounded-lg max-w-full h-auto"
               />
             </div>
 
             {/* Cards container */}
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "12px",
-                justifyContent: "center",
-                flex: 1,
-              }}
-            >
+            <div className="justify-center flex-1 flex-wrap flex gap-[12px]">
               <Card array={[1, 2, 3, 4]} />
             </div>
           </>
@@ -77,37 +53,19 @@ const CategoryFirst = ({
           // If positionBeginning is false, image comes after cards
           <>
             {/* Cards container */}
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "12px",
-                justifyContent: "center",
-                flex: 1,
-              }}
-            >
+            <div className="justify-center flex-1 flex-wrap flex gap-[12px]">
               <Card array={[1, 2, 3, 4]} />
             </div>
 
             {/* Image container */}
-            <div
-              style={{
-                alignSelf: "center",
-                flexShrink: 0,
-              }}
-            >
+            <div className="self-center flex-shrink-0 lg:mt-16">
               <Image
                 src={categorySectionImage}
                 alt="category"
                 width={300}
                 height={300}
                 quality={100}
-                style={{
-                  objectFit: "cover",
-                  borderRadius: "8px",
-                  maxWidth: "100%",
-                  height: "auto",
-                }}
+                className="object-cover rounded-[8px] max-w-full h-auto"
               />
             </div>
           </>

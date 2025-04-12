@@ -5,10 +5,7 @@ import layoutTwo from "@/public/assets/layout4.webp";
 
 const SecondLayout = () => {
   return (
-    <div
-      className="flex lg:flex-row items-center flex-col justify-center gap-8 overflow-hidden rounded-lg transition-all duration-300 ease-in-out"
-      style={{ padding: "0px 2.5px" }}
-    >
+    <div className="flex lg:flex-row px-[2.5px] items-center flex-col justify-center gap-8 overflow-hidden rounded-lg transition-all duration-300 ease-in-out">
       <div className="text-black group overflow-hidden rounded-lg transition-all duration-700 ease-in-out cursor-pointer">
         <Image
           src={layoutOne}

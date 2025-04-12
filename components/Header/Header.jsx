@@ -38,24 +38,13 @@ const Header = () => {
             <input
               type="text"
               placeholder="Search..."
-              className="w-[644px] pl-8 pr-10 rounded-full border border-gray-300 bg-gray-100 outline-none text-[14px] text-black"
-              style={{
-                paddingLeft: "20px",
-                paddingTop: "5px",
-                paddingBottom: "5px",
-              }}
+              className="w-[644px] py-[5px] pl-[20px] pr-10 rounded-full border border-gray-300 bg-gray-100 outline-none text-[14px] text-black"
             />
             <FiSearch className="absolute top-1/2 -right-45 -translate-y-1/2 text-gray-500" />
           </div>
           <Link
             href="/"
-            className="absolute top-8 lg:hidden flex justify-center items-center w-full"
-            style={{
-              left: 0,
-              right: 0,
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
+            className="absolute top-8 lg:hidden flex justify-center items-center w-full left-0 right-0 mx-auto"
           >
             <img
               src={logo.src}
@@ -91,13 +80,11 @@ const Header = () => {
             <div className="relative group">
               {/* Trigger Section */}
               <div className="flex justify-center items-center gap-2 cursor-pointer">
-                <div style={{ marginRight: "3px" }}>
+                <div className="mr-[3px]">
                   <RxHamburgerMenu className="text-2xl" />
                 </div>
                 <div className="text-[##0A0A0A] text-[14.4px] font-[400] flex justify-center items-center w-full">
-                  <span className="" style={{ marginRight: "3px" }}>
-                    All Categories
-                  </span>
+                  <span className="mr-[3px]">All Categories</span>
                   <RiArrowDropDownLine className="text-2xl" />
                 </div>
               </div>
