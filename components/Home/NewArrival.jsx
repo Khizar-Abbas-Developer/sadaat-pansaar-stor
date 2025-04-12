@@ -5,14 +5,14 @@ import product1 from "@/public/assets/products/product-001.webp";
 import { FaHeart, FaRegHeart, FaShoppingCart } from "react-icons/fa";
 import Card from "../Card/Card";
 
-const NewArrivalCards = () => {
+const NewArrivalCards = ({ title, array }) => {
   return (
     <>
       <div className="flex flex-col gap-8 bg-white mb-[60px]">
         <div className="flex justify-between items-center text-black h-auto w-full my-[25pxx] px-[10px]">
           <div className="border-b-[0.5px] border-gray-300 w-full flex justify-between items-center">
             <div className="border-b-3 border-[#5FA800]">
-              <p className="text-sm md:text-xl lg:text-lg">New Arrivals</p>
+              <p className="text-sm md:text-xl lg:text-lg uppercase">{title}</p>
             </div>
             <div className="border-b-3 flex justify-center items-center border-[#5FA800] cursor-pointer mr-[10px]">
               <p className="text-sm md:text-xl lg:text-lg">View More</p>
@@ -22,7 +22,7 @@ const NewArrivalCards = () => {
             </div>
           </div>
         </div>
-        <Card array={[1, 2, 3, 4, 5, 6]} />
+        <Card array={array} />
       </div>
     </>
   );
