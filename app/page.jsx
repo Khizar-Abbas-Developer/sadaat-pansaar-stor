@@ -30,7 +30,6 @@ export default function Home() {
       <div className="bg-white px-[10px] sm:px-[20px] md:px-[40px] lg:px-[80px] xl:px-[130px] 2xl:px-[130px]">
         <SecondLayout />
       </div>
-
       {/* // */}
       <div className="flex flex-col gap-8 bg-white min-h-[60vh] px-[10px] sm:px-[20px] md:px-[40px] lg:px-[80px] xl:px-[130px] 2xl:px-[130px]">
         <CategoryFirst

@@ -20,12 +20,19 @@ const CategoriesList = () => {
         </div>
       </div>
 
-      {/* Categories List */}
-      <div className="mt-6 flex flex-wrap justify-center sm:justify-start gap-6 md:gap-8">
+      {/* Categories List - Carousel on small screens, grid on md+ */}
+      <div
+        className="mt-6 flex md:flex-wrap gap-6 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none scrollbar-hide pb-2"
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          WebkitOverflowScrolling: "touch",
+        }}
+      >
         {categoryCirclesList.map((item) => (
           <div
             key={item.id}
-            className="flex flex-col items-center gap-2 transition-transform duration-300 transform hover:scale-110 cursor-pointer w-[100px] md:w-[120px]"
+            className="snap-start flex-shrink-0 md:flex-shrink md:w-[120px] flex flex-col items-center gap-2 transition-transform duration-300 transform hover:scale-110 cursor-pointer w-[100px]"
           >
             <Image
               src={item.image}
