@@ -12,6 +12,7 @@ import CategoryFirst from "@/components/Home/CategoryFirst";
 import categorySection1 from "@/public/assets/categorySection1.webp";
 import categorySection2 from "@/public/assets/categorySection2.webp";
 import categorySection3 from "@/public/assets/categorySection3.webp";
+import Feedback from "@/components/Home/Feedback";
 
 export default function Home() {
   return (
@@ -48,6 +49,7 @@ export default function Home() {
           positionBeginning={false}
         />
       </div>
+      <Feedback />
     </>
   );
 }

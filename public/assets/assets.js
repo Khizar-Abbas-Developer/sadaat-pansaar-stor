@@ -155,3 +155,30 @@ export const categoryCirclesList = [
     id: 8,
   },
 ];
+
+export const feedback = [
+  {
+    id: 1,
+    name: "Khawajaadil Bashi",
+    message:
+      "Sir g parcel recived with outclass packing and all nuts are very fresh n tasty thanks khan dry fruits",
+  },
+  {
+    id: 2,
+    name: "Humayun Sajid",
+    message:
+      "A really fantastic experience. They delivered with premium quality packaging and also best dry fruits in Lahore.",
+  },
+  {
+    id: 3,
+    name: "Tariq Baig",
+    message:
+      "Zabardast packing zabardast quality reasonable rates online delivery on time 10/10 Qadri Khan Bhai",
+  },
+  {
+    id: 4,
+    name: "Dr Johra",
+    message:
+      "Excellent service.All dry fruits were good quality.No hassle at ordering.Recommended.",
+  },
+];
