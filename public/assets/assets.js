@@ -7,6 +7,16 @@ import service2 from "@/public/assets/return.webp";
 import service3 from "@/public/assets/verified.webp";
 import service4 from "@/public/assets/headphones.webp";
 
+//
+import categoryList1 from "@/public/assets/Box.webp";
+import categoryList2 from "@/public/assets/almond.webp";
+import categoryList3 from "@/public/assets/Walnut.webp";
+import categoryList4 from "@/public/assets/fig.webp";
+import categoryList5 from "@/public/assets/raisins.webp";
+import categoryList6 from "@/public/assets/Dates.ci_.webp";
+import categoryList7 from "@/public/assets/kishmish.webp";
+import categoryList8 from "@/public/assets/honey.webp";
+
 export const navigationList = [
   {
     title: "Home",
@@ -100,5 +110,48 @@ export const services = [
     title: "24*7 online suport",
     description: "Premium Service",
     id: 4,
+  },
+];
+
+export const categoryCirclesList = [
+  {
+    image: categoryList1,
+    title: "Gift Boxes",
+    id: 1,
+  },
+  {
+    image: categoryList2,
+    title: "Almonds",
+    id: 2,
+  },
+  {
+    image: categoryList3,
+    title: "Walnuts",
+    id: 3,
+  },
+  {
+    image: categoryList4,
+    title: "Fig (Anjeer)",
+    id: 4,
+  },
+  {
+    image: categoryList5,
+    title: "Dry Apricot",
+    id: 5,
+  },
+  {
+    image: categoryList6,
+    title: "Dates",
+    id: 6,
+  },
+  {
+    image: categoryList7,
+    title: "Raisins",
+    id: 7,
+  },
+  {
+    image: categoryList8,
+    title: "Honey",
+    id: 8,
   },
 ];

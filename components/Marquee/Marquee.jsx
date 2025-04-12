@@ -14,7 +14,7 @@ const Marquee = () => {
         className="rounded-full"
       />
       <p className="text-sm underline text-white">Almonds</p>
-      <span className="text-red-500 text-sm"> || </span>
+      <span className="text-red-500 text-sm"> {`||`} </span>
     </div>
   ));
 

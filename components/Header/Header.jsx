@@ -65,6 +65,8 @@ const Header = () => {
           </Link>
 
           <div className="flex items-center gap-6 p-4">
+            <p className="text-xl">{`1000${"$"}`}</p>
+
             {/* Heart Icon with Badge */}
             <Link href="/" className="relative">
               <FiHeart className="lg:text-white text-black text-xl" />
@@ -82,6 +84,7 @@ const Header = () => {
             </Link>
           </div>
         </div>
+
         <div className="h-[29.5px] text-sm lg:bg-[rgb(44,44,44)] bg-[#5FA800] lg:hidden flex justify-center items-center text-white text-center">
           🎉 Get Up To 10% OFF, Limited Time Only 🎉
         </div>
