@@ -14,8 +14,8 @@ const CategoryCards = () => {
             <Image
               src={item.image}
               alt={item.id}
-              width={200}
-              height={200}
+              width={300}
+              height={300}
               className="w-full h-auto object-contain rounded-md"
               quality={100}
               priority

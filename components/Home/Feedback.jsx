@@ -60,7 +60,7 @@ const Feedback = () => {
                   <IoIosStar key={index} className="text-[#66ac04] text-xl" />
                 ))}
               </div>
-              <div className="text-sm">{item.message}</div>
+              <div className="text-sm text-black">{item.message}</div>
             </div>
             <div className="flex items-center gap-4">
               <Image
@@ -71,7 +71,7 @@ const Feedback = () => {
                 quality={100}
                 className="object-cover"
               />
-              <div className="text-sm font-medium">{item.name}</div>
+              <div className="text-sm font-medium text-black">{item.name}</div>
             </div>
           </div>
         ))}
