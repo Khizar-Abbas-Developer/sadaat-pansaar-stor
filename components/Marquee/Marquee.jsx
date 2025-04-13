@@ -5,7 +5,7 @@ import "./Marquee.css";
 
 const Marquee = () => {
   const content = [...Array(30)].map((_, index) => (
-    <div key={index} className="flex items-center gap-3 px-4">
+    <div key={index} className="flex items-center gap-1 px-4">
       <Image
         src={almondImage}
         alt="Almonds"
@@ -14,7 +14,7 @@ const Marquee = () => {
         className="rounded-full"
       />
       <p className="text-sm underline text-white">Almonds</p>
-      <span className="text-red-500 text-sm"> {`||`} </span>
+      <span className="text-red-500 text-sm ml-2"> {`||`} </span>
     </div>
   ));
 
