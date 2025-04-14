@@ -15,12 +15,14 @@ const CategoryFirst = ({
       <div className="flex justify-between items-center text-black h-auto w-full mx-[10px] my-[25px]">
         <div className="border-b-[0.5px] border-gray-300 w-full flex justify-between items-center">
           <div className="border-b-3 border-[#5FA800]">
-            <p className="text-sm md:text-xl lg:text-lg uppercase">{heading}</p>
+            <p className="text-md md:text-xl lg:text-lg uppercase">{heading}</p>
           </div>
           <div className="border-b-3 flex justify-center items-center border-[#5FA800] cursor-pointer mr-[10px]">
-            <p className="text-sm md:text-xl lg:text-lg">View More</p>
+            <p className="text-sm md:text-xl lg:text-lg text-[#5FA800]">
+              View More
+            </p>
             <span>
-              <MdOutlineKeyboardArrowRight className="text-gray-400 text-xl" />
+              <MdOutlineKeyboardArrowRight className="text-[#5FA800] text-xl" />
             </span>
           </div>
         </div>

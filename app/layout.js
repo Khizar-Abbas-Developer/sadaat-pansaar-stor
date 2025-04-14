@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased mt-[100px]">
+      <body className="antialiased mt-[110px]">
         <Header />
         {children}
         <Footer />

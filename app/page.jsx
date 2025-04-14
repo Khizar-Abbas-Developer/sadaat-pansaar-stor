@@ -18,7 +18,7 @@ import Shop from "@/components/Home/Shop";
 export default function Home() {
   return (
     <>
-      <div className="bg-white min-h-screen px-[10px] sm:px-[20px] md:px-[40px] lg:px-[80px] xl:px-[130px] 2xl:px-[130px] home-margin">
+      <div className="bg-white min-h-screen px-[10px] sm:px-[20px] md:px-[40px] lg:px-[80px] xl:px-[130px] 2xl:px-[130px]">
         <div className="mt-[105px]">
           <Banner />
         </div>
