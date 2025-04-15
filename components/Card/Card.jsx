@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { FaHeart, FaRegHeart, FaShoppingCart } from "react-icons/fa";
 import Image from "next/image";
 import product1 from "@/public/assets/products/product-001.webp";
+import Link from "next/link";
 
 // Dummy product image used for all cards; use item.image if available
 
@@ -28,7 +29,8 @@ const Card = ({ array }) => {
         {array.map((item, index) => {
           const liked = likedItems.includes(index);
           return (
-            <div
+            <Link
+              href={`/product/${"343dlfjdlfdf"}`}
               key={index}
               className="snap-start min-w-[200px] md:min-w-[180px] max-w-[200px] md:max-w-[180px] relative group p-[8px] flex flex-col gap-6 justify-between items-center mt-2 text-black border-2 rounded-2xl border-gray-300 shadow-md bg-white"
             >
@@ -74,7 +76,7 @@ const Card = ({ array }) => {
                   </span>
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>
