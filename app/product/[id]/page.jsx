@@ -4,6 +4,7 @@ import product1 from "@/public/assets/products/product-001.webp";
 import paymentsMethodsLogo from "@/public/assets/payments-methods.webp";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
+import ProductTabs from "@/components/ProductTabs";
 
 const Product = () => {
   return (
@@ -114,6 +115,7 @@ const Product = () => {
           </div>
         </div>
       </div>
+      <ProductTabs />
     </div>
   );
 };
