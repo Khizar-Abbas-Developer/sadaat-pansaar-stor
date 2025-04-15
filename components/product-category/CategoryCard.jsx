@@ -1,8 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { FaHeart, FaRegHeart, FaShoppingCart } from "react-icons/fa";
-import { IoMdHeart } from "react-icons/io";
-
 import Image from "next/image";
 import product1 from "@/public/assets/products/product-001.webp";
 
@@ -16,57 +14,59 @@ const CategoryCard = ({ array }) => {
   };
 
   return (
-    <div className="w-full px-1 sm:px-6 lg:px-12">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-4">
+    <div className="w-full px-2 sm:px-4 md:px-6 lg:px-10 xl:px-16 ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
         {array.map((item, index) => {
           const liked = likedItems.includes(index);
           return (
             <div
               key={index}
-              className="relative group p-2 flex flex-col gap-6 justify-between items-center text-black border-2 rounded-2xl border-gray-300 shadow-md bg-white"
+              className="relative group flex flex-col justify-between border rounded-2xl shadow-md bg-white overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
             >
+              {/* Like Button */}
               <div
-                className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
                 onClick={() => toggleLike(index)}
               >
                 {liked ? (
-                  <FaRegHeart className="text-white px-[5px] bg-green-600 text-2xl cursor-pointer rounded-full" />
+                  <FaHeart className="text-white bg-green-600 text-xl p-1 rounded-full" />
                 ) : (
-                  <FaRegHeart className="text-white px-[5px] bg-green-600 text-2xl cursor-pointer rounded-full" />
+                  <FaRegHeart className="text-white bg-green-600 text-xl p-1 rounded-full" />
                 )}
               </div>
 
-              <div className="w-full">
+              {/* Product Image */}
+              <div className="w-full h-[220px] flex items-start justify-center px-2 py-2">
                 <Image
-                  src={product1} // Replace with item.image if dynamic
+                  src={product1}
                   alt="product"
-                  width={250}
+                  width={320}
                   height={250}
-                  className="rounded-lg object-contain"
+                  className="rounded-lg object-contain max-h-full"
                 />
               </div>
 
-              <div className="flex flex-col gap-5 w-full">
+              {/* Product Info */}
+              <div className="flex flex-col justify-between gap-4 p-4">
                 <div className="flex flex-col gap-1">
-                  <p className="text-left text-xs tracking-wider text-gray-500">
+                  <p className="text-xs text-gray-500 tracking-wider">
                     DRY FRUITS
                   </p>
-                  <p className="text-sm tracking-wider font-medium">
+                  <p className="text-sm font-medium text-gray-800 tracking-wide">
                     {item.name || "Brazil Nuts Without Shell 250g Pack"}
                   </p>
                 </div>
-                <div className="flex justify-between items-center">
+
+                <div className="flex items-center justify-between">
                   <div>
-                    <span className="font-light text-gray-500 text-md tracking-wide">
-                      From:{" "}
-                    </span>
-                    <span className="font-semibold">
+                    <span className="text-sm text-gray-500">From: </span>
+                    <span className="font-semibold text-black">
                       {item.price || "₨2,500"}
                     </span>
                   </div>
-                  <span className="bg-[#5FA800] rounded-full p-2">
+                  <div className="bg-green-600 p-2 rounded-full cursor-pointer">
                     <FaShoppingCart className="text-white text-lg" />
-                  </span>
+                  </div>
                 </div>
               </div>
             </div>

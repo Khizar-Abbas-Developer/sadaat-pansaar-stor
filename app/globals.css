@@ -9,3 +9,22 @@ body {
 ::-webkit-scrollbar {
   display: none;
 }
+
+/* globals.css */
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  background: #5fa800;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -7px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  background: #5fa800;
+  border-radius: 50%;
+  cursor: pointer;
+}
