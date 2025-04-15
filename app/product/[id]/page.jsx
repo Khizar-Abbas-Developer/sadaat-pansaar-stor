@@ -3,10 +3,11 @@ import React from "react";
 import product1 from "@/public/assets/products/product-001.webp";
 import paymentsMethodsLogo from "@/public/assets/payments-methods.webp";
 import { FaWhatsapp } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Product = () => {
   return (
-    <div className="h-[100vh] mt-[100px] px-4 sm:px-8 md:px-[50px] lg:px-[165px] py-[40px] md:py-[64px]">
+    <div className="h-[170vh] lg:h-[100vh] mt-[100px] px-4 sm:px-8 md:px-[50px] lg:px-[165px] py-[40px] md:py-[64px]">
       <div className="flex flex-col lg:flex-row justify-between items-center gap-10">
         {/* Image Section */}
         <div className="w-full lg:w-[50%] flex justify-center">
@@ -79,23 +80,26 @@ const Product = () => {
                 +
               </button>
             </div>
-            <button className="bg-green-500 px-6 py-2 text-white font-bold rounded">
+            <button className="bg-[#559812] px-6 flex justify-center items-center gap-3 py-2 text-white font-bold rounded">
+              <FaShoppingCart className="text-lg" />
               ADD TO CART
             </button>
-            <button className="bg-green-500 px-6 py-2 text-white font-bold rounded">
+            <button className="bg-[#559812] px-6 py-2 text-white font-bold rounded">
               BUY NOW
             </button>
           </div>
 
           {/* Shipping & Returns */}
-          <div className="text-sm">
+          <div className="text-sm my-1">
             <div>
-              <span className="text-red-400">Shipping:</span> Delivery 2 to 4
-              Business Days
+              <span className="text-black">Shipping:</span>{" "}
+              <span className="text-red-400">
+                Delivery 2 to 4 Business Days
+              </span>
             </div>
             <div>
-              <span className="text-green-400">Returns:</span> 7 Day Easy
-              Returns
+              <span className="text-black">Returns:</span>{" "}
+              <span className="text-[#5FA800]">7 Day Easy Returns</span>
             </div>
           </div>
 
