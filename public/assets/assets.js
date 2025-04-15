@@ -116,41 +116,49 @@ export const services = [
 export const categoryCirclesList = [
   {
     image: categoryList1,
+    category: "gift-boxes",
     title: "Gift Boxes",
     id: 1,
   },
   {
     image: categoryList2,
+    category: "almonds",
     title: "Almonds",
     id: 2,
   },
   {
     image: categoryList3,
+    category: "walnuts",
     title: "Walnuts",
     id: 3,
   },
   {
     image: categoryList4,
+    category: "fig",
     title: "Fig (Anjeer)",
     id: 4,
   },
   {
     image: categoryList5,
+    category: "raisins",
     title: "Dry Apricot",
     id: 5,
   },
   {
     image: categoryList6,
+    category: "dates",
     title: "Dates",
     id: 6,
   },
   {
     image: categoryList7,
+    category: "cashews",
     title: "Raisins",
     id: 7,
   },
   {
     image: categoryList8,
+    category: "honey",
     title: "Honey",
     id: 8,
   },

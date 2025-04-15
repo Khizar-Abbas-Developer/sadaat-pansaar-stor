@@ -3,6 +3,7 @@ import React from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import categoryList1 from "@/public/assets/Box.webp";
 import { categoryCirclesList } from "@/public/assets/assets";
+import Link from "next/link";
 
 const CategoriesList = () => {
   return (
@@ -30,7 +31,8 @@ const CategoriesList = () => {
         }}
       >
         {categoryCirclesList.map((item) => (
-          <div
+          <Link
+            href={`product-category/${item.category}`}
             key={item.id}
             className="snap-start flex-shrink-0 md:flex-shrink md:w-[120px] flex flex-col items-center gap-2 transition-transform duration-300 transform hover:scale-110 cursor-pointer w-[100px]"
           >
@@ -43,7 +45,7 @@ const CategoriesList = () => {
               className="object-cover rounded-full"
             />
             <p className="text-center text-sm md:text-base">{item.title}</p>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
