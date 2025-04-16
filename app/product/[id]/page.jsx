@@ -4,12 +4,12 @@ import product1 from "@/public/assets/products/product-001.webp";
 import paymentsMethodsLogo from "@/public/assets/payments-methods.webp";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
-import ProductTabs from "@/components/ProductTabs";
 import RelatedProducts from "@/components/RelatedProducts";
+import NumberOfProducts from "@/components/NumberOfProducts";
 
 const Product = () => {
   return (
-    <div className="h-[250vh] lg:h-[180vh] mt-[100px] px-4 sm:px-8 md:px-[50px] lg:px-[165px] py-[40px] md:py-[64px]">
+    <div className="h-[260vh] lg:h-auto mt-[100px] px-4 sm:px-8 md:px-[50px] lg:px-[165px] py-[40px] md:py-[64px]">
       <div className="flex flex-col lg:flex-row justify-between items-center gap-10">
         {/* Image Section */}
         <div className="w-full lg:w-[50%] flex justify-center">
@@ -73,15 +73,7 @@ const Product = () => {
 
           {/* Quantity + Buttons */}
           <div className="flex flex-wrap items-center gap-3">
-            <div className="flex items-center border border-white rounded overflow-hidden">
-              <button className="bg-white text-black w-8 h-8 text-lg font-bold">
-                -
-              </button>
-              <div className="px-4 bg-white text-black">1</div>
-              <button className="bg-white text-black w-8 h-8 text-lg font-bold">
-                +
-              </button>
-            </div>
+            <NumberOfProducts />
             <button className="bg-[#559812] px-6 flex justify-center items-center gap-3 py-2 text-white font-bold rounded">
               <FaShoppingCart className="text-lg" />
               ADD TO CART
@@ -116,7 +108,42 @@ const Product = () => {
           </div>
         </div>
       </div>
-      <ProductTabs />
+      <div className="px-10">
+        <div className="shadow-lg rounded-lg px-12 py-8 mt-10">
+          <div className="flex justify-between items-center text-xl font-semibold mb-4">
+            About this item
+          </div>
+          <ul className="mt-4 list-disc list-inside text-gray-700 text-sm sm:text-base space-y-2">
+            <li>
+              <span className="font-bold">POWER UP YOUR PLAY</span> – Win more
+              games with Windows 11, a 13th Gen Intel Core i7-13650HX processor,
+              and an NVIDIA GeForce RTX 4060 Laptop GPU at 140W Max TGP.
+            </li>
+            <li>
+              <span className="font-bold">BLAZING FAST MEMORY AND STORAGE</span>{" "}
+              – Multitask swiftly with 16GB of DDR5-4800MHz memory and 1TB of
+              PCIe Gen4 SSD.
+            </li>
+            <li>
+              <span className="font-bold">ROG INTELLIGENT COOLING</span> – The
+              Strix G16 features Thermal Grizzly’s Conductonaut Extreme liquid
+              metal on the CPU, and a third intake fan among other premium
+              features, to allow for better sustained performance over long
+              gaming sessions.
+            </li>
+            <li>
+              <span className="font-bold">SWIFT DISPLAY</span> – The Strix G16
+              features a FHD 165Hz panel, 100% sRGB, Pantone Validation, among
+              other premium features on the Strix G16.
+            </li>
+            <li>
+              <span className="font-bold">XBOX GAME PASS</span> – Get a free
+              90-day pass and gain access to over 100 high-quality games. With
+              games added all the time, there’s always something new to play.
+            </li>
+          </ul>
+        </div>
+      </div>
       <RelatedProducts array={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
     </div>
   );
