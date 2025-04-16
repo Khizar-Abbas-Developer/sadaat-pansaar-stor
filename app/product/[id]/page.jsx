@@ -5,10 +5,11 @@ import paymentsMethodsLogo from "@/public/assets/payments-methods.webp";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import ProductTabs from "@/components/ProductTabs";
+import RelatedProducts from "@/components/RelatedProducts";
 
 const Product = () => {
   return (
-    <div className="h-[170vh] lg:h-[100vh] mt-[100px] px-4 sm:px-8 md:px-[50px] lg:px-[165px] py-[40px] md:py-[64px]">
+    <div className="h-[265vh] lg:h-[180vh] mt-[100px] px-4 sm:px-8 md:px-[50px] lg:px-[165px] py-[40px] md:py-[64px]">
       <div className="flex flex-col lg:flex-row justify-between items-center gap-10">
         {/* Image Section */}
         <div className="w-full lg:w-[50%] flex justify-center">
@@ -116,6 +117,7 @@ const Product = () => {
         </div>
       </div>
       <ProductTabs />
+      <RelatedProducts array={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
     </div>
   );
 };

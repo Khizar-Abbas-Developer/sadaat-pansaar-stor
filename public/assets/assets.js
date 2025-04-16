@@ -190,3 +190,20 @@ export const feedback = [
       "Excellent service.All dry fruits were good quality.No hassle at ordering.Recommended.",
   },
 ];
+
+export const descriptionList = [
+  {
+    id: 1,
+    title: "Brazil Nuts Without Shell 250g Pack Available at Khan Dry Fruit",
+    description:
+      "Brazil nuts, known for their rich, buttery flavour and high nutritional value, are a sought-after snack worldwide. At Khan Dry Fruit, we are proud to offer premium Brazil nuts without shell in a convenient 250-pack. Our nuts are sourced directly from the lush Amazon rainforest, ensuring the freshest and finest quality available. In this article, we will explore the many benefits of Brazil nuts, how they are sourced, their health advantages, and why the 250g pack from Khan Dry Fruit is the ideal choice for any health-conscious consumer.",
+  },
+  {
+    id: 2,
+    title: "What Are Brazil Nuts?",
+    description:
+      "Brazil nuts are large, energy-dense seeds that come from the Brazil nut tree (Bertholletia excelsa), which grows primarily in the Amazon basin. The trees can grow up to 160 feet tall, making them one of the largest trees in the rainforest. The nuts themselves are encased in a hard, woody shell and are harvested sustainably to protect the natural environment.",
+    description2:
+      "At Khan Dry Fruit, we offer Brazil nuts without the shell, making them easy to consume without the hassle of cracking. Each nut is carefully selected and processed to maintain its natural nutrients and flavour, giving you a product that is both delicious and healthy.",
+  },
+];
