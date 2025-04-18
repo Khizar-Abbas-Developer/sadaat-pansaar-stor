@@ -8,6 +8,9 @@ const nextConfig = {
       enabled: false,
     },
   },
+  images: {
+    domains: ["res.cloudinary.com"], // ✅ Allow Cloudinary image host
+  },
 };
 
 export default nextConfig;
