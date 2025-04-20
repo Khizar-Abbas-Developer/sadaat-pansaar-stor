@@ -12,7 +12,7 @@ const CategoryCards = () => {
             className="w-full max-w-[160px] sm:max-w-[200px] md:max-w-[250px] lg:max-w-[500px] xl:max-w-[600px]"
           >
             <Image
-              src={item.image}
+              src={item.image || null}
               alt={item.id}
               width={1000} // Increased from 900 to 1000
               height={1000}

@@ -1,36 +1,69 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import product1 from "@/public/assets/products/product-001.webp";
 import paymentsMethodsLogo from "@/public/assets/payments-methods.webp";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaMinusCircle, FaPlusCircle, FaWhatsapp } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import RelatedProducts from "@/components/RelatedProducts";
-import NumberOfProducts from "@/components/NumberOfProducts";
 import axios from "axios";
 import { MoonLoader } from "react-spinners";
+import { useParams, useRouter } from "next/navigation";
 
-const Product = ({ params }) => {
+const Product = () => {
+  const params = useParams();
+  const { id } = params; // Extracting the product ID from the URL parameters
   const [loading, setLoading] = useState(true);
   const [dataToPopulate, setDataToPopulate] = React.useState({});
-  const { id } = params; // Extracting the id from params
   const URL = process.env.NEXT_PUBLIC_SERVER_URL; // Base URL for the API
+  const [count, setCount] = useState(1);
+  const navigate = useRouter(); // Using Next.js router for navigation
   const fetchProduct = async () => {
     try {
       const response = await axios.get(
         `${URL}/api/v1/product/get-product/${id}`
       );
       setDataToPopulate(response.data.product);
-      console.log(response.data.product);
+      console.log(response.data.product); // Logging the fetched product data
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false); // Set loading to false after fetching data
     }
   };
+  const [currentVariant, setCurrentVariant] = useState(
+    dataToPopulate?.variants?.[0]?.variantName || null
+  );
+  const [currentPrice, setCurrentPrice] = useState(
+    dataToPopulate?.variants?.[0]?.variantPrice || null
+  );
+
   useEffect(() => {
     fetchProduct();
   }, []);
+
+  useEffect(() => {
+    if (dataToPopulate?.variants) {
+      setCurrentVariant(dataToPopulate.variants[0].variantName);
+      setCurrentPrice(dataToPopulate.variants[0].variantPrice);
+    }
+  }, [dataToPopulate]);
+  const handleIncrease = () => {
+    if (count >= dataToPopulate.productsInStock) {
+      return;
+    }
+    setCount(count + 1);
+  };
+  const handleDecrease = () => {
+    if (count <= 1) {
+      setCount(1);
+      return;
+    }
+    setCount(count - 1);
+  };
+  const redirectToWishList = () => {
+    console.log("clicked and redirecting to wishlist");
+    navigate.push("/product/wishlist");
+  };
   return (
     <>
       {loading ? (
@@ -43,7 +76,7 @@ const Product = ({ params }) => {
             {/* Image Section */}
             <div className="w-full lg:w-[50%] flex justify-center">
               <Image
-                src={dataToPopulate?.image}
+                src={dataToPopulate?.image || null}
                 width={490}
                 height={490}
                 alt="product"
@@ -68,7 +101,7 @@ const Product = ({ params }) => {
               {/* Price */}
               <div className="text-base sm:text-xl font-semibold text-black my-2">
                 <span className="text-[#5FA800]">From:</span> ₨
-                {dataToPopulate?.productPrice}
+                {dataToPopulate?.variants?.[0]?.variantPrice || null}
               </div>
 
               {/* WhatsApp Help Button */}
@@ -79,24 +112,29 @@ const Product = ({ params }) => {
 
               {/* Weight Buttons */}
               <div className="flex flex-wrap gap-3">
-                <button className="cursor-pointer border-2 border-[#559812] px-4 py-1 rounded text-green-500 bg-white">
-                  250 gm
-                </button>
-                <button className="cursor-pointer border border-gray-400 px-4 py-1 rounded text-black">
-                  500 gm
-                </button>
-                <button className="cursor-pointer border border-gray-500 px-4 py-1 rounded text-black">
-                  1 Kg
-                </button>
+                {dataToPopulate?.variants?.map((variant) => (
+                  <button
+                    key={variant.variantName}
+                    onClick={() => {
+                      setCurrentVariant(variant.variantName);
+                      setCurrentPrice(variant.variantPrice);
+                    }}
+                    className={`${
+                      currentVariant === variant.variantName
+                        ? "cursor-pointer border-2 border-[#559812] px-4 py-1 rounded text-green-500 bg-white"
+                        : "cursor-pointer border border-black px-4 py-1 rounded text-black bg-white"
+                    }`}
+                  >
+                    {variant.variantName}
+                  </button>
+                ))}
               </div>
 
               {/* Price and Stock */}
               <div className="my-2">
                 <div className="text-xl sm:text-2xl font-bold text-black">
                   <span className="text-lg">₨</span>
-                  <span className="text-2xl">
-                    {dataToPopulate.variants[0].variantPrice}
-                  </span>
+                  <span className="text-2xl">{currentPrice}</span>
                 </div>
                 <div className="text-[#559812] font-semibold text-sm">
                   {dataToPopulate.productsInStock} in stock
@@ -105,8 +143,27 @@ const Product = ({ params }) => {
 
               {/* Quantity + Buttons */}
               <div className="flex flex-wrap items-center gap-3">
-                <NumberOfProducts />
-                <button className="bg-[#559812] px-6 flex justify-center items-center gap-3 py-2 text-white font-bold rounded">
+                <div className="flex items-center justify-center border border-white rounded overflow-hidden">
+                  <button
+                    className="bg-white text-black flex justify-center items-center w-8 h-8 text-lg font-bold"
+                    onClick={handleDecrease}
+                  >
+                    <FaMinusCircle />
+                  </button>
+                  <div className="px-4 bg-white text-black text-xl font-semibold">
+                    {count}
+                  </div>
+                  <button
+                    className="bg-white text-black flex justify-center items-center w-8 h-8 text-lg font-bold"
+                    onClick={handleIncrease}
+                  >
+                    <FaPlusCircle />
+                  </button>
+                </div>
+                <button
+                  className="bg-[#559812] px-6 cursor-pointer flex justify-center items-center gap-3 py-2 text-white font-bold rounded"
+                  onClick={redirectToWishList}
+                >
                   <FaShoppingCart className="text-lg" />
                   ADD TO CART
                 </button>
@@ -146,37 +203,12 @@ const Product = ({ params }) => {
                 About this item
               </div>
               <ul className="mt-4 list-disc list-inside text-gray-700 text-sm sm:text-base space-y-2">
-                <li>
-                  <span className="font-bold">POWER UP YOUR PLAY</span> – Win
-                  more games with Windows 11, a 13th Gen Intel Core i7-13650HX
-                  processor, and an NVIDIA GeForce RTX 4060 Laptop GPU at 140W
-                  Max TGP.
-                </li>
-                <li>
-                  <span className="font-bold">
-                    BLAZING FAST MEMORY AND STORAGE
-                  </span>{" "}
-                  – Multitask swiftly with 16GB of DDR5-4800MHz memory and 1TB
-                  of PCIe Gen4 SSD.
-                </li>
-                <li>
-                  <span className="font-bold">ROG INTELLIGENT COOLING</span> –
-                  The Strix G16 features Thermal Grizzly’s Conductonaut Extreme
-                  liquid metal on the CPU, and a third intake fan among other
-                  premium features, to allow for better sustained performance
-                  over long gaming sessions.
-                </li>
-                <li>
-                  <span className="font-bold">SWIFT DISPLAY</span> – The Strix
-                  G16 features a FHD 165Hz panel, 100% sRGB, Pantone Validation,
-                  among other premium features on the Strix G16.
-                </li>
-                <li>
-                  <span className="font-bold">XBOX GAME PASS</span> – Get a free
-                  90-day pass and gain access to over 100 high-quality games.
-                  With games added all the time, there’s always something new to
-                  play.
-                </li>
+                {dataToPopulate?.description?.map((item) => (
+                  <li key={item._id}>
+                    <span className="font-bold">{item.heading}</span> –{" "}
+                    {item.detail}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

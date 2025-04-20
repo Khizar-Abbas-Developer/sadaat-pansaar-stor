@@ -2,7 +2,7 @@
 import React from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
-import logo from "@/public/assets/logo.png";
+import logo from "@/public/assets/headerK.jpeg";
 import { navigationList } from "@/public/assets/assets";
 import { RxHamburgerMenu } from "react-icons/rx";
 import "./Header.css";
@@ -12,6 +12,8 @@ import { FiHeart } from "react-icons/fi";
 import Link from "next/link";
 import SideBar from "./SideBar";
 import Marquee from "../Marquee/Marquee";
+import CartSidebar from "../CartSidebar";
+import temporyBackgroundImage from "@/public/assets/munaza/theme.jpg";
 
 const Header = () => {
   const pathname = usePathname(); // Get the current pathname
@@ -27,12 +29,16 @@ const Header = () => {
             <img
               src={logo.src}
               alt="Logo"
-              className="rounded-[9%] w-[135px] h-[89px] bg-[#c0cccc] shadow-[-2px_8px_8px_rgba(0,0,0,0.2)]"
+              className="w-[90px] h-[90px] rounded-full bg-[#c0cccc] shadow-[-2px_8px_8px_rgba(0,0,0,0.2)]"
             />
           </Link>
+
           <div className="absolute top-[48px] lg:hidden z-[9999]">
             <SideBar />
           </div>
+          {/* <div className="absolute top-[48px] lg:hidden z-[9999]">
+            <CartSidebar />
+          </div> */}
           <div />
           <div className="relative w-full max-w-md mx-auto px-4 hidden lg:block">
             <input
@@ -44,12 +50,12 @@ const Header = () => {
           </div>
           <Link
             href="/"
-            className="absolute top-8 lg:hidden flex justify-center items-center w-full left-0 right-0 mx-auto"
+            className="absolute top-7 lg:hidden flex justify-center items-center w-full left-0 right-0 mx-auto"
           >
             <img
               src={logo.src}
               alt="Logo"
-              className="rounded-[9%] w-[90px] h-[60px] bg-[#c0cccc] shadow-[-2px_8px_8px_rgba(0,0,0,0.2)]"
+              className="w-[75px] h-[75px] rounded-full bg-[#c0cccc] shadow-[-2px_8px_8px_rgba(0,0,0,0.2)]"
             />
           </Link>
 
@@ -75,7 +81,10 @@ const Header = () => {
         <div className="h-[29.5px] text-sm lg:bg-[rgb(44,44,44)] bg-[#5FA800] lg:hidden flex justify-center items-center text-white text-center">
           🎉 Get Up To 10% OFF, Limited Time Only 🎉
         </div>
-        <div className="border-b border-gray-200 hidden lg:block">
+        <div
+          className="border-b border-gray-200 hidden lg:block"
+          style={{ backgroundImage: temporyBackgroundImage }}
+        >
           <div className="flex justify-center text-black items-center bg-white shadow-md h-[50px] gap-4">
             <div className="relative group">
               {/* Trigger Section */}

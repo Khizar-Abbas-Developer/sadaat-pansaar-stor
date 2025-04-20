@@ -106,15 +106,22 @@ const ProductUploadForm = () => {
           <label className="block mb-1 font-semibold text-gray-700">
             Category
           </label>
-          <input
-            type="text"
+          <select
             name="category"
-            placeholder="e.g. Dry Fruits"
             onChange={handleChange}
             value={formData.category}
             className="w-full border border-gray-300 px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
             required
-          />
+          >
+            <option value="" disabled>
+              Select a category
+            </option>
+            <option value="Dry Fruits">Dry Fruits</option>
+            <option value="Spices">Spices</option>
+            <option value="Grains">Grains</option>
+            <option value="Herbs">Herbs</option>
+            {/* Add more categories as needed */}
+          </select>
         </div>
 
         {/* Product Name */}

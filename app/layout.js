@@ -3,6 +3,9 @@ import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { Toaster } from "react-hot-toast";
+import ReduxToolkitProvider, {
+  PersistGateProvider,
+} from "@/redux/reduxProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,8 +34,13 @@ export default function RootLayout({ children }) {
       <body className="antialiased mt-[110px]">
         <Toaster />
         <Header />
-        {children}
-        <Footer />
+        <ReduxToolkitProvider>
+          <PersistGateProvider>
+            {/* The page content (e.g., Home) will be injected here */}
+            {children}
+          </PersistGateProvider>
+          <Footer />
+        </ReduxToolkitProvider>
       </body>
     </html>
   );

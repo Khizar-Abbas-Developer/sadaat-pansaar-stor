@@ -1,14 +1,27 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import Card from "@/components/Card/Card";
 import Image from "next/image";
+import { useSelector } from "react-redux";
 
 const CategoryFirst = ({
   positionBeginning,
   heading,
   categorySectionImage,
 }) => {
+  const [loading, setLoading] = React.useState(true);
+  const products = useSelector((state) => state.product.products);
+  const firstCategoryArray = (products || [])
+    .filter((item) => item.productNewArrival)
+    .slice(0, 4);
+  console.log(firstCategoryArray);
+
+  useEffect(() => {
+    if (firstCategoryArray.length > 0) {
+      setLoading(false);
+    }
+  }, [products]);
   return (
     <div className="w-full px-[8px] py-[16px] text-black">
       {/* Header */}
@@ -48,7 +61,7 @@ const CategoryFirst = ({
 
             {/* Cards container */}
             <div className="justify-center flex-1 flex-wrap flex gap-[12px]">
-              <Card array={[1, 2, 3, 4]} />
+              <Card arrayData={firstCategoryArray} />
             </div>
           </>
         ) : (
@@ -56,7 +69,7 @@ const CategoryFirst = ({
           <>
             {/* Cards container */}
             <div className="justify-center flex-1 flex-wrap flex gap-[12px]">
-              <Card array={[1, 2, 3, 4]} />
+              <Card arrayData={firstCategoryArray} />
             </div>
 
             {/* Image container */}

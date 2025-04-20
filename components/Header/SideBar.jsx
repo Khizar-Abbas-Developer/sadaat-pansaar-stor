@@ -22,7 +22,7 @@ const SideBar = () => {
             <GiHamburgerMenu className="text-2xl text-black" />
           </label>
         </div>
-        <div className="drawer-side z-50">
+        <div className="drawer-side z-15">
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
 
           <div className="bg-white text-black min-h-full w-80 p-4 relative flex flex-col justify-between">
