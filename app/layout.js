@@ -33,14 +33,16 @@ export default function RootLayout({ children }) {
       </head>
       <body className="antialiased mt-[110px]">
         <Toaster />
-        <Header />
         <ReduxToolkitProvider>
           <PersistGateProvider>
-            {/* The page content (e.g., Home) will be injected here */}
-            {children}
+            <Header />
+            <Toaster />
+            {/* Wrap children with main */}
+            <main>{children}</main>
           </PersistGateProvider>
           <Footer />
         </ReduxToolkitProvider>
+        {/* Place the Footer outside of the page content */}
       </body>
     </html>
   );

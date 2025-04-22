@@ -15,8 +15,6 @@ const CategoryFirst = ({
   const firstCategoryArray = (products || [])
     .filter((item) => item.productNewArrival)
     .slice(0, 4);
-  console.log(firstCategoryArray);
-
   useEffect(() => {
     if (firstCategoryArray.length > 0) {
       setLoading(false);

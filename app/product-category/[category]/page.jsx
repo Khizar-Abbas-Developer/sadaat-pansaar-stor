@@ -69,7 +69,6 @@ const ProductCategory = () => {
     const [min, max] = price;
     setMinimumPrice(min);
     setMaximumPrice(max);
-    console.log("Updated min:", min, "max:", max);
   };
 
   return (

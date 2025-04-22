@@ -9,7 +9,12 @@ const nextConfig = {
     },
   },
   images: {
-    domains: ["res.cloudinary.com"], // ✅ Allow Cloudinary image host
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
   },
 };
 

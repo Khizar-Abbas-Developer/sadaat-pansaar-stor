@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import { setProducts } from "@/redux/products/productSlice";
 import React, { useEffect } from "react";
 import { HashLoader } from "react-spinners";
+import BestSellingProducts from "@/components/Home/BestSellingProducts";
 
 export default function Home() {
   const [loading, setLoading] = React.useState(true);
@@ -74,10 +75,7 @@ export default function Home() {
           </div>
           <Feedback />
           <div className="bg-white min-h-[40vh] px-[10px] sm:px-[20px] md:px-[40px] lg:px-[80px] xl:px-[130px] 2xl:px-[130px] home-margin">
-            <NewArrivalCards
-              title={"best selling products"}
-              array={[1, 2, 3, 4, 5, 6]}
-            />
+            <BestSellingProducts title={"best selling products"} />
             <Shop />
           </div>
         </>

@@ -8,8 +8,12 @@ import RelatedProducts from "@/components/RelatedProducts";
 import axios from "axios";
 import { MoonLoader } from "react-spinners";
 import { useParams, useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { addProductToCart } from "@/redux/products/productSlice";
+import toast from "react-hot-toast";
 
 const Product = () => {
+  const dispatch = useDispatch(); // Using Redux for state management
   const params = useParams();
   const { id } = params; // Extracting the product ID from the URL parameters
   const [loading, setLoading] = useState(true);
@@ -23,7 +27,6 @@ const Product = () => {
         `${URL}/api/v1/product/get-product/${id}`
       );
       setDataToPopulate(response.data.product);
-      console.log(response.data.product); // Logging the fetched product data
     } catch (error) {
       console.log(error);
     } finally {
@@ -61,8 +64,17 @@ const Product = () => {
     setCount(count - 1);
   };
   const redirectToWishList = () => {
-    console.log("clicked and redirecting to wishlist");
     navigate.push("/product/wishlist");
+  };
+  const handleAddToCart = (item) => () => {
+    const productToAdd = {
+      ...item,
+      selectedVariant: currentVariant,
+      selectedPrice: currentPrice,
+      numberOfItems: count,
+    };
+    dispatch(addProductToCart(productToAdd));
+    toast.success("Product added to cart");
   };
   return (
     <>
@@ -162,7 +174,7 @@ const Product = () => {
                 </div>
                 <button
                   className="bg-[#559812] px-6 cursor-pointer flex justify-center items-center gap-3 py-2 text-white font-bold rounded"
-                  onClick={redirectToWishList}
+                  onClick={handleAddToCart(dataToPopulate)}
                 >
                   <FaShoppingCart className="text-lg" />
                   ADD TO CART

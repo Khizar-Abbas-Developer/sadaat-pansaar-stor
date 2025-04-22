@@ -175,7 +175,7 @@ export const feedback = [
     id: 2,
     name: "Humayun Sajid",
     message:
-      "A really fantastic experience. They delivered with premium quality packaging and also best dry fruits in Lahore.",
+      "A really fantastic experience. They delivered with premium packaging and also best dry fruits in Lahore.",
   },
   {
     id: 3,

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import logo from "@/public/assets/headerK.jpeg";
@@ -14,9 +14,22 @@ import SideBar from "./SideBar";
 import Marquee from "../Marquee/Marquee";
 import CartSidebar from "../CartSidebar";
 import temporyBackgroundImage from "@/public/assets/munaza/theme.jpg";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const pathname = usePathname(); // Get the current pathname
+  const [favoriteItems, setFavoriteItems] = React.useState(0);
+  const [cartItems, setCartItems] = React.useState(0);
+  const favouriteProducts = useSelector(
+    (state) => state.product.favouriteProducts
+  );
+  const cartProducts = useSelector((state) => state.product.cartProducts);
+
+  useEffect(() => {
+    setFavoriteItems(favouriteProducts.length);
+    setCartItems(cartProducts.length);
+  }, [favouriteProducts, cartProducts]);
+
   return (
     <>
       <div className="fixed top-0 left-0 w-full z-50">
@@ -61,10 +74,10 @@ const Header = () => {
 
           <div className="flex items-center gap-6 p-4">
             {/* Heart Icon with Badge */}
-            <Link href="/" className="relative">
+            <Link href="/product/wishlist" className="relative">
               <FiHeart className="lg:text-white text-black text-xl" />
               <span className="absolute -top-2 -right-2 bg-black text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
-                2
+                {favoriteItems}
               </span>
             </Link>
 
@@ -72,7 +85,7 @@ const Header = () => {
             <Link href="/" className="relative">
               <FaShoppingCart className="lg:text-white text-black text-xl" />
               <span className="absolute -top-2 -right-2 bg-black text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
-                2
+                {cartItems}
               </span>
             </Link>
           </div>
