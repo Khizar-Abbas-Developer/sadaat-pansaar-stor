@@ -9,8 +9,10 @@ import {
   removeFavouriteProductById,
 } from "@/redux/products/productSlice";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const WhishList = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const [data, setData] = React.useState([]);
   const favouriteProducts = useSelector(
@@ -24,9 +26,8 @@ const WhishList = () => {
     dispatch(removeFavouriteProductById(productId));
     toast.error("Product removed  from wishlist");
   };
-  const handleAddToCart = (item) => () => {
-    dispatch(addProductToCart(item));
-    toast.success("Product added to cart");
+  const handleAddToCart = (productId) => () => {
+    router.push(`/product/${productId}`);
   };
   return (
     <div className="h-auto mt-40 px-4 sm:px-8 md:px-12 lg:px-40 py-10 md:py-16">
@@ -91,7 +92,7 @@ const WhishList = () => {
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-2">
                     <button
                       className="bg-[#5FA800] text-white px-4 py-2 text-sm font-semibold rounded w-full sm:w-auto cursor-pointer"
-                      onClick={handleAddToCart(item)}
+                      onClick={handleAddToCart(item._id)}
                     >
                       Add to Cart
                     </button>

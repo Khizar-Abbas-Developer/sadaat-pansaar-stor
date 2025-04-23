@@ -9,7 +9,7 @@ import axios from "axios";
 import { MoonLoader } from "react-spinners";
 import { useParams, useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { addProductToCart } from "@/redux/products/productSlice";
+import { addProductToCart, setCartStatus } from "@/redux/products/productSlice";
 import toast from "react-hot-toast";
 
 const Product = () => {
@@ -72,8 +72,11 @@ const Product = () => {
       selectedVariant: currentVariant,
       selectedPrice: currentPrice,
       numberOfItems: count,
+      cartId: Date.now() + Math.random(), // Unique per item added
     };
     dispatch(addProductToCart(productToAdd));
+    dispatch(setCartStatus(true));
+
     toast.success("Product added to cart");
   };
   return (
@@ -157,7 +160,7 @@ const Product = () => {
               <div className="flex flex-wrap items-center gap-3">
                 <div className="flex items-center justify-center border border-white rounded overflow-hidden">
                   <button
-                    className="bg-white text-black flex justify-center items-center w-8 h-8 text-lg font-bold"
+                    className="bg-white text-black flex cursor-pointer justify-center items-center w-8 h-8 text-lg font-bold"
                     onClick={handleDecrease}
                   >
                     <FaMinusCircle />
@@ -166,7 +169,7 @@ const Product = () => {
                     {count}
                   </div>
                   <button
-                    className="bg-white text-black flex justify-center items-center w-8 h-8 text-lg font-bold"
+                    className="bg-white text-black flex cursor-pointer justify-center items-center w-8 h-8 text-lg font-bold"
                     onClick={handleIncrease}
                   >
                     <FaPlusCircle />

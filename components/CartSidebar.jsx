@@ -1,105 +1,142 @@
-import React, { useState } from "react";
-import { navigationList } from "@/public/assets/assets";
-import Link from "next/link";
+"use client";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  FaFacebookF,
-  FaInstagram,
-  FaEnvelope,
-  FaYoutube,
-} from "react-icons/fa";
+  removeProductFromCart,
+  setCartStatus,
+} from "@/redux/products/productSlice";
+import Image from "next/image";
+import { FaShoppingCart } from "react-icons/fa";
+
 import { IoClose } from "react-icons/io5";
-import { FaStaffSnake } from "react-icons/fa6";
+import { ImCross } from "react-icons/im";
+import { useRouter } from "next/navigation";
 
 const CartSidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const cartProducts = useSelector((state) => state.product.cartProducts);
+  const dispatch = useDispatch();
+  const isOpen = useSelector((state) => state.product.cartStatus);
+
+  const handleCloseCartSidebar = () => {
+    dispatch(setCartStatus(false));
+  };
+
+  const handleOpenCartSidebar = () => {
+    dispatch(setCartStatus(true));
+  };
+
+  const cartTotal = cartProducts.reduce((acc, product) => {
+    const quantity = Number(product?.numberOfItems) || 0;
+    const price = Number(product?.selectedPrice) || 0;
+    return acc + quantity * price;
+  }, 0);
+
+  const handleRemoveProduct = (cartId) => {
+    dispatch(removeProductFromCart(cartId));
+  };
 
   return (
     <>
-      {/* Hamburger Icon */}
-      <button onClick={() => setIsOpen(true)} className="cursor-pointer">
-        <FaStaffSnake className="text-2xl text-black" />
-      </button>
+      {/* Toggle Sidebar (can be removed if unused) */}
+      <button
+        onClick={handleOpenCartSidebar}
+        className="cursor-pointer z-50 fixed top-4 right-4 md:right-6"
+      ></button>
 
-      {/* Sidebar Overlay */}
+      {/* Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40"
-          onClick={() => setIsOpen(false)}
+          className="fixed inset-0 bg-transparent bg-opacity-40 z-40"
+          onClick={handleCloseCartSidebar}
         />
       )}
 
-      {/* Sidebar Panel */} 
+      {/* Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 bg-white text-black z-50 transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 h-full w-87 max-w-full bg-white text-black z-50 transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {/* Close Button */}
         <button
-          onClick={() => setIsOpen(false)}
-          className="absolute top-4 right-6 text-3xl cursor-pointer"
+          onClick={handleCloseCartSidebar}
+          className="absolute top-4 right-6 text-3xl cursor-pointer z-50"
         >
           <IoClose />
         </button>
 
-        {/* Sidebar Content */}
-        <div className="flex flex-col justify-between min-h-full p-4">
-          {/* Search Bar */}
-          <div className="mt-12 mb-6 relative px-[30px]">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="input input-bordered w-full px-[20px] py-[10px] pr-10 bg-gray-100 rounded-full pl-3"
-            />
-            <button className="absolute top-1/2 right-14 -translate-y-1/2 text-gray-500">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"
-                />
-              </svg>
-            </button>
+        {/* Content Container */}
+        <div className="flex flex-col justify-between h-full pt-16 pb-4 px-6">
+          {/* Top Header */}
+          <div className="">
+            <h1 className="text-center text-xl text-gray-400">CART</h1>
+            <hr className="text-gray-400 w-[10%] my-2 mx-auto h-1" />
           </div>
 
-          {/* Menu Items */}
-          <ul className="text-sm flex flex-col gap-5">
-            {navigationList.map((item) => (
-              <li
-                key={item.title}
-                className="hover:font-semibold hover:bg-[#EBEBEB] transition-all duration-300 ease-in-out px-[40px] py-[10px]"
-              >
-                <Link
-                  href={item.path}
-                  className="block"
-                  onClick={() => setIsOpen(false)}
+          {/* Scrollable Product List */}
+          <div className="flex-1 overflow-y-auto pr-2 mt-4">
+            {cartProducts.length > 0 ? (
+              cartProducts.map((product, index) => (
+                <div
+                  className="flex items-center gap-2 my-2"
+                  key={product.cartId || index}
                 >
-                  {item.title}
-                </Link>
-              </li>
-            ))}
-            <div className="flex items-center gap-6 px-[33px] py-[10px]">
-              <li>
-                <FaFacebookF className="text-xl" />
-              </li>
-              <li>
-                <FaInstagram className="text-xl" />
-              </li>
-              <li>
-                <FaEnvelope className="text-xl" />
-              </li>
-              <li>
-                <FaYoutube className="text-2xl" />
-              </li>
+                  <div>
+                    <Image
+                      src={product?.image || ""}
+                      alt=""
+                      width={90}
+                      height={90}
+                    />
+                  </div>
+                  <div className="">
+                    <p className="text-[16px] font-normal">
+                      {product?.productName} - {product?.selectedVariant}
+                    </p>
+                    <p>
+                      {product?.numberOfItems} × Rs:{product?.selectedPrice}
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <div
+                      className="cursor-pointer text-gray-700 hover:text-red-600 border border-black p-1 rounded-full"
+                      onClick={() => handleRemoveProduct(product.cartId)}
+                    >
+                      <ImCross size={9} />
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="flex flex-col gap-4 items-center justify-center h-full">
+                <div className="">
+                  <FaShoppingCart size={40} className="text-gray-400" />
+                </div>
+                <p className="text-gray-400 text-center">Your cart is empty.</p>
+              </div>
+            )}
+          </div>
+
+          {/* Bottom Section */}
+          <div className="mt-4 border-t border-gray-300 pt-4">
+            <div className="flex justify-between w-full">
+              <p className="font-semibold text-gray-600">Subtotal</p>
+              <p>
+                <span className="font-semibold text-lg">Rs: {cartTotal}</span>
+              </p>
             </div>
-          </ul>
+            <hr className="text-gray-200 w-full my-2" />
+            <button
+              onClick={() => router.push("/cart")}
+              className="uppercase cursor-pointer bg-[#5fa800] text-white font-semibold w-full py-2"
+            >
+              View Cart
+            </button>
+            <button className="uppercase cursor-pointer bg-black text-white font-semibold w-full py-2 mt-2">
+              Checkout
+            </button>
+          </div>
         </div>
       </div>
     </>

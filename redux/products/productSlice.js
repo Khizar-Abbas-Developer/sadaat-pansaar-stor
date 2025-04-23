@@ -6,6 +6,9 @@ const initialState = {
   favouriteProducts: [],
   cartProducts: [], // Will hold up to 24 product objects
   cartStatus: false,
+  subtotal: 0,
+  shippingMethod: "express",
+  grandTotal: 0,
 };
 
 const productSlice = createSlice({
@@ -55,29 +58,46 @@ const productSlice = createSlice({
         state.cartProducts = [];
       }
 
-      const index = state.cartProducts.findIndex(
-        (product) => product._id === newProduct._id
-      );
-
-      // If product doesn't already exist in cart, add it
-      if (index === -1) {
-        state.cartProducts.push(newProduct);
-      }
+      // Always add the new product, even if it has the same _id
+      state.cartProducts.push(newProduct);
     },
     removeProductFromCart(state, action) {
-      const productToRemove = action.payload;
+      const cartIdToRemove = action.payload;
 
-      // Defensive check
-      if (!productToRemove || !productToRemove._id) return;
+      if (!cartIdToRemove) return;
 
       if (!Array.isArray(state.cartProducts)) {
         state.cartProducts = [];
       }
 
       state.cartProducts = state.cartProducts.filter(
-        (product) => product._id !== productToRemove._id
+        (product) => product.cartId !== cartIdToRemove
       );
     },
+    updateCartItems(state, action) {
+      const newProduct = action.payload;
+
+      if (!newProduct || !newProduct._id || !newProduct.cartId) return;
+
+      if (!Array.isArray(state.cartProducts)) {
+        state.cartProducts = [];
+      }
+
+      // Remove the old product with the same cartId
+      state.cartProducts = state.cartProducts.filter(
+        (product) => product.cartId !== newProduct.cartId
+      );
+
+      // Push the updated one
+      state.cartProducts.push(newProduct);
+    },
+    setCartSummary(state, action) {
+      const { subtotal, shippingMethod, grandTotal } = action.payload;
+      state.subtotal = subtotal;
+      state.shippingMethod = shippingMethod;
+      state.grandTotal = grandTotal;
+    },
+
     setCartStatus(state, action) {
       state.cartStatus = action.payload;
     },
@@ -92,5 +112,7 @@ export const {
   addProductToCart,
   removeProductFromCart,
   setCartStatus,
+  updateCartItems,
+  setCartSummary,
 } = productSlice.actions;
 export default productSlice.reducer;

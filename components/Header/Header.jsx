@@ -14,9 +14,11 @@ import SideBar from "./SideBar";
 import Marquee from "../Marquee/Marquee";
 import CartSidebar from "../CartSidebar";
 import temporyBackgroundImage from "@/public/assets/munaza/theme.jpg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCartStatus } from "@/redux/products/productSlice";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const pathname = usePathname(); // Get the current pathname
   const [favoriteItems, setFavoriteItems] = React.useState(0);
   const [cartItems, setCartItems] = React.useState(0);
@@ -29,7 +31,9 @@ const Header = () => {
     setFavoriteItems(favouriteProducts.length);
     setCartItems(cartProducts.length);
   }, [favouriteProducts, cartProducts]);
-
+  const handleCheckCartSidebar = () => {
+    dispatch(setCartStatus(true));
+  };
   return (
     <>
       <div className="fixed top-0 left-0 w-full z-50">
@@ -49,9 +53,9 @@ const Header = () => {
           <div className="absolute top-[48px] lg:hidden z-[9999]">
             <SideBar />
           </div>
-          {/* <div className="absolute top-[48px] lg:hidden z-[9999]">
+          <div className="absolute top-[48px] z-[9999]">
             <CartSidebar />
-          </div> */}
+          </div>
           <div />
           <div className="relative w-full max-w-md mx-auto px-4 hidden lg:block">
             <input
@@ -82,12 +86,15 @@ const Header = () => {
             </Link>
 
             {/* Cart Icon */}
-            <Link href="/" className="relative">
+            <div
+              className="relative cursor-pointer"
+              onClick={handleCheckCartSidebar}
+            >
               <FaShoppingCart className="lg:text-white text-black text-xl" />
               <span className="absolute -top-2 -right-2 bg-black text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
                 {cartItems}
               </span>
-            </Link>
+            </div>
           </div>
         </div>
 
