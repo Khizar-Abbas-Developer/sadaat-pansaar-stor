@@ -90,7 +90,7 @@ const Checkout = () => {
     );
   }, [favouriteProducts, shippingOption]);
   return (
-    <div className="h-auto mt-32 px-4 sm:px-8 md:px-2 lg:px-30 py-10 flex flex-col lg:flex-row gap-10">
+    <div className="h-auto mt-32 px-4 sm:px-8 md:px-2 lg:px-40 py-10 flex flex-col lg:flex-row gap-10">
       {favouriteProducts.length > 0 ? (
         <>
           {/* Left - Wishlist Items */}
