@@ -4,8 +4,6 @@ import { ImCross } from "react-icons/im";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addProductToCart,
-  removeFavouriteProductById,
   removeProductFromCart,
   setCartSummary,
   updateCartItems,
@@ -32,6 +30,30 @@ const Cart = () => {
     toast.error("Product removed from cart");
   };
 
+  const recalculateCartSummary = (updatedCart = favouriteProducts) => {
+    const subtotal = updatedCart.reduce(
+      (acc, product) => acc + product.selectedPrice * product.numberOfItems,
+      0
+    );
+    const shippingCost = shippingOption === "express" ? 500 : 200;
+    const grandTotal = subtotal + shippingCost;
+
+    dispatch(
+      setCartSummary({
+        subtotal,
+        shippingMethod: shippingOption,
+        grandTotal,
+      })
+    );
+  };
+
+  const totalAmount = favouriteProducts.reduce((acc, item) => {
+    return acc + item.selectedPrice * item.numberOfItems;
+  }, 0);
+  useEffect(() => {
+    recalculateCartSummary();
+  }, [favouriteProducts, shippingOption]);
+  //
   const handleQuantityChange = (cartId, type) => {
     const item = favouriteProducts.find((i) => i.cartId === cartId);
     if (!item) return;
@@ -69,10 +91,6 @@ const Cart = () => {
       })
     );
   };
-
-  const totalAmount = favouriteProducts.reduce((acc, item) => {
-    return acc + item.selectedPrice * item.numberOfItems;
-  }, 0);
   useEffect(() => {
     const subtotal = favouriteProducts.reduce(
       (acc, product) => acc + product.selectedPrice * product.numberOfItems,
@@ -148,7 +166,7 @@ const Cart = () => {
                   <span className="sm:hidden font-semibold text-gray-500">
                     Qty:
                   </span>
-                  <div className="">
+                  <div>
                     <button
                       className="bg-[#f9f9f9] cursor-pointer text-gray-800 px-2 py-2 border border-gray-400"
                       onClick={() =>

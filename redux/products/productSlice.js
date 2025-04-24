@@ -75,31 +75,30 @@ const productSlice = createSlice({
       );
     },
     updateCartItems(state, action) {
-      const newProduct = action.payload;
-
-      if (!newProduct || !newProduct._id || !newProduct.cartId) return;
-
-      if (!Array.isArray(state.cartProducts)) {
-        state.cartProducts = [];
-      }
-
-      // Remove the old product with the same cartId
-      state.cartProducts = state.cartProducts.filter(
-        (product) => product.cartId !== newProduct.cartId
+      const updatedItem = action.payload;
+      state.cartProducts = state.cartProducts.map((item) =>
+        item.cartId === updatedItem.cartId ? updatedItem : item
       );
-
-      // Push the updated one
-      state.cartProducts.push(newProduct);
     },
+
     setCartSummary(state, action) {
       const { subtotal, shippingMethod, grandTotal } = action.payload;
       state.subtotal = subtotal;
       state.shippingMethod = shippingMethod;
       state.grandTotal = grandTotal;
     },
+    setShippingMethod(state, action) {
+      state.shippingMethod = action.payload;
+    },
 
     setCartStatus(state, action) {
       state.cartStatus = action.payload;
+    },
+    resetProductState(state) {
+      return {
+        ...initialState,
+        products: state.products,
+      };
     },
   },
 });
@@ -114,5 +113,7 @@ export const {
   setCartStatus,
   updateCartItems,
   setCartSummary,
+  setShippingMethod,
+  resetProductState,
 } = productSlice.actions;
 export default productSlice.reducer;

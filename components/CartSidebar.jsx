@@ -133,7 +133,10 @@ const CartSidebar = () => {
             >
               View Cart
             </button>
-            <button className="uppercase cursor-pointer bg-black text-white font-semibold w-full py-2 mt-2">
+            <button
+              className="uppercase cursor-pointer bg-black text-white font-semibold w-full py-2 mt-2"
+              onClick={() => router.push("/checkout")}
+            >
               Checkout
             </button>
           </div>

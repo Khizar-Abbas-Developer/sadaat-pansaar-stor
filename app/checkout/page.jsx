@@ -1,286 +1,365 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { ImCross } from "react-icons/im";
-import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
 import {
-  addProductToCart,
-  removeFavouriteProductById,
-  removeProductFromCart,
+  resetProductState,
   setCartSummary,
-  updateCartItems,
+  setShippingMethod,
 } from "@/redux/products/productSlice";
-import toast from "react-hot-toast";
+import axios from "axios";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import {
-  FaDotCircle,
-  FaLongArrowAltLeft,
-  FaShoppingCart,
-} from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const Checkout = () => {
-  const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
-  const grandTotal = useSelector((state) => state.product.grandTotal);
-
+  const [selectedPayment, setSelectedPayment] = useState("cod");
+  const [openPaymentAccordion, setOpenPaymentAccordion] = useState(true);
+  //
   const dispatch = useDispatch();
   const favouriteProducts = useSelector((state) => state.product.cartProducts);
-  console.log(favouriteProducts);
-  const [shippingOption, setShippingOption] = useState("standard"); // default selection
-  const handleRemoveProduct = (productId) => () => {
-    dispatch(removeProductFromCart(productId));
-    toast.error("Product removed from cart");
-  };
+  const subtotalWithoutDeliveryCharges = useSelector(
+    (state) => state.product.subtotal
+  );
+  const grandGreatTotal = useSelector((state) => state.product.grandTotal);
+  const shippingOption = useSelector((state) => state.product.shippingMethod);
+  //
+  const updateShippingAndRecalculate = (method) => (dispatch, getState) => {
+    dispatch(setShippingMethod(method));
 
-  const handleQuantityChange = (cartId, type) => {
-    const item = favouriteProducts.find((i) => i.cartId === cartId);
-    if (!item) return;
+    const { cartProducts } = getState().product;
 
-    const newCount =
-      type === "increase" ? item.numberOfItems + 1 : item.numberOfItems - 1;
-
-    if (newCount < 1 || newCount > item.productsInStock) return;
-
-    const updatedProduct = {
-      ...item,
-      numberOfItems: newCount,
-    };
-
-    dispatch(updateCartItems(updatedProduct));
-
-    // Recalculate and update totals after changing quantity
-    const updatedCart = favouriteProducts.map((product) =>
-      product.cartId === cartId ? updatedProduct : product
-    );
-
-    const subtotal = updatedCart.reduce(
-      (acc, product) => acc + product.selectedPrice * product.numberOfItems,
+    const subtotal = cartProducts.reduce(
+      (acc, item) => acc + item.selectedPrice * item.numberOfItems,
       0
     );
 
-    const shippingCost = shippingOption === "express" ? 500 : 200;
+    const shippingCost = method === "express" ? 500 : 200;
     const grandTotal = subtotal + shippingCost;
 
     dispatch(
       setCartSummary({
         subtotal,
-        shippingMethod: shippingOption,
+        shippingMethod: method,
         grandTotal,
       })
     );
   };
-
-  const totalAmount = favouriteProducts.reduce((acc, item) => {
-    return acc + item.selectedPrice * item.numberOfItems;
-  }, 0);
+  const [order, setOrder] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    orderNotes: "",
+    paymentMethod: selectedPayment,
+    shippingMethod: shippingOption,
+    subtotal: subtotalWithoutDeliveryCharges,
+    shippingCost: shippingOption === "express" ? 500 : 200,
+    total: grandGreatTotal,
+    products: favouriteProducts,
+    orderDate: new Date().toISOString(),
+    orderStatus: "pending",
+  });
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setOrder((prev) => ({ ...prev, [name]: value }));
+  };
+  const handlePlaceOrder = async () => {
+    const URL = process.env.NEXT_PUBLIC_SERVER_URL;
+    try {
+      const response = await axios.post(
+        `${URL}/api/v1/order/place-order`,
+        order
+      );
+      console.log(response);
+      dispatch(resetProductState());
+      router.push(`${`order-completed/${response.data.order._id}`}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    const subtotal = favouriteProducts.reduce(
-      (acc, product) => acc + product.selectedPrice * product.numberOfItems,
-      0
-    );
-    const shippingCost = shippingOption === "express" ? 500 : 200;
-    const grandTotal = subtotal + shippingCost;
-
-    dispatch(
-      setCartSummary({
-        subtotal,
-        shippingMethod: shippingOption,
-        grandTotal,
-      })
-    );
-  }, [favouriteProducts, shippingOption]);
+    setOrder((prev) => ({
+      ...prev,
+      paymentMethod: selectedPayment,
+      shippingMethod: shippingOption,
+      subtotal: subtotalWithoutDeliveryCharges,
+      shippingCost: shippingOption === "express" ? 500 : 200,
+      total: grandGreatTotal,
+      products: favouriteProducts,
+      orderDate: new Date().toISOString(),
+    }));
+  }, [
+    selectedPayment,
+    shippingOption,
+    subtotalWithoutDeliveryCharges,
+    grandGreatTotal,
+    favouriteProducts,
+  ]);
   return (
-    <div className="h-auto mt-32 px-4 sm:px-8 md:px-2 lg:px-40 py-10 flex flex-col lg:flex-row gap-10">
-      {favouriteProducts.length > 0 ? (
-        <>
-          {/* Left - Wishlist Items */}
-          <div className="w-full lg:w-[65%] flex flex-col">
-            {/* Header */}
-            <div className="hidden sm:grid grid-cols-5 font-semibold text-gray-600 text-sm uppercase mb-3">
-              <div className="col-span-2">Product</div>
-              <div className="text-center">Price</div>
-              <div className="text-center">Quantity</div>
-              <div className="text-center">Subtotal</div>
-            </div>
-            <hr className="mb-4 hidden sm:block border-t-2 border-gray-300" />
-
-            {/* Cart Items */}
-            {favouriteProducts.map((item) => (
-              <div
-                key={item.cartId}
-                className="flex flex-col sm:grid sm:grid-cols-5 gap-4 sm:gap-y-0 text-sm py-4 border-b"
-              >
-                {/* Product Info */}
-                <div className="flex sm:col-span-2 items-center gap-4">
-                  <button
-                    onClick={handleRemoveProduct(item.cartId)}
-                    className="text-gray-700 cursor-pointer hover:text-red-600 border border-black p-1 rounded-full"
-                  >
-                    <ImCross size={9} />
-                  </button>
-                  <Image
-                    src={item?.image || ""}
-                    alt="product"
-                    width={70}
-                    height={70}
-                    className="object-cover rounded"
+    <div className="min-h-screen mt-32 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 py-10 flex flex-col lg:flex-row gap-10">
+      {/* Left - Billing & Shipping */}
+      <div className="w-full lg:w-[65%]">
+        <div>
+          <h1 className="text-lg md:text-xl font-semibold mb-4">
+            Billing & Shipping
+          </h1>
+          <div className="flex flex-col gap-4">
+            {/* Input Field */}
+            {[
+              {
+                label: "Full Name: مکمل نام *",
+                name: "fullName",
+                id: "fullName",
+                type: "text",
+                value: order.fullName,
+              },
+              {
+                label: "Phone: فون نمبر *",
+                name: "phone",
+                id: "phone",
+                type: "number",
+                value: order.phone,
+              },
+              {
+                label: "Town / City: شہر *",
+                name: "city",
+                id: "city",
+                type: "text",
+                value: order.city,
+              },
+              {
+                label: "Address: مکمل پتہ *",
+                placeholder: "House number and street name",
+                name: "address",
+                id: "address",
+                type: "text",
+                value: order.address,
+              },
+              {
+                label: "Email address (optional)",
+                name: "email",
+                id: "email",
+                type: "email",
+                value: order.email,
+              },
+            ].map(
+              ({ label, placeholder = "", name, id, type, value }, index) => (
+                <div key={index} className="flex flex-col gap-2">
+                  <p className="font-semibold text-sm">{label}</p>
+                  <input
+                    type={type}
+                    placeholder={placeholder}
+                    name={name}
+                    id={id}
+                    value={value}
+                    onChange={handleOnChange}
+                    className="w-full border border-gray-300 p-2 rounded outline-none text-sm"
                   />
-                  <div className="flex flex-col">
-                    <p className="font-medium text-gray-800">
-                      {item?.productName}
-                    </p>
-                    <p className="text-gray-500 sm:hidden text-sm">
-                      Category: {item?.category}
-                    </p>
-                  </div>
                 </div>
+              )
+            )}
 
-                {/* Price */}
-                <div className="flex justify-between sm:justify-center sm:items-center sm:text-center">
-                  <span className="sm:hidden font-semibold text-gray-500">
-                    Price:
-                  </span>
-                  <span className="font-bold">₨{item?.selectedPrice}</span>
-                </div>
-
-                {/* Quantity */}
-                <div className="flex justify-between sm:justify-center sm:items-center">
-                  <span className="sm:hidden font-semibold text-gray-500">
-                    Qty:
-                  </span>
-                  <div className="">
-                    <button
-                      className="bg-[#f9f9f9] cursor-pointer text-gray-800 px-2 py-2 border border-gray-400"
-                      onClick={() =>
-                        handleQuantityChange(item.cartId, "decrease")
-                      }
-                    >
-                      -
-                    </button>
-                    <button className="bg-white text-gray-800 px-4 text-sm py-2 border-t border-b border-gray-400">
-                      {item?.numberOfItems}
-                    </button>
-                    <button
-                      className="bg-[#f9f9f9] cursor-pointer text-gray-800 px-2 py-2 border border-gray-400"
-                      onClick={() =>
-                        handleQuantityChange(item.cartId, "increase")
-                      }
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-
-                {/* Subtotal */}
-                <div className="flex justify-between sm:justify-center sm:items-center">
-                  <span className="sm:hidden font-semibold text-gray-500">
-                    Subtotal:
-                  </span>
-                  <span className="font-bold">
-                    ₨{item?.selectedPrice * item?.numberOfItems}
-                  </span>
-                </div>
-              </div>
-            ))}
-            <div className="w-[70%] md:w-[28%] mt-4">
-              <div
-                className="flex items-center justify-center gap-2 cursor-pointer py-2 px-2 border-2 border-[#5fa800]"
-                onClick={() => router.push("/")}
-              >
-                <span>
-                  <FaLongArrowAltLeft className="text-[#5fa800]" />
+            {/* Checkboxes */}
+            <div className="flex items-center gap-2 cursor-pointer">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" className="w-4 h-4" />
+                <span className="text-sm font-medium">
+                  Sign me up to receive email updates and news (optional)
                 </span>
-                <p className="text-[#5fa800] uppercase font-semibold text-xs md:text-base">
-                  Continue Shoppin
-                </p>
-              </div>
+              </label>
+            </div>
+
+            <div className="flex items-center gap-2 cursor-pointer">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" className="w-4 h-4" />
+                <span className="text-sm">Create an account?</span>
+              </label>
+            </div>
+
+            {/* Order Notes */}
+            <div className="flex flex-col gap-2">
+              <p className="text-sm font-semibold">Order notes (optional)</p>
+              <textarea className="w-full min-h-[120px] border border-gray-300 p-2 rounded outline-none text-sm"></textarea>
             </div>
           </div>
-
-          {/* Right - Totals Section */}
-          <div className="w-full lg:w-[30%]">
-            <div className="text-gray-600 text-sm uppercase font-semibold mb-3">
-              Cart Totals
-            </div>
-            <hr className="mb-4 border-t-2 border-gray-300" />
-
-            <div className="flex justify-between text-sm mb-4">
-              <div>Subtotal</div>
-              <div className="font-semibold">{`Rs${totalAmount}`}</div>
-            </div>
-
-            <hr className="border-gray-200" />
-
-            <div className="mt-4 text-sm">
-              <div className="mb-2 font-semibold">Shipping</div>
-              <div className="flex flex-col gap-4 mt-2">
-                {/* Express Option */}
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="shipping"
-                    value="express"
-                    checked={shippingOption === "express"}
-                    onChange={() => setShippingOption("express")}
-                    className="accent-[#5fa800] w-4 h-4"
-                  />
-                  <span>24-Hour Express Delivery: ₨500</span>
-                </label>
-
-                {/* Standard Option */}
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="shipping"
-                    value="standard"
-                    checked={shippingOption === "standard"}
-                    onChange={() => setShippingOption("standard")}
-                    className="accent-[#5fa800] w-4 h-4"
-                  />
-                  <span>Standard Shipping Charges: ₨200</span>
-                </label>
-              </div>
-            </div>
-
-            <div className="flex justify-between text-sm mt-6">
-              <div>Total</div>
-              <div className="font-semibold">{`₨${grandTotal}`}</div>
-            </div>
-
-            <button
-              className="uppercase cursor-pointer py-2 w-full bg-black text-white mt-5 font-semibold"
-              onClick={() => router.push("/checkout")}
-            >
-              Proceed to Checkout
-            </button>
-
-            {/* Coupon */}
-            <div className="mt-6">
-              <div className="text-sm font-semibold mb-2">Coupon</div>
-              <hr className="border-t-2 border-gray-300 mb-4" />
-              <input
-                type="text"
-                placeholder="Coupon code"
-                className="w-full py-2 px-3 border border-gray-400 shadow-sm outline-none"
-              />
-              <p className="text-red-500 text-sm">{errorMessage}</p>
-              <button
-                className="uppercase cursor-pointer py-2 w-full bg-[#5fa800] text-white mt-4 font-semibold"
-                onClick={() => setErrorMessage("Invalid Coupon Code")}
-              >
-                Apply Coupon
-              </button>
-            </div>
-          </div>
-        </>
-      ) : (
-        <div className="w-full text-center text-xl font-semibold flex flex-col justify-center items-center h-full">
-          <p>
-            <FaShoppingCart className="text-5xl mb-4 text-gray-600" />
-          </p>
-          <p className="text-gray-600">No items in your Cart yet.</p>
         </div>
-      )}
+      </div>
+
+      {/* Right - Order Summary */}
+      <div className="w-full lg:w-[35%] border border-[#5fa800] rounded p-4">
+        <h2 className="text-lg font-bold text-gray-700 mb-3">Your Order</h2>
+
+        {/* Product List */}
+        <div className="flex justify-between font-semibold text-sm border-b pb-2">
+          <p>Product</p>
+          <p>Subtotal</p>
+        </div>
+
+        {favouriteProducts.map((product) => (
+          <div
+            key={product.cartId}
+            className="flex flex-col sm:flex-row sm:justify-between gap-3 py-4 border-b"
+          >
+            <div className="flex gap-4 items-start">
+              <Image src={product.image} alt="" width={50} height={50} />
+              <div>
+                <p className="text-sm font-medium w-full lg:w-[80%]">
+                  {product.productName}
+                </p>
+                <div className="text-xs text-gray-600 flex items-center gap-1">
+                  <span>{product.selectedVariant}</span> ×{" "}
+                  <span>{product.numberOfItems}</span>
+                </div>
+              </div>
+            </div>
+            <div className="text-right font-semibold text-sm">
+              Rs{product.selectedPrice * product.numberOfItems}
+            </div>
+          </div>
+        ))}
+
+        {/* Totals */}
+        <div className="flex justify-between text-sm font-semibold mt-4">
+          <p>Subtotal</p>
+          <p>Rs{subtotalWithoutDeliveryCharges}</p>
+        </div>
+
+        {/* Shipping */}
+        <div className="mt-4 text-sm">
+          <p className="font-semibold mb-2">Shipping</p>
+          <div className="flex flex-col gap-2">
+            {["express", "standard"].map((method) => (
+              <label
+                key={method}
+                className="flex items-center gap-2 cursor-pointer text-sm"
+              >
+                <input
+                  type="radio"
+                  name="shipping"
+                  value={method}
+                  checked={shippingOption === method}
+                  onChange={() =>
+                    dispatch(updateShippingAndRecalculate(method))
+                  }
+                  className="accent-[#5fa800] w-4 h-4"
+                />
+                <span>
+                  {method === "express"
+                    ? "24-Hour Express Delivery: ₨500"
+                    : "Standard Shipping Charges: ₨200"}
+                </span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex justify-between text-sm font-semibold mt-4">
+          <p>Total</p>
+          <p>Rs{grandGreatTotal}</p>
+        </div>
+        {/* //Payment methods accordion */}
+        <div className="mt-6 text-sm">
+          <div
+            className="flex justify-between items-center cursor-pointer"
+            onClick={() => setOpenPaymentAccordion((prev) => !prev)}
+          >
+            <p className="font-semibold">Select Payment Method</p>
+            <span className="text-xs text-gray-600">
+              {openPaymentAccordion ? "−" : "+"}
+            </span>
+          </div>
+
+          {/* Accordion Body with animation */}
+          <div
+            className={`transition-all duration-300 overflow-hidden ${
+              openPaymentAccordion
+                ? "max-h-96 opacity-100 mt-3"
+                : "max-h-0 opacity-0"
+            }`}
+          >
+            <div className="flex flex-col gap-3">
+              {["cod", "bank"].map((method) => (
+                <label
+                  key={method}
+                  className="flex items-center gap-2 cursor-pointer"
+                >
+                  <input
+                    type="radio"
+                    name="payment"
+                    value={method}
+                    checked={selectedPayment === method}
+                    onChange={() => setSelectedPayment(method)}
+                    className="accent-[#5fa800] w-4 h-4"
+                  />
+                  <span className="text-sm">
+                    {method === "cod"
+                      ? "Cash on Delivery (COD)"
+                      : "Bank Transfer (via account)"}
+                  </span>
+                </label>
+              ))}
+            </div>
+
+            {/* Payment Details Transition Block */}
+            <div
+              className={`transition-all duration-300 ease-in-out ${
+                selectedPayment ? "mt-4 opacity-100" : "opacity-0"
+              }`}
+            >
+              {selectedPayment === "bank" && (
+                <div className="border border-gray-300 p-4 rounded bg-gray-50 text-sm text-gray-700">
+                  <p className="font-semibold text-base mb-2 text-[#5fa800]">
+                    Bank Transfer Details:
+                  </p>
+                  <ul className="space-y-1">
+                    <li>
+                      <strong>KHAN DRY FRUIT</strong>
+                    </li>
+                    <li>
+                      <strong>Bank Name:</strong> United Bank Limited (UBL)
+                    </li>
+                    <li>
+                      <strong>Account Title:</strong> Khizar Abbas
+                    </li>
+                    <li>
+                      <strong>Account Number:</strong> 1234567890
+                    </li>
+                    <li>
+                      <strong>IBAN:</strong> PK00ABPA1234567890123456
+                    </li>
+                  </ul>
+                  <p className="mt-3 text-xs text-gray-600">
+                    Please send us the transaction receipt after payment to
+                    confirm your order.
+                  </p>
+                </div>
+              )}
+
+              {selectedPayment === "cod" && (
+                <div className="border border-gray-300 p-4 rounded bg-gray-50 text-sm text-gray-700">
+                  <p className="font-semibold text-base mb-1 text-[#5fa800]">
+                    Cash on Delivery:
+                  </p>
+                  <p>
+                    You can pay in cash when the order is delivered to your
+                    doorstep. Make sure to have the exact amount ready.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* //Payment methods accordion */}
+
+        <button
+          className="uppercase py-3 w-full mt-6 bg-[#5fa800] text-white font-semibold rounded shadow-sm"
+          onClick={handlePlaceOrder}
+        >
+          Place Order
+        </button>
+      </div>
     </div>
   );
 };
