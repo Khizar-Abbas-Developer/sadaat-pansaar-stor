@@ -1,9 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { categoryCirclesList } from "@/public/assets/assets";
 
 const ProductUploadForm = () => {
+  const URL = process.env.NEXT_PUBLIC_SERVER_URL;
+  const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
     category: "",
     productName: "",
@@ -11,7 +14,10 @@ const ProductUploadForm = () => {
     variants: [{ variantName: "", variantPrice: "" }],
     productsInStock: "",
     description: [{ heading: "", detail: "" }],
+    bestSellingProduct: false,
+    productNewArrival: false,
   });
+
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
   const uploadPreset = process.env.NEXT_PUBLIC_PRESET_NAME;
   const apiKey = process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY;
@@ -69,7 +75,7 @@ const ProductUploadForm = () => {
     if (!imageUrl) return alert("Image upload failed");
 
     const payload = {
-      ...formData,
+      ...formData, // includes bestSellingProduct and productNewArrival
       image: imageUrl,
       productPrice: Number(formData.productPrice),
       productsInStock: Number(formData.productsInStock),
@@ -80,10 +86,7 @@ const ProductUploadForm = () => {
     };
 
     try {
-      await axios.post(
-        "http://localhost:5000/api/v1/product/add-product",
-        payload
-      );
+      await axios.post(`${URL}/api/v1/product/add-product`, payload);
       toast.success("Product added successfully!");
     } catch (err) {
       console.error(err);
@@ -93,6 +96,11 @@ const ProductUploadForm = () => {
     }
   };
 
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: checked }));
+  };
+
   return (
     <div className="mt-[150px] px-4">
       <form
@@ -100,6 +108,34 @@ const ProductUploadForm = () => {
         className="max-w-4xl mx-auto p-8 space-y-8 bg-white rounded-xl shadow-lg transition-all duration-300"
       >
         <h2 className="text-3xl font-bold text-gray-800">Add New Product</h2>
+        {/* Checkboxes for product tags */}
+        <div className="flex flex-col sm:flex-row gap-4">
+          <label className="inline-flex items-center gap-2">
+            <input
+              type="checkbox"
+              name="bestSellingProduct"
+              checked={formData.bestSellingProduct}
+              onChange={handleCheckboxChange}
+              className="accent-green-600 w-4 h-4"
+            />
+            <span className="text-sm font-medium text-gray-700">
+              Best Selling Product
+            </span>
+          </label>
+
+          <label className="inline-flex items-center gap-2">
+            <input
+              type="checkbox"
+              name="productNewArrival"
+              checked={formData.productNewArrival}
+              onChange={handleCheckboxChange}
+              className="accent-green-600 w-4 h-4"
+            />
+            <span className="text-sm font-medium text-gray-700">
+              New Arrival
+            </span>
+          </label>
+        </div>
 
         {/* Category */}
         <div>
@@ -116,10 +152,11 @@ const ProductUploadForm = () => {
             <option value="" disabled>
               Select a category
             </option>
-            <option value="Dry Fruits">Dry Fruits</option>
-            <option value="Spices">Spices</option>
-            <option value="Grains">Grains</option>
-            <option value="Herbs">Herbs</option>
+            {categoryCirclesList.map((category) => (
+              <option key={category.id} value={category.category}>
+                {category.title}
+              </option>
+            ))}
             {/* Add more categories as needed */}
           </select>
         </div>

@@ -9,12 +9,22 @@ const CategoryFirst = ({
   positionBeginning,
   heading,
   categorySectionImage,
+  number,
 }) => {
   const [loading, setLoading] = React.useState(true);
   const products = useSelector((state) => state.product.products);
   const firstCategoryArray = (products || [])
-    .filter((item) => item.productNewArrival)
+    .filter((item) => item.category === "almonds")
     .slice(0, 4);
+
+  const secondCategoryArray = (products || [])
+    .filter((item) => item.category === "gift-boxes")
+    .slice(0, 4);
+
+  const thirdCategoryArray = (products || [])
+    .filter((item) => item.category === "dates")
+    .slice(0, 4);
+
   useEffect(() => {
     if (firstCategoryArray.length > 0) {
       setLoading(false);
@@ -59,16 +69,24 @@ const CategoryFirst = ({
 
             {/* Cards container */}
             <div className="justify-center flex-1 flex-wrap flex gap-[12px]">
-              <Card arrayData={firstCategoryArray} />
+              <Card arrayData={secondCategoryArray} />
             </div>
           </>
         ) : (
           // If positionBeginning is false, image comes after cards
           <>
             {/* Cards container */}
-            <div className="justify-center flex-1 flex-wrap flex gap-[12px]">
-              <Card arrayData={firstCategoryArray} />
-            </div>
+            {number === 1 ? (
+              <div className="justify-center flex-1 flex-wrap flex gap-[12px]">
+                <Card arrayData={firstCategoryArray} />
+              </div>
+            ) : (
+              number === 3 && (
+                <div className="justify-center flex-1 flex-wrap flex gap-[12px]">
+                  <Card arrayData={thirdCategoryArray} />
+                </div>
+              )
+            )}
 
             {/* Image container */}
             <div className="self-center flex-shrink-0 lg:mt-16">

@@ -12,7 +12,7 @@ const BestSellingProducts = ({ title, array }) => {
   const [loading, setLoading] = useState(true);
   const products = useSelector((state) => state.product.products);
   const arrayToLoop = (products || [])
-    .filter((item) => item.productNewArrival)
+    .filter((item) => item.bestSellingProduct)
     .slice(0, 6);
   useEffect(() => {
     if (arrayToLoop.length > 0) {

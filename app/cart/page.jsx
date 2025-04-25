@@ -91,22 +91,7 @@ const Cart = () => {
       })
     );
   };
-  useEffect(() => {
-    const subtotal = favouriteProducts.reduce(
-      (acc, product) => acc + product.selectedPrice * product.numberOfItems,
-      0
-    );
-    const shippingCost = shippingOption === "express" ? 500 : 200;
-    const grandTotal = subtotal + shippingCost;
 
-    dispatch(
-      setCartSummary({
-        subtotal,
-        shippingMethod: shippingOption,
-        grandTotal,
-      })
-    );
-  }, [favouriteProducts, shippingOption]);
   return (
     <div className="h-auto mt-32 px-4 sm:px-8 md:px-2 lg:px-30 py-10 flex flex-col lg:flex-row gap-10">
       {favouriteProducts.length > 0 ? (

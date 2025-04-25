@@ -98,6 +98,7 @@ const productSlice = createSlice({
       return {
         ...initialState,
         products: state.products,
+        favouriteProducts: state.favouriteProducts,
       };
     },
   },

@@ -20,6 +20,7 @@ const Checkout = () => {
   const subtotalWithoutDeliveryCharges = useSelector(
     (state) => state.product.subtotal
   );
+  const [errors, setErrors] = useState({});
   const grandGreatTotal = useSelector((state) => state.product.grandTotal);
   const shippingOption = useSelector((state) => state.product.shippingMethod);
   //
@@ -63,21 +64,35 @@ const Checkout = () => {
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setOrder((prev) => ({ ...prev, [name]: value }));
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
+
   const handlePlaceOrder = async () => {
-    const URL = process.env.NEXT_PUBLIC_SERVER_URL;
+    const newErrors = {};
+    if (!order.fullName.trim()) newErrors.fullName = "Full Name is required";
+    if (!order.phone.trim()) newErrors.phone = "Phone is required";
+    if (!order.city.trim()) newErrors.city = "City is required";
+    if (!order.address.trim()) newErrors.address = "Address is required";
+    // Email is optional, so we skip it
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     try {
+      const URL = process.env.NEXT_PUBLIC_SERVER_URL;
       const response = await axios.post(
         `${URL}/api/v1/order/place-order`,
         order
       );
-      console.log(response);
       dispatch(resetProductState());
-      router.push(`${`order-completed/${response.data.order._id}`}`);
+      router.push(`/order-completed/${response.data.order._id}`);
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
     setOrder((prev) => ({
       ...prev,
@@ -145,7 +160,7 @@ const Checkout = () => {
               },
             ].map(
               ({ label, placeholder = "", name, id, type, value }, index) => (
-                <div key={index} className="flex flex-col gap-2">
+                <div key={index} className="flex flex-col gap-1">
                   <p className="font-semibold text-sm">{label}</p>
                   <input
                     type={type}
@@ -154,12 +169,16 @@ const Checkout = () => {
                     id={id}
                     value={value}
                     onChange={handleOnChange}
-                    className="w-full border border-gray-300 p-2 rounded outline-none text-sm"
+                    className={`w-full border p-2 rounded outline-none text-sm ${
+                      errors[name] ? "border-red-500" : "border-gray-300"
+                    }`}
                   />
+                  {errors[name] && (
+                    <span className="text-red-500 text-xs">{errors[name]}</span>
+                  )}
                 </div>
               )
             )}
-
             {/* Checkboxes */}
             <div className="flex items-center gap-2 cursor-pointer">
               <label className="flex items-center gap-2 cursor-pointer">
@@ -354,7 +373,7 @@ const Checkout = () => {
         {/* //Payment methods accordion */}
 
         <button
-          className="uppercase py-3 w-full mt-6 bg-[#5fa800] text-white font-semibold rounded shadow-sm"
+          className="uppercase py-3 cursor-pointer w-full mt-6 bg-[#5fa800] text-white font-semibold rounded shadow-sm"
           onClick={handlePlaceOrder}
         >
           Place Order

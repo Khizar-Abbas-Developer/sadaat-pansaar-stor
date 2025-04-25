@@ -61,16 +61,19 @@ export default function Home() {
               categorySectionImage={categorySection1}
               heading="Dryfruit collections"
               positionBeginning={false}
+              number={1}
             />
             <CategoryFirst
               categorySectionImage={categorySection2}
               heading="Giftbox collections"
               positionBeginning={true}
+              number={2}
             />
             <CategoryFirst
               categorySectionImage={categorySection3}
               heading="Dates collection"
               positionBeginning={false}
+              number={3}
             />
           </div>
           <Feedback />

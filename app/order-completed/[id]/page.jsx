@@ -69,7 +69,7 @@ const Checkout = () => {
 
             {fetchedOrderDetails?.products.map((product) => (
               <div key={product.cartId}>
-                <div className="flex justify-between items-center mb-2">
+                <div className="flex justify-start items-center mb-2">
                   <p className="text-sm md:text-base">{`${product.productName} ×`}</p>
                   <span className="font-semibold text-sm">
                     {product.numberOfItems}
