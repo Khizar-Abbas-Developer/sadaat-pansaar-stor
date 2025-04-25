@@ -27,6 +27,10 @@ export default function Home() {
   const [loading, setLoading] = React.useState(true);
   const dispatch = useDispatch();
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [loading]);
+
+  useEffect(() => {
     const getProducts = async () => {
       const products = await fetchTwentyFourProducts();
       if (Array.isArray(products)) {
@@ -36,8 +40,6 @@ export default function Home() {
     };
     getProducts();
   }, [dispatch]);
-
-  useScrollToPosition(0); // Scroll to top of the page
   return (
     <React.Fragment>
       {loading ? (
