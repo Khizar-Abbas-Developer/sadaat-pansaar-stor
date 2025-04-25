@@ -21,6 +21,7 @@ import { setProducts } from "@/redux/products/productSlice";
 import React, { useEffect } from "react";
 import { HashLoader } from "react-spinners";
 import BestSellingProducts from "@/components/Home/BestSellingProducts";
+import useScrollToPosition from "@/lib";
 
 export default function Home() {
   const [loading, setLoading] = React.useState(true);
@@ -35,6 +36,8 @@ export default function Home() {
     };
     getProducts();
   }, [dispatch]);
+
+  useScrollToPosition(0); // Scroll to top of the page
   return (
     <React.Fragment>
       {loading ? (
