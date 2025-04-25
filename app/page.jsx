@@ -69,6 +69,7 @@ export default function Home() {
               positionBeginning={true}
               number={2}
             />
+            {/*  */}
             <CategoryFirst
               categorySectionImage={categorySection3}
               heading="Dates collection"
