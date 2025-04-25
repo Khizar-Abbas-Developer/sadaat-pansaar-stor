@@ -1,4 +1,4 @@
-import category1 from "@/public/assets/Alm.webp";
+import category1 from "@/public/assets/Almond.png";
 import category2 from "@/public/assets/Cash-1.webp";
 import category3 from "@/public/assets/Pista-2.webp";
 import category4 from "@/public/assets/Rais.webp";
