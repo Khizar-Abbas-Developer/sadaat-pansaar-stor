@@ -48,7 +48,14 @@ const Card = ({ arrayData }) => {
                     className="snap-start min-w-[200px] md:min-w-[180px] max-w-[200px] md:max-w-[180px] relative group p-[8px] flex flex-col gap-6 justify-between items-center mt-2 text-black border-2 rounded-2xl border-gray-300 shadow-md bg-white"
                   >
                     <div
-                      className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                      className="
+    absolute top-2 right-2 
+    opacity-100 
+    lg:opacity-0 
+    lg:group-hover:opacity-100 
+    transition-opacity duration-300 
+    z-10
+  "
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
@@ -61,6 +68,7 @@ const Card = ({ arrayData }) => {
                         <FaRegHeart className="text-green-600 px-[5px] bg-white text-2xl cursor-pointer rounded-full" />
                       )}
                     </div>
+
                     <div>
                       <Image
                         src={item?.image || null} // Replace with item.image if dynamic
