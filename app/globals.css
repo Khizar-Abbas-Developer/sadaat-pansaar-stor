@@ -28,3 +28,43 @@ input[type="range"]::-moz-range-thumb {
   border-radius: 50%;
   cursor: pointer;
 }
+
+/* //Slider */
+/* styles/globals.css or your component module CSS */
+.custom-range {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px; /* Track height */
+  background: #d1d5db; /* Gray-300 track color */
+  border-radius: 5px;
+  outline: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.custom-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 90px; /* Thumb height */
+  width: 90px; /* Thumb width */
+  background: green; /* Green dot */
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -11px; /* Center the thumb */
+}
+
+/* Firefox */
+.custom-range::-moz-range-thumb {
+  height: 30px;
+  width: 30px;
+  background: green; /* Green dot */
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Firefox track */
+.custom-range::-moz-range-track {
+  height: 8px;
+  background: #d1d5db;
+  border-radius: 5px;
+}

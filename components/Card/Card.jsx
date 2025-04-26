@@ -15,7 +15,6 @@ const Card = ({ arrayData }) => {
   const favouriteProducts = useSelector(
     (state) => state.product.favouriteProducts
   );
-  const [likedItems, setLikedItems] = useState([]);
 
   const toggleLike = (item) => {
     if (item) {

@@ -1,5 +1,6 @@
 import { categoriesList } from "@/public/assets/assets";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const CategoryCards = () => {
@@ -7,8 +8,9 @@ const CategoryCards = () => {
     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 place-items-center text-center py-4">
       {categoriesList.map((item) => {
         return (
-          <div
+          <Link
             key={item.id}
+            href={`/product-category/${item.category}`}
             className="w-full max-w-[160px] sm:max-w-[200px] md:max-w-[250px] lg:max-w-[500px] xl:max-w-[600px]"
           >
             <Image
@@ -20,7 +22,7 @@ const CategoryCards = () => {
               quality={100}
               priority
             />
-          </div>
+          </Link>
         );
       })}
     </div>

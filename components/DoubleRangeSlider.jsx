@@ -1,134 +1,165 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { Range } from "react-range";
 import product1 from "@/public/assets/products/product-001.webp";
 import Image from "next/image";
 
-export default function PriceRangeSlider({ getPriceFilter, heading }) {
-  const MIN = 700;
-  const MAX = 3000;
+export default function PriceRangeSlider({
+  getPriceFilter,
+  heading,
+  initialPriceRange,
+}) {
+  const MIN = 100;
+  const MAX = 19000;
 
-  const [priceRange, setPriceRange] = useState([800, 1400]);
+  const [priceRange, setPriceRange] = useState(
+    () => initialPriceRange || [MIN, MAX]
+  );
 
-  const handleMinChange = (e) => {
-    const newMin = Number(e.target.value);
-    if (newMin <= priceRange[1]) {
-      setPriceRange([newMin, priceRange[1]]);
-    }
+  const handleRangeChange = (values) => {
+    setPriceRange(values);
   };
 
-  const handleMaxChange = (e) => {
-    const newMax = Number(e.target.value);
-    if (newMax >= priceRange[0]) {
-      setPriceRange([priceRange[0], newMax]);
-    }
+  const handleInputChange = (index, value) => {
+    const newRange = [...priceRange];
+    newRange[index] = Number(value);
+    setPriceRange(newRange);
   };
-  // 📤 Lift updated price to parent
-  useEffect(() => {
-    getPriceFilter(priceRange);
-  }, [priceRange, getPriceFilter]);
 
-  const trackLeft = ((priceRange[0] - MIN) / (MAX - MIN)) * 100;
-  const trackWidth = ((priceRange[1] - priceRange[0]) / (MAX - MIN)) * 100;
+  const handleInputBlur = () => {
+    let [min, max] = priceRange;
+    if (min < MIN) min = MIN;
+    if (max > MAX) max = MAX;
+    if (min > max) min = max;
+    setPriceRange([min, max]);
+  };
 
   return (
-    <div className="w-full max-w-md p-4 bg-white">
+    <div className="w-full max-w-md p-4 bg-white custom-scroll">
       <div className="flex justify-start items-center">
         <h3 className="text-lg font-semibold text-center">Select Price</h3>
       </div>
-      <div className="relative h-28 flex items-center">
-        {/* Track background */}
-        <div className="absolute top-1/2 transform -translate-y-1/2 h-[6px] w-full bg-black rounded"></div>
 
-        {/* Active track */}
-        <div
-          className="absolute top-1/2 transform -translate-y-1/2 h-[6px] bg-black rounded"
-          style={{
-            left: `${trackLeft}%`,
-            width: `${trackWidth}%`,
+      {/* Custom Range Slider */}
+      <div className="my-6">
+        <Range
+          step={50}
+          min={MIN}
+          max={MAX}
+          values={priceRange}
+          onChange={handleRangeChange}
+          renderTrack={({ props, children }) => {
+            const { key, ...rest } = props;
+            return (
+              <div
+                key={key}
+                {...rest}
+                className="w-full h-2 rounded-full my-4"
+                style={{
+                  background: `linear-gradient(to right, #f97316 ${
+                    ((priceRange[0] - MIN) / (MAX - MIN)) * 100
+                  }%, #5fa800 ${
+                    ((priceRange[1] - MIN) / (MAX - MIN)) * 100
+                  }%, #e5e7eb 100%)`,
+                }}
+              >
+                {children}
+              </div>
+            );
           }}
-        ></div>
-
-        <input
-          type="range"
-          min={MIN}
-          max={MAX}
-          step="50"
-          value={priceRange[0]}
-          onChange={handleMinChange}
-          className="absolute w-full z-20 pointer-events-auto appearance-none bg-transparent"
-          style={{ top: "38%" }}
+          renderThumb={({ props }) => {
+            const { key, ...rest } = props;
+            return (
+              <div
+                key={key}
+                {...rest}
+                className="h-5 w-5 bg-[#5FA800] rounded-full shadow-md border-2 border-white"
+              />
+            );
+          }}
         />
-
-        {/* Max slider */}
-        <input
-          type="range"
-          min={MIN}
-          max={MAX}
-          step="50"
-          value={priceRange[1]}
-          onChange={handleMaxChange}
-          className="absolute w-full z-10 pointer-events-auto appearance-none bg-transparent"
-          style={{ top: "60%" }}
-        />
-        <div className="mt-24 flex justify-between w-full items-center">
-          <div className="flex">
-            <button className="text-sm px-4 cursor-pointer py-1 text-white font-semibold rounded-full bg-[#5FA800]">
-              FILTER
-            </button>
+        <div className="flex justify-between gap-4">
+          <div className="w-full">
+            <label className="text-xs font-medium">
+              From: Rs {priceRange[0]}
+            </label>
+            <input
+              type="number"
+              className="w-full border rounded px-2 py-1 mt-1"
+              value={priceRange[0]}
+              min={MIN}
+              max={priceRange[1]}
+              onChange={(e) => handleInputChange(0, e.target.value)}
+              onBlur={handleInputBlur}
+            />
           </div>
-          <div className="flex gap-2">
-            <p className="text-gray-500">Price:</p>
-            <p className="text-sm font-bold mt-1">Rs {priceRange[0]}</p>
-            <p className="mt-1">-</p>
-            <p className="text-sm font-bold mt-1">Rs {priceRange[1]}</p>
+          <div className="w-full">
+            <label className="text-xs font-medium">
+              To: Rs {priceRange[1]}
+            </label>
+            <input
+              type="number"
+              className="w-full border rounded px-2 py-1 mt-1"
+              value={priceRange[1]}
+              min={priceRange[0]}
+              max={MAX}
+              onChange={(e) => handleInputChange(1, e.target.value)}
+              onBlur={handleInputBlur}
+            />
           </div>
         </div>
       </div>
+
+      {/* Filter Button */}
+      <div className="flex flex-col-reverse gap-4 justify-between items-center mt-6">
+        <button
+          className="text-sm px-4 py-1 text-white font-semibold rounded-full bg-[#5FA800]"
+          onClick={() => getPriceFilter(priceRange)}
+        >
+          FILTER
+        </button>
+        <p className="text-gray-600 text-sm">
+          Price: Rs {priceRange[0]} - Rs {priceRange[1]}
+        </p>
+      </div>
+
+      {/* Product List Preview */}
       <div className="flex justify-start items-center my-10">
         <h3 className="text-lg font-semibold text-center">{heading}</h3>
       </div>
-      {[1, 2, 3, 4, 5, 6].map((item, i) => {
-        return (
-          <React.Fragment key={i + 1}>
-            <div className="flex justify-start items-center mt-10 mb-3">
-              <div className="flex gap-4">
-                <div className="">
-                  <Image src={product1} alt="product" width={60} height={60} />
-                </div>
-                <div className="w-[60%]">
-                  <p className="text-base text-gray-500">
-                    Dry Fruit Gift Box 11 Portion
-                  </p>
-                  <p className="font-semibold">Rs 13,000</p>
-                </div>
+
+      {[1, 2, 3, 4, 5, 6].map((item, i) => (
+        <React.Fragment key={i}>
+          <div className="flex justify-start items-center mt-10 mb-3">
+            <div className="flex gap-4">
+              <div>
+                <Image src={product1} alt="product" width={60} height={60} />
+              </div>
+              <div className="w-[60%]">
+                <p className="text-base text-gray-500">
+                  Dry Fruit Gift Box 11 Portion
+                </p>
+                <p className="font-semibold">Rs 13,000</p>
               </div>
             </div>
-            <hr className="w-full bg-gray-200" />
-          </React.Fragment>
-        );
-      })}
-      <style jsx>{`
-        input[type="range"]::-webkit-slider-thumb {
-          appearance: none;
-          height: 16px;
-          width: 16px;
-          background: #5fa800; /* <--- This is green */
-          border-radius: 50%;
-          cursor: pointer;
-          margin-top: -7px;
-        }
-        input[type="range"]::-moz-range-thumb {
-          height: 16px;
-          width: 16px;
-          background: #5fa800; /* <--- This is green */
-          border-radius: 50%;
-          cursor: pointer;
-        }
-      `}</style>
+          </div>
+          <hr className="w-full bg-gray-200" />
+        </React.Fragment>
+      ))}
     </div>
   );
 }
 
-export const SidebarFilter = ({ getPriceFilter, heading }) => {
-  return <PriceRangeSlider getPriceFilter={getPriceFilter} heading={heading} />;
+export const SidebarFilter = ({
+  getPriceFilter,
+  heading,
+  initialPriceRange,
+}) => {
+  return (
+    <PriceRangeSlider
+      getPriceFilter={getPriceFilter}
+      heading={heading}
+      initialPriceRange={initialPriceRange}
+    />
+  );
 };

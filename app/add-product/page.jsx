@@ -183,7 +183,7 @@ const ProductUploadForm = () => {
             Product Price (₨)
           </label>
           <input
-            type="number"
+            type="text"
             name="productPrice"
             placeholder="e.g. 2500"
             onChange={handleChange}
@@ -199,7 +199,7 @@ const ProductUploadForm = () => {
             Stock Quantity
           </label>
           <input
-            type="number"
+            type="text"
             name="productsInStock"
             placeholder="e.g. 100"
             onChange={handleChange}
@@ -225,7 +225,7 @@ const ProductUploadForm = () => {
                 required
               />
               <input
-                type="number"
+                type="text"
                 placeholder="Variant Price"
                 value={variant.variantPrice}
                 onChange={(e) =>
