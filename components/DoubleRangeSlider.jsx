@@ -1,14 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Range } from "react-range";
 import product1 from "@/public/assets/products/product-001.webp";
 import Image from "next/image";
+import axios from "axios";
+import Link from "next/link";
 
 export default function PriceRangeSlider({
   getPriceFilter,
   heading,
   initialPriceRange,
 }) {
+  const backEndUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+  const [dataToLoop, setDataToLoop] = useState([]);
   const MIN = 100;
   const MAX = 19000;
 
@@ -34,6 +38,21 @@ export default function PriceRangeSlider({
     setPriceRange([min, max]);
   };
 
+  const fetchProductsByCategory = async () => {
+    try {
+      const response = await axios.get(
+        `${backEndUrl}/api/v1/product/get-products-by-category/${"almonds"}`
+      );
+      console.log(response);
+
+      setDataToLoop(response.data.products);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchProductsByCategory();
+  }, []);
   return (
     <div className="w-full max-w-md p-4 bg-white custom-scroll">
       <div className="flex justify-start items-center">
@@ -128,24 +147,32 @@ export default function PriceRangeSlider({
         <h3 className="text-lg font-semibold text-center">{heading}</h3>
       </div>
 
-      {[1, 2, 3, 4, 5, 6].map((item, i) => (
-        <React.Fragment key={i}>
-          <div className="flex justify-start items-center mt-10 mb-3">
-            <div className="flex gap-4">
-              <div>
-                <Image src={product1} alt="product" width={60} height={60} />
+      {dataToLoop &&
+        dataToLoop.length > 0 &&
+        dataToLoop.slice(0, 5).map((item, i) => (
+          <React.Fragment key={i}>
+            <Link
+              href={`/product/${item._id}`}
+              className="flex justify-start items-center mt-10 mb-3"
+            >
+              <div className="flex gap-4">
+                <div>
+                  <Image
+                    src={item.image || null}
+                    alt="product"
+                    width={60}
+                    height={60}
+                  />
+                </div>
+                <div className="w-[60%]">
+                  <p className="text-base text-gray-500">{item?.productName}</p>
+                  <p className="font-semibold">Rs {item.productPrice}</p>
+                </div>
               </div>
-              <div className="w-[60%]">
-                <p className="text-base text-gray-500">
-                  Dry Fruit Gift Box 11 Portion
-                </p>
-                <p className="font-semibold">Rs 13,000</p>
-              </div>
-            </div>
-          </div>
-          <hr className="w-full bg-gray-200" />
-        </React.Fragment>
-      ))}
+            </Link>
+            <hr className="w-full bg-gray-200" />
+          </React.Fragment>
+        ))}
     </div>
   );
 }

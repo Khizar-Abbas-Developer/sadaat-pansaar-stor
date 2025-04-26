@@ -23,7 +23,6 @@ const Cart = () => {
 
   const dispatch = useDispatch();
   const favouriteProducts = useSelector((state) => state.product.cartProducts);
-  console.log(favouriteProducts);
   const [shippingOption, setShippingOption] = useState("standard"); // default selection
   const handleRemoveProduct = (productId) => () => {
     dispatch(removeProductFromCart(productId));

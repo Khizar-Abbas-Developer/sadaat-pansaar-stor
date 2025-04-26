@@ -8,8 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 
 const CategoryCard = ({ array }) => {
-  console.log(array);
-
   const dispatch = useDispatch();
   const favouriteProducts = useSelector(
     (state) => state.product.favouriteProducts

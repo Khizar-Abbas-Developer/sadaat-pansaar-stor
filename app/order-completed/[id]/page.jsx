@@ -22,8 +22,6 @@ const Checkout = () => {
       const order = await axios.get(
         `${URL}/api/v1/order/getOrderById/${orderId}`
       );
-      console.log(order.data.order);
-
       setFetchedOrderDetails(order.data.order);
     } catch (error) {
       console.log(error);

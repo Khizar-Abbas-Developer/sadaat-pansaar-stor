@@ -119,7 +119,7 @@ const ProductCategory = () => {
 
     // Filter products by the selected price range
     const filtered = productsToFilter.filter((product) => {
-      console.log("Product Price:", product.productPrice);
+      // console.log("Product Price:", product.productPrice);
       return product.productPrice >= min && product.productPrice <= max;
     });
 

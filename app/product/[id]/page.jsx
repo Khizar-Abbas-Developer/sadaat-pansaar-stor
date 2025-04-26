@@ -26,6 +26,8 @@ const Product = () => {
       const response = await axios.get(
         `${URL}/api/v1/product/get-product/${id}`
       );
+      console.log(response);
+
       setDataToPopulate(response.data.product);
     } catch (error) {
       console.log(error);
@@ -42,7 +44,7 @@ const Product = () => {
 
   useEffect(() => {
     fetchProduct();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (dataToPopulate?.variants) {
@@ -86,12 +88,12 @@ const Product = () => {
           <MoonLoader color="#5FA800" />;
         </div>
       ) : (
-        <div className="h-auto lg:h-auto mt-[100px] px-4 sm:px-8 md:px-[50px] lg:px-[165px] py-[40px] md:py-[64px]">
+        <div className="h-auto z-[9999999] lg:h-auto mt-[100px] px-4 sm:px-8 md:px-[50px] lg:px-[165px] py-[40px] md:py-[64px]">
           <div className="flex flex-col lg:flex-row justify-between items-center gap-10">
             {/* Image Section */}
             <div className="w-full lg:w-[50%] flex justify-center">
               <Image
-                src={dataToPopulate?.image || null}
+                src={dataToPopulate?.image || ""}
                 width={490}
                 height={490}
                 alt="product"
@@ -204,7 +206,7 @@ const Product = () => {
               {/* Payment Icons */}
               <div className="bg-white border-2 border-[#5FA800] px-4 py-2 mt-4 rounded w-full flex flex-wrap justify-center sm:justify-around items-center gap-3">
                 <Image
-                  src={paymentsMethodsLogo}
+                  src={paymentsMethodsLogo || ""}
                   alt="payments-methods"
                   width={570}
                   height={370}
@@ -227,7 +229,7 @@ const Product = () => {
               </ul>
             </div>
           </div>
-          <RelatedProducts array={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
+          <RelatedProducts category={dataToPopulate?.category} />
         </div>
       )}
     </>
