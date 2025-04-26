@@ -67,13 +67,22 @@ const SideBar = () => {
                     key={item.title}
                     className="hover:font-semibold hover:bg-[#EBEBEB] transition-all duration-300 ease-in-out px-[40px] py-[10px]"
                   >
-                    <label htmlFor="my-drawer" className="cursor-pointer">
-                      <Link className="block" href={item.path}>
-                        {item.title}
-                      </Link>
-                    </label>
+                    <Link
+                      className="block cursor-pointer"
+                      href={item.path}
+                      onClick={() => {
+                        const drawerCheckbox =
+                          document.getElementById("my-drawer");
+                        if (drawerCheckbox) {
+                          drawerCheckbox.checked = false;
+                        }
+                      }}
+                    >
+                      {item.title}
+                    </Link>
                   </li>
                 ))}
+
                 {/* Flash Sale with NEW Badge */}
                 <div className="flex items-center gap-6 px-[33px] py-[10px]">
                   <li>
