@@ -80,7 +80,7 @@ export default function PriceRangeSlider({
         />
         <div className="flex justify-between gap-4">
           <div className="w-full">
-            <label className="text-xs font-medium">
+            <label className="text-sm font-medium">
               From: Rs {priceRange[0]}
             </label>
             <input
@@ -94,7 +94,7 @@ export default function PriceRangeSlider({
             />
           </div>
           <div className="w-full">
-            <label className="text-xs font-medium">
+            <label className="text-sm font-medium">
               To: Rs {priceRange[1]}
             </label>
             <input
