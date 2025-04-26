@@ -36,6 +36,14 @@ const CartSidebar = () => {
     dispatch(removeProductFromCart(cartId));
   };
 
+  const navigateToCart = () => {
+    dispatch(setCartStatus(false));
+    router.push("/cart");
+  };
+  const navigateToCheckout = () => {
+    dispatch(setCartStatus(false));
+    router.push("/checkout");
+  };
   return (
     <>
       {/* Toggle Sidebar (can be removed if unused) */}
@@ -128,14 +136,14 @@ const CartSidebar = () => {
             </div>
             <hr className="text-gray-200 w-full my-2" />
             <button
-              onClick={() => router.push("/cart")}
+              onClick={navigateToCart}
               className="uppercase cursor-pointer bg-[#5fa800] text-white font-semibold w-full py-2"
             >
               View Cart
             </button>
             <button
               className="uppercase cursor-pointer bg-black text-white font-semibold w-full py-2 mt-2"
-              onClick={() => router.push("/checkout")}
+              onClick={navigateToCheckout}
             >
               Checkout
             </button>

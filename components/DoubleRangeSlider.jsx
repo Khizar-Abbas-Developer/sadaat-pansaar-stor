@@ -43,8 +43,6 @@ export default function PriceRangeSlider({
       const response = await axios.get(
         `${backEndUrl}/api/v1/product/get-products-by-category/${"almonds"}`
       );
-      console.log(response);
-
       setDataToLoop(response.data.products);
     } catch (error) {
       console.log(error);
@@ -73,7 +71,7 @@ export default function PriceRangeSlider({
               <div
                 key={key}
                 {...rest}
-                className="w-full h-2 rounded-full my-4"
+                className="relative w-full h-2 rounded-full my-4 bg-gray-300"
                 style={{
                   background: `linear-gradient(to right, #f97316 ${
                     ((priceRange[0] - MIN) / (MAX - MIN)) * 100
@@ -93,10 +91,14 @@ export default function PriceRangeSlider({
                 key={key}
                 {...rest}
                 className="h-5 w-5 bg-[#5FA800] rounded-full shadow-md border-2 border-white"
+                style={{
+                  position: "absolute", // important!
+                }}
               />
             );
           }}
         />
+
         <div className="flex justify-between gap-4">
           <div className="w-full">
             <label className="text-sm font-medium">
@@ -133,7 +135,7 @@ export default function PriceRangeSlider({
       <div className="flex flex-col-reverse gap-4 justify-between items-center mt-6">
         <button
           className="text-sm px-4 py-1 text-white font-semibold rounded-full bg-[#5FA800]"
-          onClick={() => getPriceFilter(priceRange)}
+          onClick={() => getPriceFilter(priceRange, false)}
         >
           FILTER
         </button>

@@ -55,6 +55,7 @@ const sortOptions = [
 ];
 
 const ProductCategory = () => {
+  const [openDrawer, setOpenDrawer] = useState(false);
   const [loading, setLoading] = useState(true);
   const URL = process.env.NEXT_PUBLIC_SERVER_URL;
   const params = useParams();
@@ -106,7 +107,7 @@ const ProductCategory = () => {
 
     setProductsToList(sortedProducts);
   };
-  const getPriceFilter = (price) => {
+  const getPriceFilter = (price, value) => {
     setLoading(true); // Start loading when price filter is applied
     const [min, max] = price;
 
@@ -127,6 +128,8 @@ const ProductCategory = () => {
 
     // console.log("Min Price:", min);
     // console.log("Max Price:", max);
+    setOpenDrawer(value);
+
     setLoading(false); // Stop loading once filtering is done
   };
 
@@ -151,7 +154,6 @@ const ProductCategory = () => {
   const currentCategoryName = categoriesList.find(
     (item) => item.category === category
   )?.title;
-
   return (
     <>
       {loading ? (
@@ -173,46 +175,62 @@ const ProductCategory = () => {
                 <h2 className="text-gray-500 mb-2 sm:mb-0 md:ml-16 text-center mx-auto md:mx-0">
                   <span className="font-normal text-xl">Home</span>{" "}
                   <span>/</span>{" "}
-                  <span className="text-black font-semibold text-xl uppercase">
+                  <span className="font-semibold text-xl uppercase text-black">
                     {currentCategoryName}
                   </span>
                 </h2>
                 {/* //Filter Drawer */}
-                <div className="drawer z-[9999]">
-                  <input
-                    id="my-drawerNew"
-                    type="checkbox"
-                    className="drawer-toggle"
-                  />
+                <div className="drawer lg:hidden">
+                  {/* Sidebar background overlay */}
+                  {openDrawer && (
+                    <div
+                      className="fixed inset-0 bg-transparent bg-opacity-40"
+                      onClick={() => setOpenDrawer(false)}
+                    ></div>
+                  )}
+
                   <div className="drawer-content">
-                    {/* Page content here */}
-                    <label
-                      htmlFor="my-drawerNew"
-                      className="flex justify-center"
-                    >
-                      <div className="flex items-center gap-2 my-4 cursor-pointer lg:hidden drawer-button">
-                        <p>
-                          <IoOptionsOutline className="text-2xl" />
-                        </p>
+                    {/* Button to Open Drawer */}
+                    <div className="flex justify-center">
+                      <div
+                        onClick={() => setOpenDrawer(true)}
+                        className="flex items-center gap-2 my-4 cursor-pointer lg:hidden"
+                      >
+                        <IoOptionsOutline className="text-2xl" />
                         <p className="uppercase text-lg font-medium">Filter</p>
                       </div>
-                    </label>
+                    </div>
                   </div>
-                  <div className="drawer-side">
-                    <label
-                      htmlFor="my-drawerNew"
-                      aria-label="close sidebar"
-                      className="drawer-overlay"
-                    ></label>
-                    <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-                      <SidebarFilter
-                        heading="Products"
-                        getPriceFilter={getPriceFilter}
-                        initialPriceRange={[minimumPrice, maximumPrice]}
-                      />
-                    </ul>
+
+                  {/* Sidebar */}
+                  <div
+                    className={`fixed top-0 left-0 bg-base-200 text-base-content h-screen w-80 transition-transform duration-300 z-[9999] ${
+                      openDrawer ? "translate-x-0" : "-translate-x-full"
+                    }`}
+                  >
+                    {/* Close Button */}
+                    <div className="p-4 flex justify-end">
+                      <button
+                        onClick={() => setOpenDrawer(false)}
+                        className="text-2xl font-bold"
+                      >
+                        ✕
+                      </button>
+                    </div>
+
+                    {/* Scrollable Content */}
+                    <div className="h-[calc(100vh-64px)] overflow-y-auto p-4">
+                      <ul className="menu">
+                        <SidebarFilter
+                          heading="Products"
+                          getPriceFilter={getPriceFilter}
+                          initialPriceRange={[minimumPrice, maximumPrice]}
+                        />
+                      </ul>
+                    </div>
                   </div>
                 </div>
+
                 {/* //Filter Drawer */}
                 <select
                   value={selectedSort}
