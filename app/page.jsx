@@ -10,9 +10,9 @@ import CategoriesList from "@/components/Home/CategoriesList";
 import CategoryFirst from "@/components/Home/CategoryFirst";
 
 //CategorySEctionsImages imported from public folder
-import categorySection1 from "@/public/assets/categorySection1.webp";
-import categorySection2 from "@/public/assets/categorySection2.webp";
-import categorySection3 from "@/public/assets/categorySection3.webp";
+import categorySection1 from "@/public/assets/home-categories/first.png";
+import categorySection2 from "@/public/assets/home-categories/second.png";
+import categorySection3 from "@/public/assets/home-categories/third.png";
 import Feedback from "@/components/Home/Feedback";
 import Shop from "@/components/Home/Shop";
 import { fetchTwentyFourProducts } from "@/lib/products";

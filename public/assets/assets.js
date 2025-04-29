@@ -1,21 +1,21 @@
-import category1 from "@/public/assets/Almond.png";
-import category2 from "@/public/assets/Cash-1.webp";
-import category3 from "@/public/assets/Pista-2.webp";
-import category4 from "@/public/assets/Rais.webp";
+import category1 from "@/public/assets/main-categories/Almond.png";
+import category2 from "@/public/assets/main-categories/Seeds.png";
+import category3 from "@/public/assets/main-categories/Honey.png";
+import category4 from "@/public/assets/main-categories/DryFruits.png";
 import service1 from "@/public/assets/vehicle.webp";
 import service2 from "@/public/assets/return.webp";
 import service3 from "@/public/assets/verified.webp";
 import service4 from "@/public/assets/headphones.webp";
 
 //
-import categoryList1 from "@/public/assets/Box.webp";
-import categoryList2 from "@/public/assets/almond.webp";
-import categoryList3 from "@/public/assets/Walnut.webp";
-import categoryList4 from "@/public/assets/fig.webp";
-import categoryList5 from "@/public/assets/raisins.webp";
-import categoryList6 from "@/public/assets/Dates.ci_.webp";
-import categoryList7 from "@/public/assets/kishmish.webp";
-import categoryList8 from "@/public/assets/honey.webp";
+import categoryList1 from "@/public/assets/product-categories/Box.webp";
+import categoryList2 from "@/public/assets/product-categories/almond.webp";
+import categoryList3 from "@/public/assets/product-categories/Walnut.webp";
+import categoryList4 from "@/public/assets/product-categories/fig.webp";
+import categoryList5 from "@/public/assets/product-categories/raisins.webp";
+import categoryList6 from "@/public/assets/product-categories/Dates.ci_.webp";
+import categoryList7 from "@/public/assets//product-categories/kishmish.webp";
+import categoryList8 from "@/public/assets/product-categories/honey.webp";
 
 export const navigationList = [
   {

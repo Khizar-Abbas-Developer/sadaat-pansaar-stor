@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import categoryList1 from "@/public/assets/Box.webp";
+import categoryList1 from "@/public/assets/product-categories/Box.webp";
 import { categoryCirclesList } from "@/public/assets/assets";
 import Link from "next/link";
 
