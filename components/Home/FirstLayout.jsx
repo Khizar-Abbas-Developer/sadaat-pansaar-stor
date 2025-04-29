@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import layoutOne from "@/public/assets/layout1.webp";
+import layoutOne from "@/public/assets/test001.png";
 import layoutTwo from "@/public/assets/layout2.webp";
 
 const FirstLayout = () => {

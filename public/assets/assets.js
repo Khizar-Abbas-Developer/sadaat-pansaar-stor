@@ -8,7 +8,7 @@ import service3 from "@/public/assets/verified.webp";
 import service4 from "@/public/assets/headphones.webp";
 
 //
-import categoryList1 from "@/public/assets/product-categories/Box.webp";
+import categoryList1 from "@/public/assets/product-categories/test002.png";
 import categoryList2 from "@/public/assets/product-categories/almond.webp";
 import categoryList3 from "@/public/assets/product-categories/Walnut.webp";
 import categoryList4 from "@/public/assets/product-categories/fig.webp";
@@ -71,7 +71,7 @@ export const categoriesList = [
   {
     image: category1,
     id: 1,
-    category: "almonds",
+    category: "dry-fruits",
     title: "Almonds",
   },
   {

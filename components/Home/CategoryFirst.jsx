@@ -14,15 +14,15 @@ const CategoryFirst = ({
   const [loading, setLoading] = React.useState(true);
   const products = useSelector((state) => state.product.products);
   const firstCategoryArray = (products || [])
-    .filter((item) => item.category === "almonds")
+    .filter((item) => item.category === "dry-fruits")
     .slice(0, 4);
 
   const secondCategoryArray = (products || [])
-    .filter((item) => item.category === "gift-boxes")
+    .filter((item) => item.category === "murabba")
     .slice(0, 4);
 
   const thirdCategoryArray = (products || [])
-    .filter((item) => item.category === "dates")
+    .filter((item) => item.category === "seeds")
     .slice(0, 4);
 
   useEffect(() => {
