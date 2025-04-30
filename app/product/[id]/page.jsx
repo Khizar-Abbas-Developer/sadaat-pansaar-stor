@@ -81,6 +81,7 @@ const Product = () => {
 
     toast.success("Product added to cart");
   };
+  
   return (
     <>
       {loading ? (
