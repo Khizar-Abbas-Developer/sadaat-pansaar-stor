@@ -153,6 +153,8 @@ const Checkout = () => {
               </p>
               <Image
                 src={successGiftImage}
+                priority
+                unoptimized
                 alt="Order Success"
                 width={220}
                 height={220}
