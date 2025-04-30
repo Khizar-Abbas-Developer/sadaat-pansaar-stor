@@ -9,8 +9,10 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { HashLoader } from "react-spinners";
 
 const Checkout = () => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [selectedPayment, setSelectedPayment] = useState("cod");
   const [openPaymentAccordion, setOpenPaymentAccordion] = useState(true);
@@ -81,6 +83,7 @@ const Checkout = () => {
     }
 
     try {
+      setLoading(true);
       const URL = process.env.NEXT_PUBLIC_SERVER_URL;
       const response = await axios.post(
         `${URL}/api/v1/order/place-order`,
@@ -112,274 +115,289 @@ const Checkout = () => {
     favouriteProducts,
   ]);
   return (
-    <div className="min-h-screen mt-32 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 py-10 flex flex-col lg:flex-row gap-10">
-      {/* Left - Billing & Shipping */}
-      <div className="w-full lg:w-[65%]">
-        <div>
-          <h1 className="text-lg md:text-xl font-semibold mb-4">
-            Billing & Shipping
-          </h1>
-          <div className="flex flex-col gap-4">
-            {/* Input Field */}
-            {[
-              {
-                label: "Full Name: مکمل نام *",
-                name: "fullName",
-                id: "fullName",
-                type: "text",
-                value: order.fullName,
-              },
-              {
-                label: "Phone: فون نمبر *",
-                name: "phone",
-                id: "phone",
-                type: "number",
-                value: order.phone,
-              },
-              {
-                label: "Town / City: شہر *",
-                name: "city",
-                id: "city",
-                type: "text",
-                value: order.city,
-              },
-              {
-                label: "Address: مکمل پتہ *",
-                placeholder: "House number and street name",
-                name: "address",
-                id: "address",
-                type: "text",
-                value: order.address,
-              },
-              {
-                label: "Email address (optional)",
-                name: "email",
-                id: "email",
-                type: "email",
-                value: order.email,
-              },
-            ].map(
-              ({ label, placeholder = "", name, id, type, value }, index) => (
-                <div key={index} className="flex flex-col gap-1">
-                  <p className="font-semibold text-sm">{label}</p>
-                  <input
-                    type={type}
-                    placeholder={placeholder}
-                    name={name}
-                    id={id}
-                    value={value}
-                    onChange={handleOnChange}
-                    className={`w-full border p-2 rounded outline-none text-sm ${
-                      errors[name] ? "border-red-500" : "border-gray-300"
-                    }`}
-                  />
-                  {errors[name] && (
-                    <span className="text-red-500 text-xs">{errors[name]}</span>
-                  )}
+    <>
+      {loading ? (
+        <div className="flex justify-center items-center h-screen">
+          <HashLoader color="#5fa800" />
+        </div>
+      ) : (
+        <div className="min-h-screen mt-32 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 py-10 flex flex-col lg:flex-row gap-10">
+          {/* Left - Billing & Shipping */}
+          <div className="w-full lg:w-[65%]">
+            <div>
+              <h1 className="text-lg md:text-xl font-semibold mb-4">
+                Billing & Shipping
+              </h1>
+              <div className="flex flex-col gap-4">
+                {/* Input Field */}
+                {[
+                  {
+                    label: "Full Name: مکمل نام *",
+                    name: "fullName",
+                    id: "fullName",
+                    type: "text",
+                    value: order.fullName,
+                  },
+                  {
+                    label: "Phone: فون نمبر *",
+                    name: "phone",
+                    id: "phone",
+                    type: "number",
+                    value: order.phone,
+                  },
+                  {
+                    label: "Town / City: شہر *",
+                    name: "city",
+                    id: "city",
+                    type: "text",
+                    value: order.city,
+                  },
+                  {
+                    label: "Address: مکمل پتہ *",
+                    placeholder: "House number and street name",
+                    name: "address",
+                    id: "address",
+                    type: "text",
+                    value: order.address,
+                  },
+                  {
+                    label: "Email address (optional)",
+                    name: "email",
+                    id: "email",
+                    type: "email",
+                    value: order.email,
+                  },
+                ].map(
+                  (
+                    { label, placeholder = "", name, id, type, value },
+                    index
+                  ) => (
+                    <div key={index} className="flex flex-col gap-1">
+                      <p className="font-semibold text-sm">{label}</p>
+                      <input
+                        type={type}
+                        placeholder={placeholder}
+                        name={name}
+                        id={id}
+                        value={value}
+                        onChange={handleOnChange}
+                        className={`w-full border p-2 rounded outline-none text-sm ${
+                          errors[name] ? "border-red-500" : "border-gray-300"
+                        }`}
+                      />
+                      {errors[name] && (
+                        <span className="text-red-500 text-xs">
+                          {errors[name]}
+                        </span>
+                      )}
+                    </div>
+                  )
+                )}
+                {/* Checkboxes */}
+                <div className="flex items-center gap-2 cursor-pointer">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" className="w-4 h-4" />
+                    <span className="text-sm font-medium">
+                      Sign me up to receive email updates and news (optional)
+                    </span>
+                  </label>
                 </div>
-              )
-            )}
-            {/* Checkboxes */}
-            <div className="flex items-center gap-2 cursor-pointer">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" className="w-4 h-4" />
-                <span className="text-sm font-medium">
-                  Sign me up to receive email updates and news (optional)
-                </span>
-              </label>
-            </div>
 
-            <div className="flex items-center gap-2 cursor-pointer">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" className="w-4 h-4" />
-                <span className="text-sm">Create an account?</span>
-              </label>
-            </div>
+                <div className="flex items-center gap-2 cursor-pointer">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" className="w-4 h-4" />
+                    <span className="text-sm">Create an account?</span>
+                  </label>
+                </div>
 
-            {/* Order Notes */}
-            <div className="flex flex-col gap-2">
-              <p className="text-sm font-semibold">Order notes (optional)</p>
-              <textarea className="w-full min-h-[120px] border border-gray-300 p-2 rounded outline-none text-sm"></textarea>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Right - Order Summary */}
-      <div className="w-full lg:w-[35%] border border-[#5fa800] rounded p-4">
-        <h2 className="text-lg font-bold text-gray-700 mb-3">Your Order</h2>
-
-        {/* Product List */}
-        <div className="flex justify-between font-semibold text-sm border-b pb-2">
-          <p>Product</p>
-          <p>Subtotal</p>
-        </div>
-
-        {favouriteProducts.map((product) => (
-          <div
-            key={product.cartId}
-            className="flex flex-col sm:flex-row sm:justify-between gap-3 py-4 border-b"
-          >
-            <div className="flex gap-4 items-start">
-              <Image src={product.image} alt="" width={50} height={50} />
-              <div>
-                <p className="text-sm font-medium w-full lg:w-[80%]">
-                  {product.productName}
-                </p>
-                <div className="text-xs text-gray-600 flex items-center gap-1">
-                  <span>{product.selectedVariant}</span> ×{" "}
-                  <span>{product.numberOfItems}</span>
+                {/* Order Notes */}
+                <div className="flex flex-col gap-2">
+                  <p className="text-sm font-semibold">
+                    Order notes (optional)
+                  </p>
+                  <textarea className="w-full min-h-[120px] border border-gray-300 p-2 rounded outline-none text-sm"></textarea>
                 </div>
               </div>
             </div>
-            <div className="text-right font-semibold text-sm">
-              Rs{product.selectedPrice * product.numberOfItems}
-            </div>
           </div>
-        ))}
 
-        {/* Totals */}
-        <div className="flex justify-between text-sm font-semibold mt-4">
-          <p>Subtotal</p>
-          <p>Rs{subtotalWithoutDeliveryCharges}</p>
-        </div>
+          {/* Right - Order Summary */}
+          <div className="w-full lg:w-[35%] border border-[#5fa800] rounded p-4">
+            <h2 className="text-lg font-bold text-gray-700 mb-3">Your Order</h2>
 
-        {/* Shipping */}
-        <div className="mt-4 text-sm">
-          <p className="font-semibold mb-2">Shipping</p>
-          <div className="flex flex-col gap-2">
-            {["express", "standard"].map((method) => (
-              <label
-                key={method}
-                className="flex items-center gap-2 cursor-pointer text-sm"
+            {/* Product List */}
+            <div className="flex justify-between font-semibold text-sm border-b pb-2">
+              <p>Product</p>
+              <p>Subtotal</p>
+            </div>
+
+            {favouriteProducts.map((product) => (
+              <div
+                key={product.cartId}
+                className="flex flex-col sm:flex-row sm:justify-between gap-3 py-4 border-b"
               >
-                <input
-                  type="radio"
-                  name="shipping"
-                  value={method}
-                  checked={shippingOption === method}
-                  onChange={() =>
-                    dispatch(updateShippingAndRecalculate(method))
-                  }
-                  className="accent-[#5fa800] w-4 h-4"
-                />
-                <span>
-                  {method === "express"
-                    ? "24-Hour Express Delivery: ₨500"
-                    : "Standard Shipping Charges: ₨200"}
-                </span>
-              </label>
+                <div className="flex gap-4 items-start">
+                  <Image src={product.image} alt="" width={50} height={50} />
+                  <div>
+                    <p className="text-sm font-medium w-full lg:w-[80%]">
+                      {product.productName}
+                    </p>
+                    <div className="text-xs text-gray-600 flex items-center gap-1">
+                      <span>{product.selectedVariant}</span> ×{" "}
+                      <span>{product.numberOfItems}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-right font-semibold text-sm">
+                  Rs{product.selectedPrice * product.numberOfItems}
+                </div>
+              </div>
             ))}
-          </div>
-        </div>
 
-        <div className="flex justify-between text-sm font-semibold mt-4">
-          <p>Total</p>
-          <p>Rs{grandGreatTotal}</p>
-        </div>
-        {/* //Payment methods accordion */}
-        <div className="mt-6 text-sm">
-          <div
-            className="flex justify-between items-center cursor-pointer"
-            onClick={() => setOpenPaymentAccordion((prev) => !prev)}
-          >
-            <p className="font-semibold">Select Payment Method</p>
-            <span className="text-xs text-gray-600">
-              {openPaymentAccordion ? "−" : "+"}
-            </span>
-          </div>
+            {/* Totals */}
+            <div className="flex justify-between text-sm font-semibold mt-4">
+              <p>Subtotal</p>
+              <p>Rs{subtotalWithoutDeliveryCharges}</p>
+            </div>
 
-          {/* Accordion Body with animation */}
-          <div
-            className={`transition-all duration-300 overflow-hidden ${
-              openPaymentAccordion
-                ? "max-h-96 opacity-100 mt-3"
-                : "max-h-0 opacity-0"
-            }`}
-          >
-            <div className="flex flex-col gap-3">
-              {["cod", "bank"].map((method) => (
-                <label
-                  key={method}
-                  className="flex items-center gap-2 cursor-pointer"
+            {/* Shipping */}
+            <div className="mt-4 text-sm">
+              <p className="font-semibold mb-2">Shipping</p>
+              <div className="flex flex-col gap-2">
+                {["express", "standard"].map((method) => (
+                  <label
+                    key={method}
+                    className="flex items-center gap-2 cursor-pointer text-sm"
+                  >
+                    <input
+                      type="radio"
+                      name="shipping"
+                      value={method}
+                      checked={shippingOption === method}
+                      onChange={() =>
+                        dispatch(updateShippingAndRecalculate(method))
+                      }
+                      className="accent-[#5fa800] w-4 h-4"
+                    />
+                    <span>
+                      {method === "express"
+                        ? "24-Hour Express Delivery: ₨500"
+                        : "Standard Shipping Charges: ₨200"}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex justify-between text-sm font-semibold mt-4">
+              <p>Total</p>
+              <p>Rs{grandGreatTotal}</p>
+            </div>
+            {/* //Payment methods accordion */}
+            <div className="mt-6 text-sm">
+              <div
+                className="flex justify-between items-center cursor-pointer"
+                onClick={() => setOpenPaymentAccordion((prev) => !prev)}
+              >
+                <p className="font-semibold">Select Payment Method</p>
+                <span className="text-xs text-gray-600">
+                  {openPaymentAccordion ? "−" : "+"}
+                </span>
+              </div>
+
+              {/* Accordion Body with animation */}
+              <div
+                className={`transition-all duration-300 overflow-hidden ${
+                  openPaymentAccordion
+                    ? "max-h-96 opacity-100 mt-3"
+                    : "max-h-0 opacity-0"
+                }`}
+              >
+                <div className="flex flex-col gap-3">
+                  {["cod", "bank"].map((method) => (
+                    <label
+                      key={method}
+                      className="flex items-center gap-2 cursor-pointer"
+                    >
+                      <input
+                        type="radio"
+                        name="payment"
+                        value={method}
+                        checked={selectedPayment === method}
+                        onChange={() => setSelectedPayment(method)}
+                        className="accent-[#5fa800] w-4 h-4"
+                      />
+                      <span className="text-sm">
+                        {method === "cod"
+                          ? "Cash on Delivery (COD)"
+                          : "Bank Transfer (via account)"}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+
+                {/* Payment Details Transition Block */}
+                <div
+                  className={`transition-all duration-300 ease-in-out ${
+                    selectedPayment ? "mt-4 opacity-100" : "opacity-0"
+                  }`}
                 >
-                  <input
-                    type="radio"
-                    name="payment"
-                    value={method}
-                    checked={selectedPayment === method}
-                    onChange={() => setSelectedPayment(method)}
-                    className="accent-[#5fa800] w-4 h-4"
-                  />
-                  <span className="text-sm">
-                    {method === "cod"
-                      ? "Cash on Delivery (COD)"
-                      : "Bank Transfer (via account)"}
-                  </span>
-                </label>
-              ))}
+                  {selectedPayment === "bank" && (
+                    <div className="border border-gray-300 p-4 rounded bg-gray-50 text-sm text-gray-700">
+                      <p className="font-semibold text-base mb-2 text-[#5fa800]">
+                        Bank Transfer Details:
+                      </p>
+                      <ul className="space-y-1">
+                        <li>
+                          <strong>KHAN DRY FRUIT</strong>
+                        </li>
+                        <li>
+                          <strong>Bank Name:</strong> United Bank Limited (UBL)
+                        </li>
+                        <li>
+                          <strong>Account Title:</strong> Khizar Abbas
+                        </li>
+                        <li>
+                          <strong>Account Number:</strong> 1234567890
+                        </li>
+                        <li>
+                          <strong>IBAN:</strong> PK00ABPA1234567890123456
+                        </li>
+                      </ul>
+                      <p className="mt-3 text-xs text-gray-600">
+                        Please send us the transaction receipt after payment to
+                        confirm your order.
+                      </p>
+                    </div>
+                  )}
+
+                  {selectedPayment === "cod" && (
+                    <div className="border border-gray-300 p-4 rounded bg-gray-50 text-sm text-gray-700">
+                      <p className="font-semibold text-base mb-1 text-[#5fa800]">
+                        Cash on Delivery:
+                      </p>
+                      <p>
+                        You can pay in cash when the order is delivered to your
+                        doorstep. Make sure to have the exact amount ready.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
 
-            {/* Payment Details Transition Block */}
-            <div
-              className={`transition-all duration-300 ease-in-out ${
-                selectedPayment ? "mt-4 opacity-100" : "opacity-0"
-              }`}
+            {/* //Payment methods accordion */}
+
+            <button
+              className="uppercase py-3 cursor-pointer w-full mt-6 bg-[#5fa800] text-white font-semibold rounded shadow-sm"
+              onClick={handlePlaceOrder}
             >
-              {selectedPayment === "bank" && (
-                <div className="border border-gray-300 p-4 rounded bg-gray-50 text-sm text-gray-700">
-                  <p className="font-semibold text-base mb-2 text-[#5fa800]">
-                    Bank Transfer Details:
-                  </p>
-                  <ul className="space-y-1">
-                    <li>
-                      <strong>KHAN DRY FRUIT</strong>
-                    </li>
-                    <li>
-                      <strong>Bank Name:</strong> United Bank Limited (UBL)
-                    </li>
-                    <li>
-                      <strong>Account Title:</strong> Khizar Abbas
-                    </li>
-                    <li>
-                      <strong>Account Number:</strong> 1234567890
-                    </li>
-                    <li>
-                      <strong>IBAN:</strong> PK00ABPA1234567890123456
-                    </li>
-                  </ul>
-                  <p className="mt-3 text-xs text-gray-600">
-                    Please send us the transaction receipt after payment to
-                    confirm your order.
-                  </p>
-                </div>
-              )}
-
-              {selectedPayment === "cod" && (
-                <div className="border border-gray-300 p-4 rounded bg-gray-50 text-sm text-gray-700">
-                  <p className="font-semibold text-base mb-1 text-[#5fa800]">
-                    Cash on Delivery:
-                  </p>
-                  <p>
-                    You can pay in cash when the order is delivered to your
-                    doorstep. Make sure to have the exact amount ready.
-                  </p>
-                </div>
-              )}
-            </div>
+              Place Order
+            </button>
           </div>
         </div>
-
-        {/* //Payment methods accordion */}
-
-        <button
-          className="uppercase py-3 cursor-pointer w-full mt-6 bg-[#5fa800] text-white font-semibold rounded shadow-sm"
-          onClick={handlePlaceOrder}
-        >
-          Place Order
-        </button>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
