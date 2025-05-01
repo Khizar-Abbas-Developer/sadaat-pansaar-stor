@@ -82,6 +82,17 @@ const Product = () => {
 
     toast.success("Product added to cart");
   };
+  const handleBuyNow = (item) => () => {
+    const productToAdd = {
+      ...item,
+      selectedVariant: currentVariant,
+      selectedPrice: currentPrice,
+      numberOfItems: count,
+      cartId: Date.now() + Math.random(), // Unique per item added
+    };
+    dispatch(addProductToCart(productToAdd));
+    navigate.push("/checkout");
+  };
 
   return (
     <>
@@ -186,7 +197,10 @@ const Product = () => {
                   <FaShoppingCart className="text-lg" />
                   ADD TO CART
                 </button>
-                <button className="bg-[#559812] px-6 py-2 text-white font-bold rounded">
+                <button
+                  className="bg-[#559812] px-6 py-2 text-white font-bold rounded"
+                  onClick={handleBuyNow(dataToPopulate)}
+                >
                   BUY NOW
                 </button>
               </div>

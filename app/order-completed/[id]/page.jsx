@@ -43,11 +43,11 @@ const Checkout = () => {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex justify-center bg-white items-center h-screen">
           <HashLoader color="#5fa800" />
         </div>
       ) : (
-        <div className="min-h-screen mt-28 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 py-10 flex flex-col-reverse lg:flex-row gap-10">
+        <div className="min-h-screen mt-28 bg-white text-black px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 py-10 flex flex-col-reverse lg:flex-row gap-10">
           {/* Left - Order Details */}
           <div className="w-full lg:w-2/3">
             <p className="text-sm md:text-base text-[#5fa800]">
@@ -146,7 +146,7 @@ const Checkout = () => {
           </div>
 
           {/* Right - Order Summary Box */}
-          <div className="w-full lg:w-1/3 rounded-lg shadow-xl p-6 bg-white">
+          <div className="w-full lg:w-1/3 rounded-lg shadow-xl p-6 bg-gray-100">
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
               <p className="text-green-700 text-base md:text-lg font-semibold">
                 Thanks, Your Order has been Processed.

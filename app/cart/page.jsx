@@ -255,7 +255,7 @@ const Cart = () => {
               </div>
             </div>
 
-            <div className="flex justify-between text-sm mt-6">
+            <div className="flex justify-between text-sm mt-6 text-black">
               <div>Total</div>
               <div className="font-semibold">{`₨${grandTotal}`}</div>
             </div>
@@ -281,7 +281,7 @@ const Cart = () => {
               <input
                 type="text"
                 placeholder="Coupon code"
-                className="w-full py-2 px-3 border border-gray-400 shadow-sm outline-none"
+                className="w-full py-2 px-3 border border-gray-400 text-black shadow-sm outline-none"
               />
               <p className="text-red-500 text-sm">{errorMessage}</p>
               <button
