@@ -11,6 +11,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { addProductToCart, setCartStatus } from "@/redux/products/productSlice";
 import toast from "react-hot-toast";
+import CustomerReviews from "@/components/Reviews";
 
 const Product = () => {
   const dispatch = useDispatch(); // Using Redux for state management
@@ -81,7 +82,7 @@ const Product = () => {
 
     toast.success("Product added to cart");
   };
-  
+
   return (
     <>
       {loading ? (
@@ -215,21 +216,7 @@ const Product = () => {
               </div>
             </div>
           </div>
-          <div className="px-10">
-            <div className="shadow-lg rounded-lg px-12 py-8 mt-10">
-              <div className="flex justify-between items-center text-xl font-semibold mb-4">
-                About this item
-              </div>
-              <ul className="mt-4 list-disc list-inside text-gray-700 text-sm sm:text-base space-y-2">
-                {dataToPopulate?.description?.map((item) => (
-                  <li key={item._id}>
-                    <span className="font-bold">{item.heading}</span> –{" "}
-                    {item.detail}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <CustomerReviews />
           <RelatedProducts category={dataToPopulate?.category} />
         </div>
       )}
