@@ -74,14 +74,18 @@ const WhishList = () => {
 
                     {/* Unit Price */}
                     <div className="text-sm text-start">
-                      <span className="sm:hidden font-semibold">Price: </span>
-                      From:{" "}
-                      <span className="font-bold">₨{item?.productPrice}</span>
+                      <span className="sm:hidden font-semibold text-black">
+                        Price:{" "}
+                      </span>
+                      <span className="text-black">From: </span>
+                      <span className="font-semibold text-black">
+                        ₨{item?.productPrice}
+                      </span>
                     </div>
 
                     {/* Stock + Buttons */}
                     <div className="flex justify-start items-center gap-2">
-                      <span className="px-3 py-2 text-sm font-medium bg-green-400 text-black rounded cursor-pointer">
+                      <span className="px-3 py-2 text-sm font-medium bg-[#5fa800] text-white rounded cursor-pointer">
                         In Stock
                       </span>
                     </div>

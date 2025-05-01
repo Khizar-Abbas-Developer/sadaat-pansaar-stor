@@ -17,6 +17,7 @@ import {
 } from "react-icons/fa";
 
 const Cart = () => {
+  const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
   const grandTotal = useSelector((state) => state.product.grandTotal);
@@ -90,19 +91,23 @@ const Cart = () => {
       })
     );
   };
+  const handleNaviateToCheckout = () => {
+    setLoading(true);
+    router.push("/checkout");
+  };
 
   return (
-    <div className="h-auto mt-32 px-4 sm:px-8 md:px-2 lg:px-30 py-10 flex flex-col lg:flex-row gap-10">
+    <div className="h-auto mt-32 px-4 sm:px-8 md:px-2 bg-white lg:px-30 py-10 flex flex-col lg:flex-row gap-10">
       {favouriteProducts.length > 0 ? (
         <>
           {/* Left - Wishlist Items */}
           <div className="w-full lg:w-[65%] flex flex-col">
             {/* Header */}
             <div className="hidden sm:grid grid-cols-5 font-semibold text-gray-600 text-sm uppercase mb-3">
-              <div className="col-span-2">Product</div>
-              <div className="text-center">Price</div>
-              <div className="text-center">Quantity</div>
-              <div className="text-center">Subtotal</div>
+              <div className="text-black col-span-2">Product</div>
+              <div className="text-black text-center">Price</div>
+              <div className="text-black text-center">Quantity</div>
+              <div className="text-black text-center">Subtotal</div>
             </div>
             <hr className="mb-4 hidden sm:block border-t-2 border-gray-300" />
 
@@ -128,7 +133,7 @@ const Cart = () => {
                     className="object-cover rounded"
                   />
                   <div className="flex flex-col">
-                    <p className="font-medium text-gray-800">
+                    <p className="font-medium text-black">
                       {item?.productName}
                     </p>
                     <p className="text-gray-500 sm:hidden text-sm">
@@ -142,7 +147,9 @@ const Cart = () => {
                   <span className="sm:hidden font-semibold text-gray-500">
                     Price:
                   </span>
-                  <span className="font-bold">₨{item?.selectedPrice}</span>
+                  <span className="font-bold text-black">
+                    ₨{item?.selectedPrice}
+                  </span>
                 </div>
 
                 {/* Quantity */}
@@ -175,10 +182,10 @@ const Cart = () => {
 
                 {/* Subtotal */}
                 <div className="flex justify-between sm:justify-center sm:items-center">
-                  <span className="sm:hidden font-semibold text-gray-500">
+                  <span className="sm:hidden font-semibold text-black">
                     Subtotal:
                   </span>
-                  <span className="font-bold">
+                  <span className="font-bold text-black">
                     ₨{item?.selectedPrice * item?.numberOfItems}
                   </span>
                 </div>
@@ -206,7 +213,7 @@ const Cart = () => {
             </div>
             <hr className="mb-4 border-t-2 border-gray-300" />
 
-            <div className="flex justify-between text-sm mb-4">
+            <div className="flex justify-between text-sm mb-4 text-black">
               <div>Subtotal</div>
               <div className="font-semibold">{`Rs${totalAmount}`}</div>
             </div>
@@ -214,7 +221,7 @@ const Cart = () => {
             <hr className="border-gray-200" />
 
             <div className="mt-4 text-sm">
-              <div className="mb-2 font-semibold">Shipping</div>
+              <div className="mb-2 font-semibold text-black">Shipping</div>
               <div className="flex flex-col gap-4 mt-2">
                 {/* Express Option */}
                 <label className="flex items-center gap-2 cursor-pointer">
@@ -226,7 +233,9 @@ const Cart = () => {
                     onChange={() => setShippingOption("express")}
                     className="accent-[#5fa800] w-4 h-4"
                   />
-                  <span>24-Hour Express Delivery: ₨500</span>
+                  <span className="text-black">
+                    24-Hour Express Delivery: ₨500
+                  </span>
                 </label>
 
                 {/* Standard Option */}
@@ -239,7 +248,9 @@ const Cart = () => {
                     onChange={() => setShippingOption("standard")}
                     className="accent-[#5fa800] w-4 h-4"
                   />
-                  <span>Standard Shipping Charges: ₨200</span>
+                  <span className="text-black">
+                    Standard Shipping Charges: ₨200
+                  </span>
                 </label>
               </div>
             </div>
@@ -251,14 +262,21 @@ const Cart = () => {
 
             <button
               className="uppercase cursor-pointer py-2 w-full bg-black text-white mt-5 font-semibold"
-              onClick={() => router.push("/checkout")}
+              onClick={handleNaviateToCheckout}
             >
               Proceed to Checkout
+              {loading && (
+                <div className="flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
+                </div>
+              )}
             </button>
 
             {/* Coupon */}
             <div className="mt-6">
-              <div className="text-sm font-semibold mb-2">Coupon</div>
+              <div className="text-sm font-semibold mb-2 text-black">
+                Coupon
+              </div>
               <hr className="border-t-2 border-gray-300 mb-4" />
               <input
                 type="text"

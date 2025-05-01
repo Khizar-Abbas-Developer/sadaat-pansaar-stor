@@ -75,6 +75,7 @@ const Checkout = () => {
     if (!order.phone.trim()) newErrors.phone = "Phone is required";
     if (!order.city.trim()) newErrors.city = "City is required";
     if (!order.address.trim()) newErrors.address = "Address is required";
+    if (!order.email.trim()) newErrors.email = "Email is required";
     // Email is optional, so we skip it
 
     if (Object.keys(newErrors).length > 0) {
@@ -117,15 +118,15 @@ const Checkout = () => {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex justify-center items-center h-screen ">
           <HashLoader color="#5fa800" />
         </div>
       ) : (
-        <div className="min-h-screen mt-32 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 py-10 flex flex-col lg:flex-row gap-10">
+        <div className="min-h-screen mt-32 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 py-10 flex flex-col lg:flex-row gap-10 bg-white">
           {/* Left - Billing & Shipping */}
           <div className="w-full lg:w-[65%]">
             <div>
-              <h1 className="text-lg md:text-xl font-semibold mb-4">
+              <h1 className="text-lg md:text-xl font-semibold mb-4 text-black">
                 Billing & Shipping
               </h1>
               <div className="flex flex-col gap-4">
@@ -161,7 +162,7 @@ const Checkout = () => {
                     value: order.address,
                   },
                   {
-                    label: "Email address (optional)",
+                    label: "Email address *",
                     name: "email",
                     id: "email",
                     type: "email",
@@ -173,7 +174,9 @@ const Checkout = () => {
                     index
                   ) => (
                     <div key={index} className="flex flex-col gap-1">
-                      <p className="font-semibold text-sm">{label}</p>
+                      <p className="font-semibold text-sm text-black">
+                        {label}
+                      </p>
                       <input
                         type={type}
                         placeholder={placeholder}
@@ -181,7 +184,7 @@ const Checkout = () => {
                         id={id}
                         value={value}
                         onChange={handleOnChange}
-                        className={`w-full border p-2 rounded outline-none text-sm ${
+                        className={`w-full border p-2 rounded outline-none text-black text-sm ${
                           errors[name] ? "border-red-500" : "border-gray-300"
                         }`}
                       />
@@ -197,7 +200,7 @@ const Checkout = () => {
                 <div className="flex items-center gap-2 cursor-pointer">
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input type="checkbox" className="w-4 h-4" />
-                    <span className="text-sm font-medium">
+                    <span className="text-sm font-medium text-black">
                       Sign me up to receive email updates and news (optional)
                     </span>
                   </label>
@@ -206,16 +209,18 @@ const Checkout = () => {
                 <div className="flex items-center gap-2 cursor-pointer">
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input type="checkbox" className="w-4 h-4" />
-                    <span className="text-sm">Create an account?</span>
+                    <span className="text-sm text-black">
+                      Create an account?
+                    </span>
                   </label>
                 </div>
 
                 {/* Order Notes */}
                 <div className="flex flex-col gap-2">
-                  <p className="text-sm font-semibold">
+                  <p className="text-sm font-semibold text-black">
                     Order notes (optional)
                   </p>
-                  <textarea className="w-full min-h-[120px] border border-gray-300 p-2 rounded outline-none text-sm"></textarea>
+                  <textarea className="w-full min-h-[120px] border border-gray-300 text-black p-2 rounded outline-none text-sm"></textarea>
                 </div>
               </div>
             </div>
@@ -226,7 +231,7 @@ const Checkout = () => {
             <h2 className="text-lg font-bold text-gray-700 mb-3">Your Order</h2>
 
             {/* Product List */}
-            <div className="flex justify-between font-semibold text-sm border-b pb-2">
+            <div className="flex justify-between font-semibold text-sm border-b pb-2 text-black">
               <p>Product</p>
               <p>Subtotal</p>
             </div>
@@ -239,30 +244,30 @@ const Checkout = () => {
                 <div className="flex gap-4 items-start">
                   <Image src={product.image} alt="" width={50} height={50} />
                   <div>
-                    <p className="text-sm font-medium w-full lg:w-[80%]">
+                    <p className="text-sm font-medium w-full lg:w-[80%] text-black">
                       {product.productName}
                     </p>
-                    <div className="text-xs text-gray-600 flex items-center gap-1">
+                    <div className="text-xs flex items-center gap-1 text-black">
                       <span>{product.selectedVariant}</span> ×{" "}
                       <span>{product.numberOfItems}</span>
                     </div>
                   </div>
                 </div>
-                <div className="text-right font-semibold text-sm">
+                <div className="text-right font-semibold text-sm text-black">
                   Rs{product.selectedPrice * product.numberOfItems}
                 </div>
               </div>
             ))}
 
             {/* Totals */}
-            <div className="flex justify-between text-sm font-semibold mt-4">
+            <div className="flex justify-between text-sm font-semibold mt-4 text-black">
               <p>Subtotal</p>
               <p>Rs{subtotalWithoutDeliveryCharges}</p>
             </div>
 
             {/* Shipping */}
             <div className="mt-4 text-sm">
-              <p className="font-semibold mb-2">Shipping</p>
+              <p className="font-semibold mb-2 text-black">Shipping</p>
               <div className="flex flex-col gap-2">
                 {["express", "standard"].map((method) => (
                   <label
@@ -279,7 +284,7 @@ const Checkout = () => {
                       }
                       className="accent-[#5fa800] w-4 h-4"
                     />
-                    <span>
+                    <span className="text-black">
                       {method === "express"
                         ? "24-Hour Express Delivery: ₨500"
                         : "Standard Shipping Charges: ₨200"}
@@ -289,7 +294,7 @@ const Checkout = () => {
               </div>
             </div>
 
-            <div className="flex justify-between text-sm font-semibold mt-4">
+            <div className="flex justify-between text-sm font-semibold mt-4 text-black">
               <p>Total</p>
               <p>Rs{grandGreatTotal}</p>
             </div>
@@ -299,8 +304,10 @@ const Checkout = () => {
                 className="flex justify-between items-center cursor-pointer"
                 onClick={() => setOpenPaymentAccordion((prev) => !prev)}
               >
-                <p className="font-semibold">Select Payment Method</p>
-                <span className="text-xs text-gray-600">
+                <p className="font-semibold text-black">
+                  Select Payment Method
+                </p>
+                <span className="text-xs text-black">
                   {openPaymentAccordion ? "−" : "+"}
                 </span>
               </div>
@@ -313,7 +320,7 @@ const Checkout = () => {
                     : "max-h-0 opacity-0"
                 }`}
               >
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-3 text-black">
                   {["cod", "bank"].map((method) => (
                     <label
                       key={method}
