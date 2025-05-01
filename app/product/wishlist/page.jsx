@@ -30,7 +30,7 @@ const WhishList = () => {
     router.push(`/product/${productId}`);
   };
   return (
-    <div className="h-auto mt-40 px-4 sm:px-8 md:px-12 lg:px-40 py-10 md:py-16">
+    <div className="h-auto mt-30 px-4 sm:px-8 bg-white md:px-12 lg:px-40 py-10 md:py-16">
       {data.length > 0 ? (
         <>
           <div className="flex flex-col w-full">
@@ -89,15 +89,15 @@ const WhishList = () => {
                   </div>
 
                   {/* Buttons */}
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-2">
+                  <div className="flex w-full flex-col sm:flex-col md:flex-col lg:flex-col xl:flex-row items-start sm:items-center justify-start gap-2">
                     <button
-                      className="bg-[#5FA800] text-white px-4 py-2 text-sm font-semibold rounded w-full sm:w-auto cursor-pointer"
+                      className="bg-[#5FA800] text-white px-3 py-2 text-sm font-semibold rounded w-full sm:w-auto cursor-pointer"
                       onClick={handleAddToCart(item._id)}
                     >
                       Add to Cart
                     </button>
                     <button
-                      className="bg-[#5FA800] text-white px-4 py-2 text-sm font-semibold rounded w-full sm:w-auto cursor-pointer"
+                      className="bg-[#5FA800] text-white px-[27px] py-2 text-sm font-semibold rounded w-full sm:w-auto cursor-pointer"
                       onClick={handleRemoveProduct(item._id)}
                     >
                       Remove

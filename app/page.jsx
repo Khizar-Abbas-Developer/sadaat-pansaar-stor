@@ -43,7 +43,7 @@ export default function Home() {
   return (
     <React.Fragment>
       {loading ? (
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex justify-center bg-white items-center h-screen">
           <HashLoader color="#5fa800" />
         </div>
       ) : (

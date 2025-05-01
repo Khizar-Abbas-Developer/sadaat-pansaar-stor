@@ -86,11 +86,11 @@ const Product = () => {
   return (
     <>
       {loading ? (
-        <div className="h-[80vh] flex justify-center items-center">
+        <div className="h-[80vh] flex bg-white justify-center items-center">
           <MoonLoader color="#5FA800" />;
         </div>
       ) : (
-        <div className="h-auto z-[9999999] lg:h-auto mt-[100px] px-4 sm:px-8 md:px-[50px] lg:px-[165px] py-[40px] md:py-[64px]">
+        <div className="h-auto z-[9999999] lg:h-auto bg-white mt-[100px] px-4 sm:px-8 md:px-[50px] lg:px-[165px] py-[40px] md:py-[64px]">
           <div className="flex flex-col lg:flex-row justify-between items-center gap-10">
             {/* Image Section */}
             <div className="w-full lg:w-[50%] flex justify-center">
