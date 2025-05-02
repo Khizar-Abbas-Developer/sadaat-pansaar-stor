@@ -27,8 +27,6 @@ const Product = () => {
       const response = await axios.get(
         `${URL}/api/v1/product/get-product/${id}`
       );
-      console.log(response);
-
       setDataToPopulate(response.data.product);
     } catch (error) {
       console.log(error);

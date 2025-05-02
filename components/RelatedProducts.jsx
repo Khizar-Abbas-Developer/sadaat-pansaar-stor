@@ -17,8 +17,6 @@ const RelatedProducts = ({ category }) => {
   const [dataToLoop, setDataToLoop] = useState([]);
   const [likedItems, setLikedItems] = useState([]);
   const URL = process.env.NEXT_PUBLIC_SERVER_URL;
-  console.log(category);
-
   const fetchRelatedProducts = async () => {
     try {
       const response = await axios.get(
