@@ -41,7 +41,7 @@ export default function PriceRangeSlider({
   const fetchProductsByCategory = async () => {
     try {
       const response = await axios.get(
-        `${backEndUrl}/api/v1/product/get-products-by-category/${"almonds"}`
+        `${backEndUrl}/api/v1/product/get-products-by-category/${"murabba"}`
       );
       setDataToLoop(response.data.products);
     } catch (error) {

@@ -68,3 +68,21 @@ input[type="range"]::-moz-range-thumb {
   background: #d1d5db;
   border-radius: 5px;
 }
+
+/* //FLip card animatio */
+@keyframes flipBackY {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+.flip-on-hover {
+  animation: flipBackY 0.7s ease;
+  transform-style: preserve-3d;
+}

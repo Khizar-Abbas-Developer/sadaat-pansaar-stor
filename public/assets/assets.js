@@ -16,6 +16,8 @@ import categoryList5 from "@/public/assets/product-categories/raisins.webp";
 import categoryList6 from "@/public/assets/product-categories/Dates.ci_.webp";
 import categoryList7 from "@/public/assets//product-categories/kishmish.webp";
 import categoryList8 from "@/public/assets/product-categories/honey.webp";
+//
+import deliveryIcon from "@/public/assets/about-assets/delivery.webp";
 
 export const navigationList = [
   {
@@ -28,15 +30,15 @@ export const navigationList = [
   },
   {
     title: "About Us",
-    path: "/contact",
+    path: "/about-us",
   },
   {
     title: "Contact Us",
-    path: "/login",
+    path: "/contact-us",
   },
   {
     title: "FAQS",
-    path: "/register",
+    path: "/faqs",
   },
   {
     title: "Track Order",
@@ -213,5 +215,32 @@ export const descriptionList = [
       "Brazil nuts are large, energy-dense seeds that come from the Brazil nut tree (Bertholletia excelsa), which grows primarily in the Amazon basin. The trees can grow up to 160 feet tall, making them one of the largest trees in the rainforest. The nuts themselves are encased in a hard, woody shell and are harvested sustainably to protect the natural environment.",
     description2:
       "At Khan Dry Fruit, we offer Brazil nuts without the shell, making them easy to consume without the hassle of cracking. Each nut is carefully selected and processed to maintain its natural nutrients and flavour, giving you a product that is both delicious and healthy.",
+  },
+];
+
+export const aboutUsAnimatedContainersList = [
+  {
+    id: 1,
+    icon: deliveryIcon,
+    heading: "Fast Shipping",
+    paragraph: "2-4 Business Days",
+  },
+  {
+    id: 2,
+    icon: deliveryIcon,
+    heading: "Fast Shipping",
+    paragraph: "2-4 Business Days",
+  },
+  {
+    id: 3,
+    icon: deliveryIcon,
+    heading: "Fast Shipping",
+    paragraph: "2-4 Business Days",
+  },
+  {
+    id: 4,
+    icon: deliveryIcon,
+    heading: "Fast Shipping",
+    paragraph: "2-4 Business Days",
   },
 ];

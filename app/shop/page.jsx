@@ -11,41 +11,6 @@ import axios from "axios";
 import { HashLoader } from "react-spinners";
 import { categoriesList } from "@/public/assets/assets";
 
-const mockProducts = [
-  {
-    id: 1,
-    title: "Raw Cashews (250gm Pack)",
-    image: "/cashew1.jpg",
-    price: 1000,
-    discount: 20,
-  },
-  {
-    id: 2,
-    title: "Kaju Nuts Cashew (250gm Pack)",
-    image: "/cashew2.jpg",
-    price: 1200,
-  },
-  {
-    id: 3,
-    title: "Roasted Kaju (250gm Pack)",
-    image: "/cashew3.jpg",
-    price: 1100,
-  },
-  {
-    id: 4,
-    title: "Roasted Salted Cashews",
-    image: "/cashew4.jpg",
-    price: 1300,
-  },
-  {
-    id: 5,
-    title: "Roasted Cashew (250gm Pack)",
-    image: "/cashew5.jpg",
-    price: 1100,
-    discount: 30,
-  },
-];
-
 const sortOptions = [
   // "Sort by popularity",
   // "Sort by average rating",
@@ -54,7 +19,7 @@ const sortOptions = [
   "Sort by price: high to low",
 ];
 
-const ProductCategory = () => {
+const ShopPage = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [loading, setLoading] = useState(true);
   const URL = process.env.NEXT_PUBLIC_SERVER_URL;
@@ -62,15 +27,10 @@ const ProductCategory = () => {
   const [productsToList, setProductsToList] = useState([]);
   const [productsToFilter, setrProductsToFilter] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("seeds");
   const [selectedSort, setSelectedSort] = useState(sortOptions[4]);
   const [minimumPrice, setMinimumPrice] = useState(100);
   const [maximumPrice, setMaximumPrice] = useState(19000);
-  useEffect(() => {
-    if (params?.category) {
-      setCategory(params.category);
-    }
-  }, [params]);
 
   const handleSortChange = (e) => {
     const selected = e.target.value;
@@ -259,4 +219,4 @@ const ProductCategory = () => {
   );
 };
 
-export default ProductCategory;
+export default ShopPage;
