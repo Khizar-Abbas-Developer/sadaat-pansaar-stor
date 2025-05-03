@@ -12,8 +12,10 @@ import { useDispatch } from "react-redux";
 import { addProductToCart, setCartStatus } from "@/redux/products/productSlice";
 import toast from "react-hot-toast";
 import CustomerReviews from "@/components/Reviews";
+import Description from "@/components/ProductDescription";
 
 const Product = () => {
+  const [activeTab, setActiveTab] = useState("description");
   const dispatch = useDispatch(); // Using Redux for state management
   const params = useParams();
   const { id } = params; // Extracting the product ID from the URL parameters
@@ -91,6 +93,7 @@ const Product = () => {
     dispatch(addProductToCart(productToAdd));
     navigate.push("/checkout");
   };
+  console.log(dataToPopulate);
 
   return (
     <>
@@ -228,7 +231,40 @@ const Product = () => {
               </div>
             </div>
           </div>
-          <CustomerReviews />
+          {/* //Tabs */}
+          <div className="w-full max-w-4xl mx-auto mt-10">
+            {/* Tab Headers */}
+            <div className="flex border-b border-gray-300">
+              <button
+                className={`py-2 px-4 text-sm cursor-pointer font-medium ${
+                  activeTab === "description"
+                    ? "border-b-2 border-blue-500 text-blue-500"
+                    : "text-gray-500 hover:text-blue-500"
+                }`}
+                onClick={() => setActiveTab("description")}
+              >
+                Description
+              </button>
+              <button
+                className={`py-2 px-4 text-sm cursor-pointer font-medium ${
+                  activeTab === "reviews"
+                    ? "border-b-2 border-blue-500 text-blue-500"
+                    : "text-gray-500 hover:text-blue-500"
+                }`}
+                onClick={() => setActiveTab("reviews")}
+              >
+                Reviews
+              </button>
+            </div>
+
+            {/* Tab Content */}
+            <div className="p-4 border border-t-0 rounded-b-lg bg-white transition-all duration-300">
+              {activeTab === "description" && (
+                <Description data={dataToPopulate?.description} />
+              )}
+              {activeTab === "reviews" && <CustomerReviews />}
+            </div>
+          </div>
           <RelatedProducts category={dataToPopulate?.category} />
         </div>
       )}

@@ -1,4 +1,6 @@
+import { Star } from "lucide-react";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const CustomerReviews = () => {
   const [reviews, setReviews] = useState([
@@ -52,12 +54,13 @@ const CustomerReviews = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.name || !formData.city || !formData.text) {
-      alert("Please fill in all fields.");
+      toast.error("Please fill in all fields.");
       return;
     }
-    setReviews((prev) => [...prev, formData]);
+    console.log(formData);
+
     // Send formData to backend here
-    setFormData({ name: "", city: "", text: "", stars: 5 });
+    // setFormData({ name: "", city: "", text: "", stars: 5 });
   };
 
   return (
@@ -72,92 +75,13 @@ const CustomerReviews = () => {
         </p>
 
         {/* Review Form */}
-        {/* <form
-          onSubmit={handleSubmit}
-          className="mt-16 bg-white border border-gray-200 rounded-2xl shadow-lg p-8 max-w-2xl mx-auto"
-        >
-          <h3 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-            Leave a Review
-          </h3>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <label className="block mb-2 text-gray-700 font-medium">
-                Name
-              </label>
-              <input
-                type="text"
-                name="name"
-                placeholder="e.g., John Doe"
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-              />
-            </div>
-            <div>
-              <label className="block mb-2 text-gray-700 font-medium">
-                City
-              </label>
-              <input
-                type="text"
-                name="city"
-                placeholder="e.g., Karachi"
-                value={formData.city}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-              />
-            </div>
-          </div>
-
-          <div className="mt-6">
-            <label className="block mb-2 text-gray-700 font-medium">
-              Review
-            </label>
-            <textarea
-              name="text"
-              rows="5"
-              placeholder="Write your experience..."
-              value={formData.text}
-              onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none"
-            ></textarea>
-          </div>
-
-          <div className="mt-6">
-            <label className="block mb-2 text-gray-700 font-medium">
-              Rating
-            </label>
-            <div className="flex space-x-2 text-2xl text-yellow-400">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <button
-                  key={star}
-                  type="button"
-                  onClick={() => setFormData({ ...formData, stars: star })}
-                  className={`transition ${
-                    star <= formData.stars ? "text-yellow-400" : "text-gray-300"
-                  } hover:scale-110`}
-                  aria-label={`Rate ${star} star${star > 1 ? "s" : ""}`}
-                >
-                  ★
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            className="mt-8 w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold py-3 rounded-lg hover:from-blue-700 hover:to-blue-600 transition shadow-md"
-          >
-            Submit Review
-          </button>
-        </form> */}
 
         {/* Review Cards */}
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {reviews.map((review, index) => (
             <div
               key={index}
-              className="bg-[#eef7fb] rounded-lg p-6 flex flex-col items-start justify-between shadow-sm"
+              className="bg-[#e1ece3] rounded-lg p-6 flex flex-col items-start justify-between shadow-sm"
             >
               <div>
                 <div className="text-xl text-black mb-2 text-start">
@@ -185,6 +109,93 @@ const CustomerReviews = () => {
             </div>
           ))}
         </div>
+
+        <form
+          onSubmit={handleSubmit}
+          className="mt-8 bg-white border border-gray-200 rounded-xl shadow-md px-5 py-5 max-w-md mx-auto"
+        >
+          <h3 className="text-xl font-semibold text-center text-gray-800 mb-4">
+            ✨ Leave a Review
+          </h3>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {/* Name */}
+            <div>
+              <label className="block text-xs font-medium text-gray-700 mb-1">
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="John Doe"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border text-black border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-[#5fa800]"
+              />
+            </div>
+
+            {/* City */}
+            <div>
+              <label className="block text-xs font-medium text-gray-700 mb-1">
+                City
+              </label>
+              <input
+                type="text"
+                name="city"
+                placeholder="e.g. Karachi"
+                value={formData.city}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border text-black border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-[#5fa800]"
+              />
+            </div>
+          </div>
+
+          {/* Review */}
+          <div className="mt-3">
+            <label className="block text-xs font-medium text-gray-700 mb-1">
+              Experience
+            </label>
+            <textarea
+              name="text"
+              rows="2"
+              placeholder="Share your experience..."
+              value={formData.text}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border text-black border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-[#5fa800] resize-none"
+            />
+          </div>
+
+          {/* Rating */}
+          <div className="mt-3">
+            <label className="block text-xs font-medium text-gray-700 mb-1">
+              Rating
+            </label>
+            <div className="flex items-center space-x-1 text-yellow-400">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <button
+                  key={star}
+                  type="button"
+                  onClick={() => setFormData({ ...formData, stars: star })}
+                  className={`transition cursor-pointer hover:scale-105 ${
+                    formData.stars >= star ? "text-yellow-400" : "text-gray-300"
+                  }`}
+                >
+                  <Star className="w-4 h-4" />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Submit */}
+          <div className="mt-5">
+            <button
+              type="submit"
+              className="w-full bg-[#5fa800] cursor-pointer hover:bg-green-600 text-white text-sm font-medium py-2 rounded-md shadow-sm transition"
+            >
+              🚀 Submit Review
+            </button>
+          </div>
+        </form>
       </div>
     </section>
   );
