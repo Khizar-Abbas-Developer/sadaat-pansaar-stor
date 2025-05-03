@@ -2,10 +2,11 @@ import axios from "axios";
 import { Star } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { GridLoader } from "react-spinners";
+import { ClipLoader, GridLoader } from "react-spinners";
 
 const CustomerReviews = ({ productId }) => {
   const [loading, setLoading] = useState(false);
+  const [submitLoading, setSubmitLoading] = useState(false);
   const [reviews, setReviews] = useState([]);
   const URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -45,6 +46,7 @@ const CustomerReviews = ({ productId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setSubmitLoading(true);
       if (!formData.name || !formData.city || !formData.text) {
         toast.error("Please fill in all fields.");
         return;
@@ -58,6 +60,8 @@ const CustomerReviews = ({ productId }) => {
       setFormData({ name: "", city: "", text: "", stars: 0 });
     } catch (error) {
       console.log(error);
+    } finally {
+      setSubmitLoading(false);
     }
 
     // Send formData to backend here
@@ -99,6 +103,44 @@ const CustomerReviews = ({ productId }) => {
             </p>
 
             {/* Review Form */}
+
+            {/* Review Cards */}
+            <div className="mt-12 grid gap-6 sm:grid-cols-2">
+              {reviews &&
+                reviews.length > 0 &&
+                reviews.slice(0, 4).map((review, index) => (
+                  <div
+                    key={index}
+                    className="bg-[#e1ece3] rounded-lg p-6 flex flex-col items-start justify-between shadow-sm"
+                  >
+                    <div>
+                      <div className="text-xl text-black mb-2 text-start">
+                        {"★".repeat(review.stars)}
+                        {"☆".repeat(5 - review.stars)}
+                      </div>
+                      <p className="text-gray-700 text-base leading-relaxed text-start">
+                        {review.text}
+                      </p>
+                    </div>
+
+                    <div className="flex items-start gap-4 mt-6">
+                      <div
+                        className={`w-10 h-10 rounded-full text-white flex items-center justify-center font-semibold text-lg uppercase ${getColorClass(
+                          review.name
+                        )}`}
+                      >
+                        {review.name.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-black">
+                          {review.name}
+                        </p>
+                        <p className="text-gray-500 text-sm">{review.city}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
             <form
               onSubmit={handleSubmit}
               className="mt-8 bg-white border border-gray-200 rounded-xl shadow-md px-5 py-5 max-w-md mx-auto"
@@ -106,6 +148,28 @@ const CustomerReviews = ({ productId }) => {
               <h3 className="text-xl font-semibold text-center text-gray-800 mb-4">
                 ✨ Leave a Review
               </h3>
+              {/* Rating */}
+              <div className="mt-3">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Rating
+                </label>
+                <div className="flex items-center justify-center space-x-3 mb-4 mt-2 text-yellow-400">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, stars: star })}
+                      className={`transition cursor-pointer hover:scale-105 ${
+                        formData.stars >= star
+                          ? "text-yellow-400"
+                          : "text-gray-300"
+                      }`}
+                    >
+                      <Star className="w-6 h-6" />
+                    </button>
+                  ))}
+                </div>
+              </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {/* Name */}
@@ -154,76 +218,17 @@ const CustomerReviews = ({ productId }) => {
                 />
               </div>
 
-              {/* Rating */}
-              <div className="mt-3">
-                <label className="block text-xs font-medium text-gray-700 mb-1">
-                  Rating
-                </label>
-                <div className="flex items-center space-x-1 text-yellow-400">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <button
-                      key={star}
-                      type="button"
-                      onClick={() => setFormData({ ...formData, stars: star })}
-                      className={`transition cursor-pointer hover:scale-105 ${
-                        formData.stars >= star
-                          ? "text-yellow-400"
-                          : "text-gray-300"
-                      }`}
-                    >
-                      <Star className="w-4 h-4" />
-                    </button>
-                  ))}
-                </div>
-              </div>
-
               {/* Submit */}
               <div className="mt-5">
                 <button
                   type="submit"
                   className="w-full bg-[#5fa800] cursor-pointer hover:bg-green-600 text-white text-sm font-medium py-2 rounded-md shadow-sm transition"
                 >
-                  🚀 Submit Review
+                  {submitLoading ? <ClipLoader size={15} /> : "🚀"} Submit
+                  Review
                 </button>
               </div>
             </form>
-            {/* Review Cards */}
-            <div className="mt-12 grid gap-6 sm:grid-cols-2">
-              {reviews &&
-                reviews.length > 0 &&
-                reviews.slice(0, 4).map((review, index) => (
-                  <div
-                    key={index}
-                    className="bg-[#e1ece3] rounded-lg p-6 flex flex-col items-start justify-between shadow-sm"
-                  >
-                    <div>
-                      <div className="text-xl text-black mb-2 text-start">
-                        {"★".repeat(review.stars)}
-                        {"☆".repeat(5 - review.stars)}
-                      </div>
-                      <p className="text-gray-700 text-base leading-relaxed text-start">
-                        {review.text}
-                      </p>
-                    </div>
-
-                    <div className="flex items-start gap-4 mt-6">
-                      <div
-                        className={`w-10 h-10 rounded-full text-white flex items-center justify-center font-semibold text-lg uppercase ${getColorClass(
-                          review.name
-                        )}`}
-                      >
-                        {review.name.charAt(0)}
-                      </div>
-                      <div>
-                        <p className="font-semibold text-black">
-                          {review.name}
-                        </p>
-                        <p className="text-gray-500 text-sm">{review.city}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-            </div>
           </div>
         </section>
       )}
