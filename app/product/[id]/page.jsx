@@ -93,8 +93,6 @@ const Product = () => {
     dispatch(addProductToCart(productToAdd));
     navigate.push("/checkout");
   };
-  console.log(dataToPopulate);
-
   return (
     <>
       {loading ? (
@@ -262,7 +260,9 @@ const Product = () => {
               {activeTab === "description" && (
                 <Description data={dataToPopulate?.description} />
               )}
-              {activeTab === "reviews" && <CustomerReviews />}
+              {activeTab === "reviews" && (
+                <CustomerReviews productId={dataToPopulate?._id} />
+              )}
             </div>
           </div>
           <RelatedProducts category={dataToPopulate?.category} />
