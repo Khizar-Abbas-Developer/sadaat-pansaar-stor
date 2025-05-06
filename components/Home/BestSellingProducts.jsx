@@ -58,7 +58,7 @@ const BestSellingProducts = ({ title, array }) => {
           </div>
         </div>
       ) : (
-        <div className="flex flex-col gap-8 bg-white my-[30px]">
+        <div className="flex flex-col gap-8 bg-white py-[30px]">
           <div className="flex justify-between items-center text-black h-auto w-full my-[25pxx] px-[10px]">
             <div className="border-b-[0.5px] border-gray-300 w-full flex justify-between items-center">
               <div className="border-b-3 border-[#5FA800]">

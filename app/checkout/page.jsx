@@ -8,6 +8,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { HashLoader } from "react-spinners";
 
@@ -44,6 +45,7 @@ const Checkout = () => {
         subtotal,
         shippingMethod: method,
         grandTotal,
+        paymentMethod: selectedPayment,
       })
     );
   };
@@ -80,6 +82,7 @@ const Checkout = () => {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      toast.error("Please fill in all required fields.");
       return;
     }
 
@@ -90,8 +93,21 @@ const Checkout = () => {
         `${URL}/api/v1/order/place-order`,
         order
       );
-      dispatch(resetProductState());
-      router.push(`/order-completed/${response.data.order._id}`);
+      console.log(response.data.order);
+      dispatch(
+        setCartSummary({
+          subtotal: response.data.order.subtotal,
+          shippingMethod: response.data.order.shippingMethod,
+          grandTotal: response.data.order.total,
+          paymentMethod: response.data.order.paymentMethod,
+        })
+      );
+      if (response.data.order.paymentMethod === "cod") {
+        dispatch(resetProductState());
+        router.push(`/order-completed/${response.data.order._id}`);
+      } else if (selectedPayment !== "cod") {
+        router.push(`/payments/${response.data.order._id}`);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -115,6 +131,7 @@ const Checkout = () => {
     grandGreatTotal,
     favouriteProducts,
   ]);
+
   return (
     <>
       {loading ? (
@@ -321,7 +338,7 @@ const Checkout = () => {
                 }`}
               >
                 <div className="flex flex-col gap-3 text-black">
-                  {["cod", "bank"].map((method) => (
+                  {["cod", "Jazz Cash"].map((method) => (
                     <label
                       key={method}
                       className="flex items-center gap-2 cursor-pointer"
@@ -337,6 +354,8 @@ const Checkout = () => {
                       <span className="text-sm">
                         {method === "cod"
                           ? "Cash on Delivery (COD)"
+                          : method === "Jazz Cash"
+                          ? "Jazz Cash"
                           : "Bank Transfer (via account)"}
                       </span>
                     </label>
@@ -399,7 +418,7 @@ const Checkout = () => {
               className="uppercase py-3 cursor-pointer w-full mt-6 bg-[#5fa800] text-white font-semibold rounded shadow-sm"
               onClick={handlePlaceOrder}
             >
-              Place Order
+              {selectedPayment === "cod" ? "Place Order" : "Proceed to Payment"}
             </button>
           </div>
         </div>

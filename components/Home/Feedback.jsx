@@ -32,7 +32,7 @@ const Feedback = () => {
   }, []);
 
   return (
-    <div className="py-8 bg-[#f0f0f7] mb-[60px] px-[10px] sm:px-[20px] md:px-[170px] lg:px-[80px] xl:px-[130px] 2xl:px-[130px]">
+    <div className="py-8 bg-[#f0f0f7] pb-[60px] px-[10px] sm:px-[20px] md:px-[170px] lg:px-[80px] xl:px-[130px] 2xl:px-[130px]">
       <div className="flex justify-between items-center text-black h-auto w-full my-6 px-[10px]">
         <div className="border-b-[0.5px] border-gray-300 w-full flex justify-between items-center">
           <div className="border-b-4 border-[#5FA800]">

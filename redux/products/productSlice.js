@@ -9,6 +9,7 @@ const initialState = {
   subtotal: 0,
   shippingMethod: "express",
   grandTotal: 0,
+  paymentMethod: "cod",
 };
 
 const productSlice = createSlice({
@@ -82,10 +83,12 @@ const productSlice = createSlice({
     },
 
     setCartSummary(state, action) {
-      const { subtotal, shippingMethod, grandTotal } = action.payload;
+      const { subtotal, shippingMethod, grandTotal, paymentMethod } =
+        action.payload;
       state.subtotal = subtotal;
       state.shippingMethod = shippingMethod;
       state.grandTotal = grandTotal;
+      state.paymentMethod = paymentMethod;
     },
     setShippingMethod(state, action) {
       state.shippingMethod = action.payload;
