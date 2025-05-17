@@ -113,14 +113,12 @@ export const services = [
   },
 ];
 
-
-
 export const feedback = [
   {
     id: 1,
     name: "Khawajaadil Bashi",
     message:
-      "Sir g parcel recived with outclass packing and all nuts are very fresh n tasty thanks khan dry fruits",
+      "Sir g parcel recived with outclass packing and all nuts are very fresh n tasty thanks Sadaat Pansaar Store",
   },
   {
     id: 2,

@@ -68,8 +68,9 @@ const Footer = () => {
                   Sadaat Pansaar Store
                 </h3>
                 <p className="font-semibold">
-                  Khan Dry Fruits Are Fresh, Tasty & Best Quality To Deliver All
-                  Over Pakistan. Our Dry Fruits Are Highly Selected By QC Staff.
+                  Sadaat Pansaar Store Are Fresh, Tasty & Best Quality To
+                  Deliver All Over Pakistan. Our Dry Fruits Are Highly Selected
+                  By QC Staff.
                 </p>
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 flex items-center justify-center bg-white text-green-600 rounded-full mt-1">
@@ -179,7 +180,7 @@ const Footer = () => {
             {/* Footer Bottom */}
             <div className="text-center mt-10 border-t border-gray-700 pt-4">
               <p className="text-sm text-gray-300">
-                &copy; 2025 Khan Dry Fruits. All rights reserved.
+                &copy; 2025 Sadaat Pansaar Store. All rights reserved.
               </p>
             </div>
           </footer>
