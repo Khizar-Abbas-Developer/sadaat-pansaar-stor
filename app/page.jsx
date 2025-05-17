@@ -49,7 +49,7 @@ export default function Home() {
       ) : (
         <>
           <div className="bg-white min-h-screen px-[10px] sm:px-[20px] md:px-[40px] lg:px-[80px] xl:px-[130px] 2xl:px-[130px]">
-            <div className="mt-[122px]">
+            <div className="mt-[130px] sm:mt-[0px] lg:mt-[0px] xl:mt-[145px]">
               <Banner />
             </div>
             <CategoryCards />

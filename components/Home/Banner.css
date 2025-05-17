@@ -1,0 +1,10 @@
+.custom-height {
+    height: 540px;
+    object-fit: cover;
+}
+@media screen and (max-width: 768px) {
+    .custom-height {
+        height: 700px; /* Increased height */
+        object-fit: cover;
+    }
+}

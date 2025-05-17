@@ -64,7 +64,9 @@ const Footer = () => {
             <div className="max-w-7xl mx-auto flex flex-wrap justify-between gap-8">
               {/* Left Column */}
               <div className="flex-1 min-w-[250px] space-y-4">
-                <h3 className="text-xl font-semibold mb-2">Khan Dry Fruits</h3>
+                <h3 className="text-xl font-semibold mb-2">
+                  Sadaat Pansaar Store
+                </h3>
                 <p className="font-semibold">
                   Khan Dry Fruits Are Fresh, Tasty & Best Quality To Deliver All
                   Over Pakistan. Our Dry Fruits Are Highly Selected By QC Staff.
