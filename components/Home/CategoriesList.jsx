@@ -1,9 +1,8 @@
 import Image from "next/image";
 import React from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import categoryList1 from "@/public/assets/product-categories/Box.webp";
-import { categoryCirclesList } from "@/public/assets/assets";
 import Link from "next/link";
+import { categoryCirclesList } from "@/public/assets/rounded-categories/roundedCategories";
 
 const CategoriesList = () => {
   return (
@@ -23,7 +22,7 @@ const CategoriesList = () => {
 
       {/* Categories List - Carousel on small screens, grid on md+ */}
       <div
-        className="mt-6 flex md:flex-wrap gap-6 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none scrollbar-hide pb-2"
+        className="mt-6 flex overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-2"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
@@ -34,17 +33,18 @@ const CategoriesList = () => {
           <Link
             href={`product-category/${item.category}`}
             key={item.id}
-            className="snap-start flex-shrink-0 md:flex-shrink md:w-[170px] flex flex-col items-center gap-2 transition-transform duration-300 transform hover:scale-110 cursor-pointer w-[100px]"
+            className="snap-start flex-shrink-0 md:flex-shrink-0 flex flex-col items-center gap-2 transition-transform duration-300 transform hover:scale-110 cursor-pointer w-[140px] md:w-[180px]"
           >
-            <Image
-              src={item.image}
-              alt={`category${item.id}`}
-              {...(item.id === 1
-                ? { width: 410, height: 410 }
-                : { width: 1000, height: 1000 })}
-              quality={100}
-              className="object-cover rounded-full"
-            />
+            <div className="w-[120px] h-[120px] md:w-[100px] md:h-[100px] rounded-full overflow-hidden">
+              <Image
+                src={item.image}
+                alt={`category${item.id}`}
+                width={160}
+                height={160}
+                quality={100}
+                className="w-full h-full object-cover"
+              />
+            </div>
             <p className="text-center text-sm md:text-base text-black">
               {item.title}
             </p>
