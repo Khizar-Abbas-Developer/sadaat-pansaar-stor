@@ -338,7 +338,7 @@ const Checkout = () => {
                 }`}
               >
                 <div className="flex flex-col gap-3 text-black">
-                  {["cod", "Jazz Cash"].map((method) => (
+                  {["cod"].map((method) => (
                     <label
                       key={method}
                       className="flex items-center gap-2 cursor-pointer"
