@@ -70,14 +70,14 @@ export default function Home() {
             />
             <CategoryFirst
               categorySectionImage={categorySection2}
-              heading="Giftbox collections"
+              heading="Murabba collections"
               positionBeginning={true}
               number={2}
             />
             {/*  */}
             <CategoryFirst
               categorySectionImage={categorySection3}
-              heading="Dates collection"
+              heading="Seeds collection"
               positionBeginning={false}
               number={3}
             />

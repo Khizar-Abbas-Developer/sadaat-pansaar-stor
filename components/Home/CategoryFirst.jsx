@@ -16,7 +16,6 @@ const CategoryFirst = ({
   const firstCategoryArray = (products || [])
     .filter((item) => item.category === "dry-fruits")
     .slice(0, 4);
-
   const secondCategoryArray = (products || [])
     .filter((item) => item.category === "murabba")
     .slice(0, 4);
@@ -31,7 +30,7 @@ const CategoryFirst = ({
     }
   }, [products]);
   return (
-    <div className="w-full px-[8px] py-[16px] text-black">
+    <div className="w-full py-[16px] text-black">
       {/* Header */}
       <div className="flex justify-between items-center text-black h-auto w-full mx-[10px] my-[25px]">
         <div className="border-b-[0.5px] border-gray-300 w-full flex justify-between items-center">
@@ -68,9 +67,11 @@ const CategoryFirst = ({
             </div>
 
             {/* Cards container */}
-            <div className="justify-center flex-1 flex-wrap flex gap-[12px]">
-              <Card arrayData={secondCategoryArray} />
-            </div>
+            {number === 2 && (
+              <div className="justify-center flex-1 flex-wrap flex gap-[12px]">
+                <Card arrayData={secondCategoryArray} />
+              </div>
+            )}
           </>
         ) : (
           // If positionBeginning is false, image comes after cards

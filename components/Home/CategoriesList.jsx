@@ -34,17 +34,20 @@ const CategoriesList = () => {
           <Link
             href={`product-category/${item.category}`}
             key={item.id}
-            className="snap-start flex-shrink-0 md:flex-shrink md:w-[120px] flex flex-col items-center gap-2 transition-transform duration-300 transform hover:scale-110 cursor-pointer w-[100px]"
+            className="snap-start flex-shrink-0 md:flex-shrink md:w-[170px] flex flex-col items-center gap-2 transition-transform duration-300 transform hover:scale-110 cursor-pointer w-[100px]"
           >
             <Image
               src={item.image}
               alt={`category${item.id}`}
-              width={100}
-              height={100}
+              {...(item.id === 1
+                ? { width: 410, height: 410 }
+                : { width: 1000, height: 1000 })}
               quality={100}
               className="object-cover rounded-full"
             />
-            <p className="text-center text-sm md:text-base">{item.title}</p>
+            <p className="text-center text-sm md:text-base text-black">
+              {item.title}
+            </p>
           </Link>
         ))}
       </div>
