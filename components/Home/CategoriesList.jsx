@@ -39,7 +39,7 @@ const CategoriesList = () => {
         {/* Scrollable Container */}
         <div
           ref={scrollRef}
-          className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-2"
+          className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide py-2"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",
