@@ -134,10 +134,16 @@ const Product = () => {
               </div>
 
               {/* WhatsApp Help Button */}
-              <button className="bg-black text-white px-10 py-[6px] rounded flex items-center space-x-4 my-3">
-                <FaWhatsapp className="text-green-400 text-xl" />
-                <span className="text-white">Need Help?</span>
-              </button>
+              <a
+                href="https://wa.link/m5ngu2"
+                target="_blank"
+                className="cursor-pointer"
+              >
+                <button className="bg-black text-white px-10 py-[6px] rounded flex items-center cursor-pointer space-x-4 my-3">
+                  <FaWhatsapp className="text-green-400 text-xl" />
+                  <span className="text-white">Need Help?</span>
+                </button>
+              </a>
 
               {/* Weight Buttons */}
               <div className="flex flex-wrap gap-3">
