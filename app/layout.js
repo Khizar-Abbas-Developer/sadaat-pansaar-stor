@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
             <Header />
             <Toaster />
             {/* Wrap children with main */}
-            <NextTopLoader color="yellow" />
+            <NextTopLoader color="#5fa800" />
             <main>{children}</main>
           </PersistGateProvider>
           <Footer />
