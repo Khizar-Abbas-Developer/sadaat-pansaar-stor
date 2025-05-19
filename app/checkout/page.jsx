@@ -72,6 +72,7 @@ const Checkout = () => {
   };
 
   const handlePlaceOrder = async () => {
+    window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top smoothly
     const newErrors = {};
     if (!order.fullName.trim()) newErrors.fullName = "Full Name is required";
     if (!order.phone.trim()) newErrors.phone = "Phone is required";
