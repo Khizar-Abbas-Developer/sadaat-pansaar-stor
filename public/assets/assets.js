@@ -31,10 +31,6 @@ export const navigationList = [
     path: "/faqs",
   },
   {
-    title: "Track Order",
-    path: "/track-order",
-  },
-  {
     title: "Flash Sale",
     path: "/flash-sale",
   },
