@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import ReduxToolkitProvider, {
   PersistGateProvider,
 } from "@/redux/reduxProvider";
+import NextTopLoader from "nextjs-toploader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({ children }) {
             <Header />
             <Toaster />
             {/* Wrap children with main */}
+            <NextTopLoader color="yellow" />
             <main>{children}</main>
           </PersistGateProvider>
           <Footer />

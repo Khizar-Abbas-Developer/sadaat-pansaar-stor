@@ -11,8 +11,10 @@ import { FaShoppingCart } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { ImCross } from "react-icons/im";
 import { useRouter } from "next/navigation";
+import { ClipLoader } from "react-spinners";
 
 const CartSidebar = () => {
+  const [loading, setLoading] = React.useState(false);
   const router = useRouter();
   const cartProducts = useSelector((state) => state.product.cartProducts);
   const dispatch = useDispatch();
@@ -37,8 +39,10 @@ const CartSidebar = () => {
   };
 
   const navigateToCart = () => {
+    setLoading(true);
     dispatch(setCartStatus(false));
     router.push("/cart");
+    setLoading(false);
   };
   const navigateToCheckout = () => {
     dispatch(setCartStatus(false));
@@ -139,7 +143,14 @@ const CartSidebar = () => {
               onClick={navigateToCart}
               className="uppercase cursor-pointer bg-[#5fa800] text-white font-semibold w-full py-2"
             >
-              View Cart
+              {loading ? (
+                <div className="flex items-center justify-center gap-2">
+                  <ClipLoader />
+                  View Cart
+                </div>
+              ) : (
+                <div className="">View Cart</div>
+              )}
             </button>
             <button
               className="uppercase cursor-pointer bg-black text-white font-semibold w-full py-2 mt-2"
