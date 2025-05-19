@@ -38,7 +38,7 @@ const Header = () => {
     <>
       <div className="fixed top-0 left-0 w-full z-50">
         <Marquee />
-        <div className="singleHanded flex justify-between items-center lg:bg-[#5FA800] bg-white h-[73px] lg:h-[65px]">
+        <div className="singleHanded flex justify-between items-center lg:bg-[#420808] bg-white h-[73px] lg:h-[65px]">
           <Link
             href="/"
             className="absolute top-[36px] hidden lg:block cursor-pointer"
@@ -61,7 +61,7 @@ const Header = () => {
             <input
               type="text"
               placeholder="Search..."
-              className="w-[644px] py-[5px] pl-[20px] pr-10 rounded-full border border-gray-300 bg-gray-100 outline-none text-[14px] text-black"
+              className="w-[644px] py-[5px] pl-[20px] pr-10 rounded-full border border-gray-300 bg-gray-100 outline-none text-[16px] font-medium text-black"
             />
             <FiSearch className="absolute top-1/2 -right-45 -translate-y-1/2 text-gray-500" />
           </div>
@@ -98,7 +98,7 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="h-[29.5px] text-sm lg:bg-[rgb(44,44,44)] bg-[#5FA800] lg:hidden flex justify-center items-center text-white text-center">
+        <div className="h-[29.5px] text-sm lg:bg-[rgb(44,44,44)] bg-[#420808] lg:hidden flex justify-center items-center text-white text-center">
           🎉 Get Up To 10% OFF, Limited Time Only 🎉
         </div>
         <div

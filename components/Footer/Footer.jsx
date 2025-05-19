@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import { FaInstagram } from "react-icons/fa";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { CiYoutube } from "react-icons/ci";
 import { CiLinkedin } from "react-icons/ci";
@@ -31,7 +31,7 @@ const Footer = () => {
       ) : (
         <div>
           {/* Newsletter Section */}
-          <div className="bg-[#709B3F] text-white py-8 px-4 flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div className="bg-[#420808] text-white py-8 px-4 flex flex-col lg:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4 ml-[15]">
               <FaEnvelopeOpenText className="w-10 h-10" />
               <div>
@@ -77,22 +77,24 @@ const Footer = () => {
                     <MdLocationOn className="text-xl" />
                   </div>
                   <p>
-                    Shop#1 - 29 Iqbal Block, <br />
-                    Mansoora Bazar, Multan Road <br />
-                    Lahore
+                    Main Bagrian chowk <br />
+                    azmat road, house # 1D2-1186 <br />
+                    Green Town, Lahore
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 flex items-center justify-center bg-white text-green-600 rounded-full mt-1">
                     <MdOutlineMailOutline className="text-xl" />
                   </div>
-                  <p>info@khandryfruits.com</p>
+                  <p className="flex items-center mt-2">
+                    tirmizishah23@gmail.com
+                  </p>
                 </div>
                 <div className="flex items-start gap-3 mt-2">
                   <div className="w-8 h-8 flex items-center justify-center bg-white text-green-600 rounded-full mt-1">
                     <MdPhone className="text-xl" />
                   </div>
-                  <p>+92 304 9996000 | 04237-4444-00</p>
+                  <p className="flex items-center mt-2">+92 3289428803</p>
                 </div>
               </div>
               {/* Information Links */}
@@ -142,10 +144,7 @@ const Footer = () => {
                     <MdOutlineMailOutline className="text-2xl bg-[#709B3F] p-1 rounded text-white" />
                   </a>
                   <a href="#">
-                    <CiYoutube className="text-2xl  bg-[#709B3F] p-1 rounded text-white" />
-                  </a>
-                  <a href="#">
-                    <CiLinkedin className="text-2xl bg-[#709B3F] p-1 rounded text-white" />
+                    <FaWhatsapp className="text-2xl  bg-[#709B3F] p-1 rounded text-white" />
                   </a>
                 </div>
                 <p className="font-medium mb-2">Courier Partners</p>

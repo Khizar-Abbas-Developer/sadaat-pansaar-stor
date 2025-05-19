@@ -113,7 +113,7 @@ const RelatedProducts = ({ category }) => {
                         {`₨${item.productPrice}`}
                       </span>
                     </div>
-                    <span className="bg-[#5FA800] rounded-full p-[6px]">
+                    <span className="bg-[#7d2f2f] rounded-full p-[6px]">
                       <FaShoppingCart className="text-white text-lg" />
                     </span>
                   </div>

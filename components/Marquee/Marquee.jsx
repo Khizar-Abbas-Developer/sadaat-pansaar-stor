@@ -19,7 +19,7 @@ const Marquee = () => {
   ));
 
   return (
-    <div className="h-[29.5px] bg-[#5FA800] lg:bg-[rgb(44,44,44)] text-white">
+    <div className="h-[29.5px] bg-[#2c2c2c] lg:bg-[rgb(44,44,44)] text-white">
       <div className="marquee-container">
         <div className="marquee-content">
           <div className="marquee-group">{content}</div>

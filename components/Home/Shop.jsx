@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import shopImage from "@/public/assets/shopImage.webp";
+import shopImage from "@/public/assets/home-store.webp";
 
 const Shop = () => {
   return (
@@ -11,8 +11,8 @@ const Shop = () => {
           <Image
             src={shopImage} // Replace with actual path in public folder or static file
             alt="Khan Dry Fruit Store"
-            width={800}
-            height={500}
+            width={700}
+            height={400}
             quality={100}
             className="rounded-lg shadow-lg object-cover"
           />
@@ -30,7 +30,7 @@ const Shop = () => {
           </p>
           <div>
             <h3 className="text-xl font-bold mb-2 text-black">Find us Here</h3>
-            <button className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg text-sm font-semibold shadow">
+            <button className="bg-[#7d2f2f] cursor-pointer hover:bg-[#5FA800] text-white px-5 py-2 rounded-lg text-sm font-semibold shadow">
               OUR LOCATION
             </button>
           </div>
@@ -38,15 +38,15 @@ const Shop = () => {
           {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
             <div className="bg-gray-100 p-4 rounded-lg text-center shadow">
-              <p className="text-2xl font-bold text-green-700">3+</p>
+              <p className="text-2xl font-bold text-[#7d2f2f]">3+</p>
               <p className="text-gray-700">Stores</p>
             </div>
             <div className="bg-gray-100 p-4 rounded-lg text-center shadow">
-              <p className="text-2xl font-bold text-green-700">5000+</p>
+              <p className="text-2xl font-bold text-[#7d2f2f]">5000+</p>
               <p className="text-gray-700">Order Delivered</p>
             </div>
             <div className="bg-gray-100 p-4 rounded-lg text-center shadow">
-              <p className="text-2xl font-bold text-green-700">4500+</p>
+              <p className="text-2xl font-bold text-[#7d2f2f]">4500+</p>
               <p className="text-gray-700">Happy Customers</p>
             </div>
           </div>

@@ -6,7 +6,7 @@ import { FaMinusCircle, FaPlusCircle, FaWhatsapp } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import RelatedProducts from "@/components/RelatedProducts";
 import axios from "axios";
-import { MoonLoader } from "react-spinners";
+import { ClipLoader, MoonLoader } from "react-spinners";
 import { useParams, useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { addProductToCart, setCartStatus } from "@/redux/products/productSlice";
@@ -93,11 +93,13 @@ const Product = () => {
     dispatch(addProductToCart(productToAdd));
     navigate.push("/checkout");
   };
+  console.log(dataToPopulate?.variants);
+
   return (
     <>
       {loading ? (
         <div className="h-[80vh] flex bg-white justify-center items-center">
-          <MoonLoader color="#5FA800" />;
+          <ClipLoader color="#7d2f2f" />;
         </div>
       ) : (
         <div className="h-auto z-[9999999] lg:h-auto bg-white mt-[100px] px-4 sm:px-8 md:px-[50px] lg:px-[165px] py-[40px] md:py-[64px]">
@@ -129,7 +131,7 @@ const Product = () => {
 
               {/* Price */}
               <div className="text-base sm:text-xl font-semibold text-black my-2">
-                <span className="text-[#5FA800]">From:</span> ₨
+                <span className="text-[#7d2f2f]">From:</span> ₨
                 {dataToPopulate?.variants?.[0]?.variantPrice || null}
               </div>
 
@@ -156,7 +158,7 @@ const Product = () => {
                     }}
                     className={`${
                       currentVariant === variant.variantName
-                        ? "cursor-pointer border-2 border-[#559812] px-4 py-1 rounded text-green-500 bg-white"
+                        ? "cursor-pointer border-2 border-[#7d2f2f] px-4 py-1 rounded text-[#7d2f2f] bg-white"
                         : "cursor-pointer border border-black px-4 py-1 rounded text-black bg-white"
                     }`}
                   >
@@ -171,7 +173,7 @@ const Product = () => {
                   <span className="text-lg">₨</span>
                   <span className="text-2xl">{currentPrice}</span>
                 </div>
-                <div className="text-[#559812] font-semibold text-sm">
+                <div className="text-[#7d2f2f] font-semibold text-sm">
                   {dataToPopulate.productsInStock} in stock
                 </div>
               </div>
@@ -196,14 +198,14 @@ const Product = () => {
                   </button>
                 </div>
                 <button
-                  className="bg-[#559812] px-6 cursor-pointer flex justify-center items-center gap-3 py-2 text-white font-bold rounded"
+                  className="bg-[#7d2f2f] px-6 cursor-pointer flex justify-center items-center gap-3 py-2 text-white font-bold rounded"
                   onClick={handleAddToCart(dataToPopulate)}
                 >
                   <FaShoppingCart className="text-lg" />
                   ADD TO CART
                 </button>
                 <button
-                  className="bg-[#559812] px-6 py-2 text-white font-bold rounded"
+                  className="bg-[#7d2f2f] px-6 py-2 text-white font-bold rounded"
                   onClick={handleBuyNow(dataToPopulate)}
                 >
                   BUY NOW
@@ -225,7 +227,7 @@ const Product = () => {
               </div>
 
               {/* Payment Icons */}
-              <div className="bg-white border-2 border-[#5FA800] px-4 py-2 mt-4 rounded w-full flex flex-wrap justify-center sm:justify-around items-center gap-3">
+              <div className="bg-white border-2 border-[#7d2f2f] px-4 py-2 mt-4 rounded w-full flex flex-wrap justify-center sm:justify-around items-center gap-3">
                 <Image
                   src={paymentsMethodsLogo || ""}
                   alt="payments-methods"
@@ -242,8 +244,8 @@ const Product = () => {
               <button
                 className={`py-2 px-4 text-sm cursor-pointer font-medium ${
                   activeTab === "description"
-                    ? "border-b-2 border-blue-500 text-blue-500"
-                    : "text-gray-500 hover:text-blue-500"
+                    ? "border-b-2 border-[#7d2f2f] text-[#7d2f2f]"
+                    : "text-gray-500 hover:text-gray-500"
                 }`}
                 onClick={() => setActiveTab("description")}
               >
@@ -252,8 +254,8 @@ const Product = () => {
               <button
                 className={`py-2 px-4 text-sm cursor-pointer font-medium ${
                   activeTab === "reviews"
-                    ? "border-b-2 border-blue-500 text-blue-500"
-                    : "text-gray-500 hover:text-blue-500"
+                    ? "border-b-2 border-[#7d2f2f] text-[#7d2f2f]"
+                    : "text-gray-500 hover:text-gray-500"
                 }`}
                 onClick={() => setActiveTab("reviews")}
               >
