@@ -2,18 +2,22 @@ import React from "react";
 import almondImage from "@/public/assets/Almonds.webp";
 import Image from "next/image";
 import "./Marquee.css";
+import { categoryCirclesList } from "@/public/assets/rounded-categories/roundedCategories";
 
 const Marquee = () => {
-  const content = [...Array(30)].map((_, index) => (
-    <div key={index} className="flex items-center gap-1 px-4">
-      <Image
-        src={almondImage}
-        alt="Almonds"
-        width={20}
-        height={20}
-        className="rounded-full"
-      />
-      <p className="text-sm underline text-white">Almonds</p>
+  const content = categoryCirclesList.map((item, index) => (
+    <div className="flex items-center gap-1 px-4">
+      <div className="w-[27px] h-[27px] md:w-[27px] md:h-[27px] rounded-full overflow-hidden">
+        <Image
+          src={item.image}
+          alt={`category${item.id}`}
+          width={160}
+          height={160}
+          quality={100}
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <p className="text-sm underline text-white">{item.title}</p>
       <span className="text-red-500 text-sm ml-2"> {`||`} </span>
     </div>
   ));

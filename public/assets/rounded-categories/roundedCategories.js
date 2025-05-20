@@ -1,150 +1,151 @@
-import categoryList1 from "@/public/assets/round-categories/1.png";
-import categoryList2 from "@/public/assets/round-categories/2.png";
-import categoryList3 from "@/public/assets/round-categories/3.png";
-import categoryList4 from "@/public/assets/round-categories/4.png";
-import categoryList5 from "@/public/assets/round-categories/5.png";
-import categoryList6 from "@/public/assets/round-categories/6.png";
-import categoryList7 from "@/public/assets/round-categories/7.png";
-import categoryList8 from "@/public/assets/round-categories/8.png";
-import categoryList9 from "@/public/assets/round-categories/9.png";
-import categoryList10 from "@/public/assets/round-categories/10.png";
-import categoryList11 from "@/public/assets/round-categories/11.png";
-import categoryList12 from "@/public/assets/round-categories/12.png";
-import categoryList13 from "@/public/assets/round-categories/13.png";
-import categoryList14 from "@/public/assets/round-categories/14.png";
-import categoryList15 from "@/public/assets/round-categories/15.png";
+import ajmalSharbat from "@/public/assets/round-categories/ajmal sharbat.png";
+import ajmal from "@/public/assets/round-categories/ajmal.png";
+import ajwain from "@/public/assets/round-categories/Ajwain.png";
+import almond from "@/public/assets/round-categories/almond.png";
+import dalya from "@/public/assets/round-categories/dalya.png";
+import dryFruits from "@/public/assets/round-categories/dry fruits.png";
+import essenceOil from "@/public/assets/round-categories/essence oil.png";
+import hairOil from "@/public/assets/round-categories/hair oil.png";
+import hamdard from "@/public/assets/round-categories/hamdard.png";
+import herbs from "@/public/assets/round-categories/herbs.png";
+import jariBootiya from "@/public/assets/round-categories/jari bootiya.png";
+import masala from "@/public/assets/round-categories/masala.png";
+import murabajat from "@/public/assets/round-categories/murabajat.png";
+import oil from "@/public/assets/round-categories/oil.png";
+import panjeeri from "@/public/assets/round-categories/panjeeri.png";
+import powder from "@/public/assets/round-categories/powder.png";
+import qarshi from "@/public/assets/round-categories/qarshi.png";
+import salts from "@/public/assets/round-categories/salts.png";
+import seeds from "@/public/assets/round-categories/Seeds.png";
+import ubtan from "@/public/assets/round-categories/ubtan.png";
+import vinegar from "@/public/assets/round-categories/vinegar.png";
+
 //
 export const categoryCirclesList = [
   {
-    image: categoryList1,
+    image: panjeeri,
     category: "panjeeri",
     title: "Panjeeri",
     id: 1,
   },
   {
-    image: categoryList2,
+    image: vinegar,
     category: "vinegar",
     title: "Vinegar",
     id: 2,
   },
   {
-    image: categoryList3,
+    image: essenceOil,
     category: "esstential-oil",
     title: "Essential Oil",
     id: 3,
   },
   {
-    image: categoryList4,
+    image: dalya,
     category: "dalya",
     title: "Dalya",
     id: 4,
   },
   {
-    image: categoryList5,
+    image: masala,
     category: "masalajat",
     title: "Masalajat",
     id: 5,
   },
   {
-    image: categoryList6,
+    image: jariBootiya,
     category: "jari-bootiya",
     title: "Jari bootiya",
     id: 6,
   },
   {
-    image: categoryList7,
+    image: powder,
     category: "powder",
     title: "Powder",
     id: 7,
   },
   {
-    image: categoryList8,
+    image: ubtan,
     category: "ubtan",
     title: "Ubtan",
     id: 8,
   },
   {
-    image: categoryList9,
+    image: oil,
     category: "pansar-oil",
     title: "Pansar-oil",
     id: 9,
   },
   {
-    image: categoryList10,
+    image: murabajat,
     category: "murabajat",
     title: "Murabbajat",
     id: 10,
   },
   {
-    image: categoryList11,
+    image: ajmalSharbat,
     category: "ajmal-sharbat",
     title: "Ajmal Sharbat",
     id: 11,
   },
   {
-    image: categoryList12,
+    image: ajwain,
     category: "ajwain",
     title: "Ajwain",
     id: 12,
   },
   {
-    image: categoryList13,
+    image: hairOil,
     category: "hair-oil",
     title: "Hair Oil",
     id: 13,
   },
   {
-    image: categoryList14,
+    image: herbs,
     category: "herbs",
     title: "Herbs",
     id: 14,
   },
   {
-    image: categoryList15,
+    image: almond,
     category: "almonds",
     title: "Almonds",
     id: 15,
   },
   {
-    image: categoryList15,
+    image: ajmal,
     category: "ajmal-products",
     title: "Ajmal-Products",
     id: 16,
   },
   {
-    image: categoryList15,
+    image: hamdard,
     category: "hamdard-products",
     title: "Hamdard Products",
     id: 17,
   },
   {
-    image: categoryList15,
+    image: qarshi,
     category: "qarshi-products",
     title: "Qarshi Products",
     id: 18,
   },
   {
-    image: categoryList15,
+    image: salts,
     category: "salts",
     title: "Salts",
     id: 19,
   },
   {
-    image: categoryList15,
+    image: seeds,
     category: "seeds",
     title: "Seeds",
     id: 20,
   },
   {
-    image: categoryList15,
+    image: dryFruits,
     category: "dry-fruits",
     title: "Dry Fruits",
     id: 21,
-  },
-  {
-    image: categoryList15,
-    category: "food-color",
-    title: "Food Color",
-    id: 22,
   },
 ];
