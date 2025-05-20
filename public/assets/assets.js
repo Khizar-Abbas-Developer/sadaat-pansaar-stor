@@ -59,26 +59,22 @@ export const categoriesList = [
   {
     image: category1,
     id: 1,
-    category: "dry-fruits",
-    title: "Almonds",
+    category: "almonds",
   },
   {
     image: category2,
     id: 2,
-    category: "cashews",
-    title: "Cashews",
+    category: "seeds",
   },
   {
     image: category3,
     id: 3,
-    category: "pistachios",
-    title: "Pistachios",
+    category: "honey",
   },
   {
     image: category4,
     id: 4,
-    category: "Raisins",
-    title: "Raisins",
+    category: "dry-fruits",
   },
 ];
 

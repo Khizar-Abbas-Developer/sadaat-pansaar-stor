@@ -6,7 +6,7 @@ import { categoryCirclesList } from "@/public/assets/rounded-categories/roundedC
 
 const Marquee = () => {
   const content = categoryCirclesList.map((item, index) => (
-    <div className="flex items-center gap-1 px-4">
+    <div className="flex items-center gap-1 px-4" key={index}>
       <div className="w-[27px] h-[27px] md:w-[27px] md:h-[27px] rounded-full overflow-hidden">
         <Image
           src={item.image}
