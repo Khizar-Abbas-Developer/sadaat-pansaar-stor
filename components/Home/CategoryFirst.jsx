@@ -68,7 +68,7 @@ const CategoryFirst = ({
         </Link>
 
         {/* Mobile First: Cards */}
-        <div className="block md:hidden justify-center flex-1 flex-wrap flex gap-[12px]">
+        <div className="md:hidden justify-center flex-1 flex-wrap flex gap-[12px]">
           {number === 1 && <Card arrayData={firstCategoryArray} />}
           {number === 2 && <Card arrayData={secondCategoryArray} />}
           {number === 3 && <Card arrayData={thirdCategoryArray} />}
