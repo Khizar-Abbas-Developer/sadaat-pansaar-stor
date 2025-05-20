@@ -9,7 +9,7 @@ const ContactUsPage = () => {
       <div className="w-full px-6 bg-white py-12">
         <div className="p-2 shadow-2xl rounded-2xl">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10497.866124991958!2d2.294481!3d48.8583701!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fdd25b02e69%3A0xb452a3b3dbb46ad9!2sEiffel%20Tower!5e0!3m2!1sen!2sfr!4v1714568492731!5m2!1sen!2sfr"
+            src="https://maps.google.com/maps?q=31.433842,74.300812&z=17&output=embed"
             width="100%"
             height="450"
             style={{ border: 0 }}
@@ -17,7 +17,7 @@ const ContactUsPage = () => {
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             className="w-full"
-          />
+          ></iframe>
         </div>
       </div>
       {/*  */}

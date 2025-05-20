@@ -7,6 +7,7 @@ import ReduxToolkitProvider, {
   PersistGateProvider,
 } from "@/redux/reduxProvider";
 import NextTopLoader from "nextjs-toploader";
+import { IoLogoWhatsapp } from "react-icons/io5";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,6 +42,14 @@ export default function RootLayout({ children }) {
             {/* Wrap children with main */}
             <NextTopLoader color="#5fa800" />
             <main>{children}</main>
+            <a
+              href="https://wa.link/vjj9nm"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden lg:block fixed bottom-8 right-6 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition duration-300"
+            >
+              <IoLogoWhatsapp className="text-4xl" />
+            </a>
           </PersistGateProvider>
           <Footer />
         </ReduxToolkitProvider>

@@ -30,9 +30,14 @@ const Shop = () => {
           </p>
           <div>
             <h3 className="text-xl font-bold mb-2 text-black">Find us Here</h3>
-            <button className="bg-[#7d2f2f] cursor-pointer hover:bg-[#5FA800] text-white px-5 py-2 rounded-lg text-sm font-semibold shadow">
-              OUR LOCATION
-            </button>
+            <a
+              href="https://maps.app.goo.gl/svDyqdPqa9CeB7VR6?g_st=aw"
+              target="_blank"
+            >
+              <button className="bg-[#7d2f2f] cursor-pointer hover:bg-[#5FA800] text-white px-5 py-2 rounded-lg text-sm font-semibold shadow">
+                OUR LOCATION
+              </button>
+            </a>
           </div>
 
           {/* Stats */}
