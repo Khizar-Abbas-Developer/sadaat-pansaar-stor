@@ -67,12 +67,14 @@ export default function Home() {
               heading="Dryfruit collections"
               positionBeginning={false}
               number={1}
+              link={"/product-category/dry-fruits"}
             />
             <CategoryFirst
               categorySectionImage={categorySection2}
               heading="Murabba collections"
               positionBeginning={true}
               number={2}
+              link="/product-category/murabajat"
             />
             {/*  */}
             <CategoryFirst
@@ -80,6 +82,7 @@ export default function Home() {
               heading="Seeds collection"
               positionBeginning={false}
               number={3}
+              link={"/product-category/seeds"}
             />
           </div>
           <Feedback />

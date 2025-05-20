@@ -7,6 +7,7 @@ import { FaHeart, FaRegHeart, FaShoppingCart } from "react-icons/fa";
 import Card from "../Card/Card";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 const NewArrivalCards = ({ title, array }) => {
   const [loading, setLoading] = useState(true);
@@ -67,9 +68,11 @@ const NewArrivalCards = ({ title, array }) => {
                 </p>
               </div>
               <div className="border-b-3 flex justify-end items-center border-[#5FA800] cursor-pointer mr-[10px]">
-                <p className="text-sm md:text-xl lg:text-lg text-[#5FA800]">
-                  View More
-                </p>
+                <Link href="/shop">
+                  <p className="text-sm md:text-xl lg:text-lg text-[#5FA800]">
+                    View More
+                  </p>
+                </Link>
                 <span>
                   <MdOutlineKeyboardArrowRight className="text-xl text-[#5FA800]" />
                 </span>

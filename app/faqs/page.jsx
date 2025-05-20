@@ -10,56 +10,58 @@ const Accordion = () => {
 
   const questionsAndAnswers = [
     {
-      question: "What is React?",
-      answer: "React is a JavaScript library for building user interfaces.",
-    },
-    {
-      question: "What is a Component?",
-      answer: "Components are the building blocks of a React application.",
-    },
-    {
-      question: "What is the virtual DOM?",
+      question: "What products does Sadaat Pansar Store offer?",
       answer:
-        "The virtual DOM is a lightweight representation of the real DOM.",
+        "Sadaat Pansar Store offers a wide range of natural and organic products including dry fruits, herbs, oils, and traditional remedies.",
     },
     {
-      question: "What are hooks in React?",
+      question: "How can I place an order online?",
       answer:
-        "Hooks are functions that let you use state and lifecycle features in functional components.",
+        "You can place an order directly through our website by browsing the products, adding them to your cart, and completing the checkout process.",
     },
     {
-      question: "What is JSX?",
+      question: "Do you deliver all over Pakistan?",
       answer:
-        "JSX is a syntax extension for JavaScript that allows you to write HTML-like code in React.",
+        "Yes, we offer fast and reliable delivery services across all major cities in Pakistan including Lahore, Karachi, Islamabad, and Faisalabad.",
     },
     {
-      question: "What is Redux?",
+      question: "What are the payment options?",
       answer:
-        "Redux is a state management library used for managing global state in a React app.",
+        "We accept Cash on Delivery (COD), credit/debit cards, and other local payment methods for your convenience.",
     },
     {
-      question: "What is React Router?",
+      question: "Is Penis Enlargement Oil safe to use?",
       answer:
-        "React Router is a library for managing navigation in a React application.",
+        "Our Penis Enlargement Oil is made from natural ingredients. However, we recommend consulting with a healthcare professional before using any such product.",
     },
     {
-      question: "What are props in React?",
+      question: "Are your products genuine and high-quality?",
       answer:
-        "Props are inputs to a React component that allow passing data from parent to child components.",
+        "Absolutely! We pride ourselves on sourcing only the finest quality ingredients to ensure our customers receive genuine and effective products.",
+    },
+    {
+      question: "Can I return a product if I’m not satisfied?",
+      answer:
+        "Yes, we have an easy return policy. If you're not satisfied with a product, contact our support team for assistance.",
+    },
+    {
+      question: "Do you offer gift packaging?",
+      answer:
+        "Yes, we offer beautiful gift boxes and baskets – perfect for special occasions and gifting loved ones.",
     },
   ];
 
   return (
-    <div className="h-screen bg-white text-black">
-      <div className="w-full max-w-xl mx-auto mt-[145px] xl:mt-[150px]">
-        <div className="space-y-2">
+    <div className="h-screen bg-white text-black ">
+      <div className="w-full max-w-xl mx-auto xl:mt-[150px] mt-20">
+        <div className="space-y-2 mt-20">
           {questionsAndAnswers.map((item, index) => (
             <div key={index} className="border-b">
               <button
                 className="w-full text-left p-3 bg-gray-200 hover:bg-gray-300 transition duration-300 ease-in-out"
                 onClick={() => toggleAccordion(index)}
               >
-                <h3 className="text-xl font-semibold">{item.question}</h3>
+                <h3 className="text-md font-semibold">{item.question}</h3>
               </button>
               <div
                 className={`overflow-hidden transition-all duration-500 ease-in-out ${
@@ -68,7 +70,7 @@ const Accordion = () => {
                     : "max-h-0 p-0"
                 }`}
               >
-                <p>{item.answer}</p>
+                <p className="text-sm">{item.answer}</p>
               </div>
             </div>
           ))}

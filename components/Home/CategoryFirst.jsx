@@ -4,12 +4,14 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import Card from "@/components/Card/Card";
 import Image from "next/image";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 const CategoryFirst = ({
   positionBeginning,
   heading,
   categorySectionImage,
   number,
+  link,
 }) => {
   const [loading, setLoading] = React.useState(true);
   const products = useSelector((state) => state.product.products);
@@ -37,74 +39,94 @@ const CategoryFirst = ({
           <div className="border-b-3 border-[#5FA800]">
             <p className="text-md md:text-xl lg:text-lg uppercase">{heading}</p>
           </div>
-          <div className="border-b-3 flex justify-center items-center border-[#5FA800] cursor-pointer mr-[10px]">
+          <Link
+            href={link}
+            className="border-b-3 flex justify-center items-center border-[#5FA800] cursor-pointer mr-[10px]"
+          >
             <p className="text-sm md:text-xl lg:text-lg text-[#5FA800]">
               View More
             </p>
             <span>
               <MdOutlineKeyboardArrowRight className="text-[#5FA800] text-xl" />
             </span>
-          </div>
+          </Link>
         </div>
       </div>
 
       {/* Main content with image and cards */}
       <div data-flex-layout className="category-flex-layout">
-        {/* Conditional rendering of image and cards */}
-        {positionBeginning ? (
-          // If positionBeginning is true, image comes first
-          <>
-            {/* Image container */}
-            <div className="self-center flex-shrink-0 lg:mt-12">
-              <Image
-                src={categorySectionImage}
-                alt="category"
-                width={300}
-                height={300}
-                quality={100}
-                className="object-cover rounded-lg max-w-full h-auto"
-              />
-            </div>
+        {/* Mobile First: Image */}
+        <Link href={link} className="block md:hidden self-center flex-shrink-0">
+          <Image
+            src={categorySectionImage}
+            alt="category"
+            width={300}
+            height={300}
+            quality={100}
+            className="object-cover rounded-lg max-w-full h-auto"
+          />
+        </Link>
 
-            {/* Cards container */}
-            {number === 2 && (
-              <div className="justify-center flex-1 flex-wrap flex gap-[12px]">
-                <Card arrayData={secondCategoryArray} />
-              </div>
-            )}
-          </>
-        ) : (
-          // If positionBeginning is false, image comes after cards
-          <>
-            {/* Cards container */}
-            {number === 1 ? (
-              <div className="justify-center flex-1 flex-wrap flex gap-[12px]">
-                <Card arrayData={firstCategoryArray} />
-              </div>
-            ) : (
-              number === 3 && (
+        {/* Mobile First: Cards */}
+        <div className="block md:hidden justify-center flex-1 flex-wrap flex gap-[12px]">
+          {number === 1 && <Card arrayData={firstCategoryArray} />}
+          {number === 2 && <Card arrayData={secondCategoryArray} />}
+          {number === 3 && <Card arrayData={thirdCategoryArray} />}
+        </div>
+
+        {/* Desktop: Conditional layout based on positionBeginning */}
+        <div className="hidden md:flex w-full justify-between gap-[16px]">
+          {positionBeginning ? (
+            <>
+              {/* Desktop First: Image */}
+              <Link href={link} className="self-center flex-shrink-0 lg:mt-12">
+                <Image
+                  src={categorySectionImage}
+                  alt="category"
+                  width={300}
+                  height={300}
+                  quality={100}
+                  className="object-cover rounded-lg max-w-full h-auto"
+                />
+              </Link>
+
+              {/* Desktop Cards */}
+              {number === 2 && (
+                <div className="justify-center flex-1 flex-wrap flex gap-[12px]">
+                  <Card arrayData={secondCategoryArray} />
+                </div>
+              )}
+            </>
+          ) : (
+            <>
+              {/* Desktop Cards */}
+              {number === 1 && (
+                <div className="justify-center flex-1 flex-wrap flex gap-[12px]">
+                  <Card arrayData={firstCategoryArray} />
+                </div>
+              )}
+              {number === 3 && (
                 <div className="justify-center flex-1 flex-wrap flex gap-[12px]">
                   <Card arrayData={thirdCategoryArray} />
                 </div>
-              )
-            )}
+              )}
 
-            {/* Image container */}
-            <div className="self-center flex-shrink-0 lg:mt-16">
-              <Image
-                src={categorySectionImage}
-                alt="category"
-                width={300}
-                height={300}
-                quality={100}
-                className="object-cover rounded-[8px] max-w-full h-auto"
-              />
-            </div>
-          </>
-        )}
+              {/* Desktop Image */}
+              <Link href={link} className="self-center flex-shrink-0 lg:mt-16">
+                <Image
+                  src={categorySectionImage}
+                  alt="category"
+                  width={300}
+                  height={300}
+                  quality={100}
+                  className="object-cover rounded-lg max-w-full h-auto"
+                />
+              </Link>
+            </>
+          )}
+        </div>
       </div>
 
-      {/* Media queries and default styles */}
       <style jsx>{`
         .category-flex-layout {
           display: flex;
@@ -115,9 +137,7 @@ const CategoryFirst = ({
 
         @media (min-width: 1024px) {
           .category-flex-layout {
-            flex-direction: row;
-            align-items: flex-start;
-            justify-content: space-between;
+            flex-direction: column; /* Maintains layout, real logic now in inner div */
           }
         }
       `}</style>

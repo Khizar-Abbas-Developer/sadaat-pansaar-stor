@@ -13,6 +13,7 @@ import thirdImage from "@/public/assets/Footer/footer1.webp";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { HashLoader } from "react-spinners";
+import { categoryCirclesList } from "@/public/assets/rounded-categories/roundedCategories";
 
 const Footer = () => {
   const [loading, setLoading] = React.useState(true);
@@ -119,17 +120,13 @@ const Footer = () => {
                 <h4 className="text-lg font-semibold mb-2">
                   Specials Category
                 </h4>
-                {[
-                  "Gift Box",
-                  "Almonds",
-                  "Cashews",
-                  "Peanuts",
-                  "Roasted Chana",
-                  "Dried Apricots",
-                  "Dried Dates",
-                ].map((item, i) => (
-                  <a href="#" key={i} className="block hover:underline">
-                    {item}
+                {categoryCirclesList.slice(0, 8).map((item) => (
+                  <a
+                    href={`/product-category/${item.category}`}
+                    key={item.id}
+                    className="block hover:underline"
+                  >
+                    {item.title}
                   </a>
                 ))}
               </div>

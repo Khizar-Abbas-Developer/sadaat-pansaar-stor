@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import shopImage from "@/public/assets/shopImage.webp";
+import shopImage from "@/public/assets/about store.webp";
 import { aboutUsAnimatedContainersList } from "@/public/assets/assets";
 import dryFuitsImage from "@/public/assets/Dry-Fruits.webp";
 import Link from "next/link";
@@ -26,32 +26,33 @@ const AboutUsPage = () => {
               Welcome To Sadaat Pansaar Store
             </h2>
             <div className="tracking-2">
-              It’s easy to order from Sadaat Pansaar Store website, best in
-              price, perfect in taste for home or office or gifting some loves
-              one. We have best range of Dry Fruits available in market. Penis
-              enlargement oil, often marketed with claims of increased size,
-              should be approached with caution. Clinical evidence regarding
-              efficacy is limited. Information can often be verified on the
-              manufacturer’s company website, where product details are
-              available. Sadaat Pansaar Store is a best store to buy Dry Fruits
-              in Karachi, Islamabad, Lahore, Faisalabad, Quetta Pakistan. Fast
-              deliveries, top customer support, easy returns are the reason
-              customers buy from www.khandryfruits.com Buy Dry Fruits products
-              in low prices in Pakistan
+              It’s easy to order from Sadaat Pansar Store website — best in
+              price, perfect in taste, ideal for home, office, or gifting to
+              loved ones. We offer the best range of dry fruits available in the
+              market. Regarding penis enlargement oils, while they are often
+              marketed with bold claims, they should be approached with caution.
+              Clinical evidence for their effectiveness is limited. Always refer
+              to the manufacturer’s official website for accurate product
+              details. Sadaat Pansar Store is the best place to buy dry fruits
+              in Karachi, Islamabad, Lahore, Faisalabad, and Quetta, Pakistan.
+              With fast deliveries, excellent customer support, and easy
+              returns, it's clear why customers trust www.sadaat-pansaar.store
+              for their purchases. Buy dry fruits at low prices anywhere in
+              Pakistan — only from Sadaat Pansar Store.
               <div className="my-6">
-                Khan Dry Fruit is one of the most well-known and respected names
-                in the dried fruit and nut industry in Pakistan. With over 30
-                years of experience in the business, they have established
+                Sadaat Pansar Store is one of the most well-known and respected
+                names in the dried fruit and nut industry in Pakistan. With over
+                35 years of experience in the business, they have established
                 themselves as a go-to source for high-quality, delicious dried
                 fruits and nuts.
               </div>
-              One of the things that sets Khan Dry Fruit apart from other dried
-              fruit and nut producers in Pakistan is their commitment to
+              One of the things that sets Sadaat Pansar Store apart from other
+              dried fruit and nut producers in Pakistan is their commitment to
               sourcing the freshest and highest-quality ingredients. They work
               closely with local farmers to ensure that the fruits and nuts used
-              in their products are of the highest quality. This commitment to
-              quality is evident in every aspect of their business, from
-              sourcing ingredients to the careful drying and processing methods
+              in their products are of the finest quality. This dedication to
+              quality is evident in every aspect of their business — from
+              ingredient sourcing to the careful drying and processing methods
               used to preserve the natural flavor and nutritional value of the
               fruits and nuts.
             </div>
@@ -104,21 +105,21 @@ const AboutUsPage = () => {
           <div className="w-full xl:w-[50%]">
             <div className="tracking-2">
               In addition to producing and selling high-quality dried fruits and
-              nuts, Khan Dry Fruit also operates several online stores in
-              Pakistan, making it easy for customers to purchase their products
-              from the comfort of their own homes. These online stores offer a
-              wide range of products, including apricots, peaches, plums,
-              nectarines, cranberries, raisins, and almonds, as well as a
-              variety of gift boxes and gift baskets that are perfect for
-              special occasions.
+              nuts, <strong>Sadaat Pansar Store</strong> also operates several
+              online stores in Pakistan, making it easy for customers to
+              purchase their products from the comfort of their own homes. These
+              online stores offer a wide range of products, including apricots,
+              peaches, plums, nectarines, cranberries, raisins, and almonds, as
+              well as a variety of gift boxes and gift baskets that are perfect
+              for special occasions.
               <div className="my-6">
-                One of the key benefits of shopping at Khan Dry Fruit’s online
-                store is the convenience and ease of use. The website is
-                user-friendly and easy to navigate, making it easy for customers
-                to find the products they’re looking for. Additionally, the
-                online store offers a wide range of payment options, including
-                credit and debit cards, as well as the option to pay cash on
-                delivery.
+                One of the key benefits of shopping at{" "}
+                <strong>Sadaat Pansar Store’s</strong> online store is the
+                convenience and ease of use. The website is user-friendly and
+                easy to navigate, making it easy for customers to find the
+                products they’re looking for. Additionally, the online store
+                offers a wide range of payment options, including credit and
+                debit cards, as well as the option to pay cash on delivery.
               </div>
             </div>
             <Link href="/shop">
@@ -151,25 +152,26 @@ const AboutUsPage = () => {
       <div className="bg-white text-black pb-16">
         <div className="flex flex-col gap-6 xl:mx-10 shadow-xl p-10 rounded-xl">
           <p>
-            In conclusion, Khan Dry Fruit is a reputable and well-established
-            company that produces high-quality dried fruits and nuts in
-            Pakistan. They are committed to sourcing the freshest and
-            highest-quality ingredients, sustainability, and giving back to the
-            community. Their online stores and brick-and-mortar retail stores
-            make it easy for customers to purchase their products, making it a
-            convenient option for those looking for a healthy and tasty snack
-            option. If you’re looking for delicious and nutritious dried fruits
-            and nuts in Pakistan, Khan Dry Fruit is a great choice.
+            In conclusion, <strong>Sadaat Pansar Store</strong> is a reputable
+            and well-established company that produces high-quality dried fruits
+            and nuts in Pakistan. They are committed to sourcing the freshest
+            and highest-quality ingredients, sustainability, and giving back to
+            the community. Their online stores and brick-and-mortar retail
+            stores make it easy for customers to purchase their products, making
+            it a convenient option for those looking for a healthy and tasty
+            snack option. If you’re looking for delicious and nutritious dried
+            fruits and nuts in Pakistan, <strong>Sadaat Pansar Store</strong> is
+            a great choice.
           </p>
           <p>
             Dried Fruits Pakistan Inc. is a certified organic manufacturer and
             distributor of nuts and dried fruits in South East Asia. Our
             customers consist mainly of individual buyers and independently
             owned grocery stores which value working with an environmentally
-            friendly company that manufactures its own products. Sadaat Pansaar
-            Store is one the best dry fruits provider trusted by it’s thousand’s
-            of customer’s. We provide high quality products with reasonable
-            prices.
+            friendly company that manufactures its own products.{" "}
+            <strong>Sadaat Pansar Store</strong> is one of the best dry fruits
+            providers trusted by its thousands of customers. We provide
+            high-quality products at reasonable prices.
           </p>
           <p>
             Dried Fruits Pakistan Inc. started as a diversified organic nuts and
@@ -181,9 +183,10 @@ const AboutUsPage = () => {
             fruits directly from the farms, some of which we have worked with
             for over a decade. Our level of knowledge and communication with our
             farmers allows us to preserve our organic integrity and ensure fair
-            business practices throughout the supply chain. Sadaat Pansaar Store
-            top quality dry fruits in Pakistan and provides GOOD Quality
-            products.{" "}
+            business practices throughout the supply chain.{" "}
+            <strong>Sadaat Pansar Store</strong>
+            {""} offers top-quality dry fruits in Pakistan and provides good
+            quality products.
           </p>
         </div>
       </div>

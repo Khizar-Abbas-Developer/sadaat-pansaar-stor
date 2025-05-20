@@ -86,3 +86,7 @@ input[type="range"]::-moz-range-thumb {
   animation: flipBackY 0.7s ease;
   transform-style: preserve-3d;
 }
+
+.disable-toploader .nextjs-toploader {
+  display: none !important;
+}

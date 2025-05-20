@@ -1,5 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { topLoader } from "nextjs-toploader"; // Import this at the top
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -60,20 +62,20 @@ const RelatedProducts = ({ category }) => {
           const isLiked = favouriteProducts.some((fav) => fav._id === item._id);
           return (
             <React.Fragment key={index}>
-              <Link
-                href={`/product/${item._id}`}
+              <div
                 key={index}
                 className="snap-start min-w-[200px] md:min-w-[180px] max-w-[200px] md:max-w-[180px] relative group p-[8px] flex flex-col gap-6 justify-between items-center mt-2 text-black border-2 rounded-2xl border-gray-300 shadow-md bg-white"
               >
+                {/* Wishlist Heart Icon - OUTSIDE <Link> */}
                 <div
                   className="
-    absolute top-2 right-2 
-    opacity-100 
-    lg:opacity-0 
-    lg:group-hover:opacity-100 
-    transition-opacity duration-300 
-    z-10
-  "
+      absolute top-2 right-2 
+      opacity-100 
+      lg:opacity-0 
+      lg:group-hover:opacity-100 
+      transition-opacity duration-300 
+      z-10
+    "
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -87,38 +89,44 @@ const RelatedProducts = ({ category }) => {
                   )}
                 </div>
 
-                <div>
-                  <Image
-                    src={item?.image || null} // Replace with item.image if dynamic
-                    alt="product"
-                    width={162}
-                    height={162}
-                    className="rounded-lg"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-5 ml-[8px] w-full">
-                  <div className="flex flex-col gap-1">
-                    <p className="text-left text-xs tracking-wider">
-                      {item.category}
-                    </p>
-                    <p className="text-sm tracking-wider">{item.productName}</p>
+                {/* Clickable Product Card - Link Only Wraps Inside */}
+                <Link
+                  href={`/product/${item._id}`}
+                  className="w-full flex flex-col gap-6 justify-between items-center"
+                >
+                  <div>
+                    <Image
+                      src={item?.image || "/placeholder.png"}
+                      alt="product"
+                      width={162}
+                      height={162}
+                      className="rounded-lg"
+                    />
                   </div>
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <span className="font-light text-gray-500 text-md tracking-wide">
-                        From:{" "}
-                      </span>
-                      <span className="font-semibold">
-                        {`₨${item.productPrice}`}
+
+                  <div className="flex flex-col gap-5 ml-[8px] w-full">
+                    <div className="flex flex-col gap-1">
+                      <p className="text-left text-xs tracking-wider">
+                        {item.category}
+                      </p>
+                      <p className="text-sm tracking-wider">
+                        {item.productName}
+                      </p>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <span className="font-light text-gray-500 text-md tracking-wide">
+                          From:{" "}
+                        </span>
+                        <span className="font-semibold">{`₨${item.productPrice}`}</span>
+                      </div>
+                      <span className="bg-[#7d2f2f] rounded-full p-[6px]">
+                        <FaShoppingCart className="text-white text-lg" />
                       </span>
                     </div>
-                    <span className="bg-[#7d2f2f] rounded-full p-[6px]">
-                      <FaShoppingCart className="text-white text-lg" />
-                    </span>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
             </React.Fragment>
           );
         })}

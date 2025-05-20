@@ -28,10 +28,13 @@ const CategoriesList = () => {
             Shop by feature categories
           </p>
         </div>
-        <div className="mt-4 sm:mt-0 flex items-center cursor-pointer text-sm md:text-md lg:text-md text-[#5FA800]">
+        <Link
+          href="/shop"
+          className="mt-4 sm:mt-0 flex items-center cursor-pointer text-sm md:text-md lg:text-md text-[#5FA800]"
+        >
           <p className="mr-1">View More</p>
           <MdOutlineKeyboardArrowRight className="text-gray-400 text-xl" />
-        </div>
+        </Link>
       </div>
 
       {/* Scrollable Categories List with Arrows */}
@@ -72,7 +75,7 @@ const CategoriesList = () => {
         {/* Left Arrow - Only on md+ */}
         <button
           onClick={() => scroll("left")}
-          className="hidden md:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 bg-white text-black rounded-full shadow-md w-10 h-10 z-10"
+          className="hidden cursor-pointer md:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 bg-white text-black rounded-full shadow-md w-10 h-10 z-10"
         >
           <MdOutlineKeyboardArrowLeft size={24} />
         </button>
@@ -80,7 +83,7 @@ const CategoriesList = () => {
         {/* Right Arrow - Only on md+ */}
         <button
           onClick={() => scroll("right")}
-          className="hidden md:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 bg-white text-black rounded-full shadow-md w-10 h-10 z-10"
+          className="hidden cursor-pointer md:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 bg-white text-black rounded-full shadow-md w-10 h-10 z-10"
         >
           <MdOutlineKeyboardArrowRight size={24} />
         </button>
