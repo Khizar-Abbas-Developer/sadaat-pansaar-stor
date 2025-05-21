@@ -35,6 +35,7 @@ const Cart = () => {
       (acc, product) => acc + product.selectedPrice * product.numberOfItems,
       0
     );
+
     const shippingCost = shippingOption === "express" ? 500 : 200;
     const grandTotal = subtotal + shippingCost;
 

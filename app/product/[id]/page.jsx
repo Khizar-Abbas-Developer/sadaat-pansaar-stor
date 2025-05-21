@@ -91,10 +91,8 @@ const Product = () => {
       cartId: Date.now() + Math.random(), // Unique per item added
     };
     dispatch(addProductToCart(productToAdd));
-    navigate.push("/checkout");
+    navigate.push("/cart");
   };
-  console.log(dataToPopulate?.variants);
-
   return (
     <>
       {loading ? (

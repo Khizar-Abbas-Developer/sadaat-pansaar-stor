@@ -114,20 +114,15 @@ const ProductCategory = () => {
     // Update the minimum and maximum prices
     setMinimumPrice(min);
     setMaximumPrice(max);
-    // console.log("Min Price:", min);
-    // console.log("Max Price:", max);
-    // console.log(productsToList);
 
     // Filter products by the selected price range
     const filtered = productsToFilter.filter((product) => {
-      // console.log("Product Price:", product.productPrice);
       return product.productPrice >= min && product.productPrice <= max;
     });
 
     setProductsToList(filtered);
 
-    // console.log("Min Price:", min);
-    // console.log("Max Price:", max);
+
     setOpenDrawer(value);
 
     setLoading(false); // Stop loading once filtering is done

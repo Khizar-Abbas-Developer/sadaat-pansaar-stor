@@ -75,7 +75,6 @@ const DynamicPaymentPage = () => {
           ...paymentDetails,
         }
       );
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }

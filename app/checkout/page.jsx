@@ -94,7 +94,6 @@ const Checkout = () => {
         `${URL}/api/v1/order/place-order`,
         order
       );
-      console.log(response.data.order);
       dispatch(
         setCartSummary({
           subtotal: response.data.order.subtotal,

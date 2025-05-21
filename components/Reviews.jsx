@@ -73,7 +73,6 @@ const CustomerReviews = ({ productId }) => {
       const response = await axios.get(
         `${URL}/api/v1/review/review/${productId}`
       );
-      console.log(response.data.reviews);
       setReviews(response.data.reviews);
     } catch (error) {
       console.log(error);

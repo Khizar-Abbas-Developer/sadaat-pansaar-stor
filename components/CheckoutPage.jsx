@@ -26,7 +26,6 @@ const CheckoutPage = ({ amount }) => {
         }
       );
       setClientSecret(response.data.clientSecret);
-      console.log(response.data.clientSecret);
     } catch (error) {
       console.error("Error fetching client secret:", error);
     }
