@@ -30,11 +30,6 @@ const Accordion = () => {
         "We accept Cash on Delivery (COD), credit/debit cards, and other local payment methods for your convenience.",
     },
     {
-      question: "Is Penis Enlargement Oil safe to use?",
-      answer:
-        "Our Penis Enlargement Oil is made from natural ingredients. However, we recommend consulting with a healthcare professional before using any such product.",
-    },
-    {
       question: "Are your products genuine and high-quality?",
       answer:
         "Absolutely! We pride ourselves on sourcing only the finest quality ingredients to ensure our customers receive genuine and effective products.",
