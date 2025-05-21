@@ -96,7 +96,7 @@ const Footer = () => {
                   <div className="w-8 h-8 flex items-center justify-center bg-white text-green-600 rounded-full mt-1">
                     <MdPhone className="text-xl" />
                   </div>
-                  <p className="flex items-center mt-2">+92 3289428803</p>
+                  <p className="flex items-center mt-2"> 03289428803</p>
                 </div>
               </div>
               {/* Information Links */}
@@ -104,7 +104,6 @@ const Footer = () => {
                 <h4 className="text-lg font-semibold mb-2">Information</h4>
                 {[
                   "About Us",
-                  "Delivery Information",
                   "Privacy & Policy",
                   "Terms & Conditions",
                   "Refund",
@@ -135,13 +134,21 @@ const Footer = () => {
               <div className="flex-1 min-w-[200px]">
                 <h4 className="text-lg font-semibold mb-2">Follow Us</h4>
                 <div className="flex gap-4 mb-4">
-                  <a href="#">
+                  <a
+                    href="https://www.instagram.com/sadaat.pansar?igsh=ZG4xc2UydTM5NWEw"
+                    target="_blank"
+                  >
                     <FaInstagram className="text-2xl bg-[#709B3F] p-1 rounded text-white" />
                   </a>
-                  <a href="#">
+                  <a
+                    href="mailto:tirmizishah23@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <MdOutlineMailOutline className="text-2xl bg-[#709B3F] p-1 rounded text-white" />
                   </a>
-                  <a href="#">
+
+                  <a href="https://wa.link/vjj9nm" target="_blank">
                     <FaWhatsapp className="text-2xl  bg-[#709B3F] p-1 rounded text-white" />
                   </a>
                 </div>

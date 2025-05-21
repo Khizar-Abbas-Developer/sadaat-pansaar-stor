@@ -2,6 +2,8 @@
 import Image from "next/image";
 import React from "react";
 import deliveryIcon from "@/public/assets/about-assets/delivery.webp";
+import { FaLocationDot } from "react-icons/fa6";
+import { MdEmail, MdPhoneIphone } from "react-icons/md";
 
 const ContactUsPage = () => {
   return (
@@ -39,17 +41,15 @@ const ContactUsPage = () => {
                 <div className="flex flex-col gap-1 w-full sm:w-1/2">
                   {/* Address */}
                   <div className="w-fit">
-                    <Image
-                      src={deliveryIcon}
-                      width={60}
-                      height={60}
-                      alt="delivery"
-                      quality={100}
-                      className="object-cover"
-                    />
+                    <div className="w-12 h-15 flex justify-center items-center">
+                      <FaLocationDot className="absolute text-[#5fa800] text-5xl" />
+                    </div>
                   </div>
                   <p className="text-xl font-medium tracking-wider">ADDRESS</p>
-                  <p>Shop number 1, 29 Iqbal block...</p>
+                  <p>
+                    Main Bagrian chowk azmat road, house # 1D2-1186 Green Town,
+                    Lahore
+                  </p>
                 </div>
 
                 <div className="flex flex-col gap-1 w-full sm:w-1/2">
@@ -69,7 +69,7 @@ const ContactUsPage = () => {
                   </p>
                   <p className="flex flex-col gap-2">
                     <span>Monday to Sunday</span>
-                    <span>9:00 am To 9:00 pm</span>
+                    <span>24/7</span>
                   </p>
                 </div>
               </div>
@@ -79,39 +79,28 @@ const ContactUsPage = () => {
                 <div className="flex flex-col gap-1 w-full sm:w-1/2">
                   {/* Email */}
                   <div className="w-fit">
-                    <Image
-                      src={deliveryIcon}
-                      width={60}
-                      height={60}
-                      alt="delivery"
-                      quality={100}
-                      className="object-cover"
-                    />
+                    <div className="w-12 h-15 flex justify-center items-center">
+                      <MdEmail className="absolute text-[#5fa800] text-5xl" />
+                    </div>
                   </div>
                   <p className="text-xl font-medium uppercase tracking-wider">
                     email
                   </p>
-                  <p>info@khandryfruits.com</p>
+                  <p>tirmizishah23@gmail.com</p>
                 </div>
 
                 <div className="flex flex-col gap-1 w-full sm:w-1/2">
                   {/* Phone */}
                   <div className="w-fit">
-                    <Image
-                      src={deliveryIcon}
-                      width={60}
-                      height={60}
-                      alt="delivery"
-                      quality={100}
-                      className="object-cover"
-                    />
+                    <div className="w-12 h-15 flex justify-center items-center">
+                      <MdPhoneIphone className="absolute text-[#5fa800] text-5xl" />
+                    </div>
                   </div>
                   <p className="text-xl font-medium uppercase tracking-wider">
                     call us
                   </p>
                   <p className="flex flex-col gap-2">
-                    <span>0304-9996000 | 0345-0144865</span>
-                    <span>04237 444400</span>
+                    <span>03289428803</span>
                   </p>
                 </div>
               </div>
