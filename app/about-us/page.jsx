@@ -2,7 +2,10 @@
 import Image from "next/image";
 import React from "react";
 import shopImage from "@/public/assets/about store.webp";
-import { aboutUsAnimatedContainersList } from "@/public/assets/assets";
+import {
+  aboutUsAnimatedContainersList,
+  services,
+} from "@/public/assets/assets";
 import dryFuitsImage from "@/public/assets/Dry-Fruits.webp";
 import Link from "next/link";
 
@@ -62,7 +65,7 @@ const AboutUsPage = () => {
         {/* //Animated Cards Container */}
         <div className="bg-[#e6e6e6] h-auto xl:h-[100px] xl:mx-10 rounded-4xl my-10">
           <div className="flex flex-wrap py-6 xl:py-0 h-full gap-6 xl:gap-0 items-center justify-between">
-            {aboutUsAnimatedContainersList.map((item) => {
+            {services.map((item) => {
               return (
                 <div
                   key={item.id}
@@ -78,7 +81,7 @@ const AboutUsPage = () => {
                 >
                   <div className="w-fit">
                     <Image
-                      src={item.icon}
+                      src={item.image}
                       width={60}
                       height={60}
                       alt="delivery"
@@ -88,8 +91,8 @@ const AboutUsPage = () => {
                   </div>
 
                   <div className="">
-                    <p className="text-xl font-medium">{item.heading}</p>
-                    <p className="">{item.paragraph}</p>
+                    <p className="text-xl font-medium">{item.title}</p>
+                    <p className="">{item.description}</p>
                   </div>
                 </div>
               );
