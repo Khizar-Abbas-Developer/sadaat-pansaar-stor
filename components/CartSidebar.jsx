@@ -97,9 +97,10 @@ const CartSidebar = () => {
                   <div>
                     <Image
                       src={product?.image || ""}
-                      alt=""
+                      alt={product?.productName || "Product image"}
                       width={90}
                       height={90}
+                      className="w-[90px] h-[90px] object-cover rounded"
                     />
                   </div>
                   <div className="">
