@@ -10,6 +10,8 @@ import { IoOptionsOutline } from "react-icons/io5";
 import axios from "axios";
 import { HashLoader } from "react-spinners";
 import { categoriesList } from "@/public/assets/assets";
+import { categoryCirclesList } from "@/public/assets/rounded-categories/roundedCategories";
+import Link from "next/link";
 
 const mockProducts = [
   {
@@ -114,15 +116,20 @@ const ProductCategory = () => {
     // Update the minimum and maximum prices
     setMinimumPrice(min);
     setMaximumPrice(max);
+    // console.log("Min Price:", min);
+    // console.log("Max Price:", max);
+    // console.log(productsToList);
 
     // Filter products by the selected price range
     const filtered = productsToFilter.filter((product) => {
+      // console.log("Product Price:", product.productPrice);
       return product.productPrice >= min && product.productPrice <= max;
     });
 
     setProductsToList(filtered);
 
-
+    // console.log("Min Price:", min);
+    // console.log("Max Price:", max);
     setOpenDrawer(value);
 
     setLoading(false); // Stop loading once filtering is done
@@ -146,7 +153,7 @@ const ProductCategory = () => {
       fetchProductsByCategory();
     }
   }, [category]);
-  const currentCategoryName = categoriesList.find(
+  const currentCategoryName = categoryCirclesList.find(
     (item) => item.category === category
   )?.title;
   return (
@@ -168,7 +175,9 @@ const ProductCategory = () => {
             <main className="w-full lg:w-3/4 flex flex-col mt-10">
               <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
                 <h2 className="text-gray-500 mb-2 sm:mb-0 md:ml-16 text-center mx-auto md:mx-0">
-                  <span className="font-normal text-xl">Home</span>{" "}
+                  <Link href="/">
+                    <span className="font-normal text-xl">Home</span>{" "}
+                  </Link>
                   <span>/</span>{" "}
                   <span className="font-semibold text-xl uppercase text-black">
                     {currentCategoryName}
