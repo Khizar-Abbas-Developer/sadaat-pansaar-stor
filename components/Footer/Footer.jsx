@@ -14,6 +14,7 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 import { HashLoader } from "react-spinners";
 import { categoryCirclesList } from "@/public/assets/rounded-categories/roundedCategories";
+import Link from "next/link";
 
 const Footer = () => {
   const [loading, setLoading] = React.useState(true);
@@ -121,13 +122,13 @@ const Footer = () => {
                   Specials Category
                 </h4>
                 {categoryCirclesList.slice(0, 8).map((item) => (
-                  <a
+                  <Link
                     href={`/product-category/${item.category}`}
                     key={item.id}
                     className="block hover:underline"
                   >
                     {item.title}
-                  </a>
+                  </Link>
                 ))}
               </div>
               {/* Social & App */}
