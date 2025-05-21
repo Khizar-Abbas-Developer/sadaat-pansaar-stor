@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const Accordion = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -47,25 +48,36 @@ const Accordion = () => {
   ];
 
   return (
-    <div className="h-screen bg-white text-black ">
-      <div className="w-full max-w-xl mx-auto xl:mt-[150px] mt-20">
-        <div className="space-y-2 mt-20">
+    <div className="min-h-screen bg-gray-50 text-gray-900 py-12 px-4">
+      <div className="max-w-3xl mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-10">
+          Frequently Asked Questions
+        </h2>
+        <div className="space-y-4">
           {questionsAndAnswers.map((item, index) => (
-            <div key={index} className="border-b">
+            <div
+              key={index}
+              className="border rounded-xl shadow-sm bg-white overflow-hidden transition-all duration-300"
+            >
               <button
-                className="w-full text-left p-3 bg-gray-200 hover:bg-gray-300 transition duration-300 ease-in-out"
+                className="w-full flex items-center justify-between px-5 py-4 focus:outline-none hover:bg-gray-100 transition"
                 onClick={() => toggleAccordion(index)}
               >
-                <h3 className="text-md font-semibold">{item.question}</h3>
+                <h3 className="text-lg font-medium">{item.question}</h3>
+                {openIndex === index ? (
+                  <FaChevronUp className="text-gray-500" />
+                ) : (
+                  <FaChevronDown className="text-gray-500" />
+                )}
               </button>
               <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                className={`transition-all duration-500 ease-in-out ${
                   openIndex === index
-                    ? "max-h-screen p-4 bg-gray-50"
-                    : "max-h-0 p-0"
-                }`}
+                    ? "max-h-screen px-5 pb-4"
+                    : "max-h-0 px-5 pb-0"
+                } overflow-hidden text-gray-600 text-sm`}
               >
-                <p className="text-sm">{item.answer}</p>
+                <p>{item.answer}</p>
               </div>
             </div>
           ))}
