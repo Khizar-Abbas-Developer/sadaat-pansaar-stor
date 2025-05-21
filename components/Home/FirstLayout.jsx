@@ -9,7 +9,7 @@ const FirstLayout = () => {
     <div className="flex lg:flex-row pb-8 px-[2.5px] items-center flex-col justify-center gap-8 overflow-hidden rounded-lg transition-all duration-300 ease-in-out">
       {/* First image with its own group */}
       <Link
-        href="/product-category/masalajat"
+        href="/product-category/herbs"
         className="text-black group overflow-hidden rounded-lg transition-all duration-700 ease-in-out cursor-pointer"
       >
         <Image

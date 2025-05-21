@@ -9,7 +9,6 @@ import hairOil from "@/public/assets/round-categories/hair oil.png";
 import hamdard from "@/public/assets/round-categories/hamdard.png";
 import herbs from "@/public/assets/round-categories/herbs.png";
 import jariBootiya from "@/public/assets/round-categories/jari bootiya.png";
-import masala from "@/public/assets/round-categories/masala.png";
 import murabajat from "@/public/assets/round-categories/murabajat.png";
 import oil from "@/public/assets/round-categories/oil.png";
 import panjeeri from "@/public/assets/round-categories/panjeeri.png";
@@ -45,12 +44,6 @@ export const categoryCirclesList = [
     category: "dalya",
     title: "Dalya",
     id: 4,
-  },
-  {
-    image: masala,
-    category: "masalajat",
-    title: "Masalajat",
-    id: 5,
   },
   {
     image: jariBootiya,
