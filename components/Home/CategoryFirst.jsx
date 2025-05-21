@@ -19,7 +19,7 @@ const CategoryFirst = ({
     .filter((item) => item.category === "dry-fruits")
     .slice(0, 4);
   const secondCategoryArray = (products || [])
-    .filter((item) => item.category === "murabba")
+    .filter((item) => item.category === "murabajat")
     .slice(0, 4);
 
   const thirdCategoryArray = (products || [])
