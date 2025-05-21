@@ -26,9 +26,9 @@ import useScrollToPosition from "@/lib";
 export default function Home() {
   const [loading, setLoading] = React.useState(true);
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   window.scrollTo({ top: 0, behavior: "smooth" });
-  // }, [loading]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [loading]);
 
   useEffect(() => {
     const getProducts = async () => {
