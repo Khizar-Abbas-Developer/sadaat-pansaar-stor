@@ -7,6 +7,7 @@ import ReduxToolkitProvider, {
   PersistGateProvider,
 } from "@/redux/reduxProvider";
 import NextTopLoader from "nextjs-toploader";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { IoLogoWhatsapp } from "react-icons/io5";
 
 const geistSans = Geist({
