@@ -7,7 +7,7 @@ import ReduxToolkitProvider, {
   PersistGateProvider,
 } from "@/redux/reduxProvider";
 import NextTopLoader from "nextjs-toploader";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { IoLogoWhatsapp } from "react-icons/io5";
 
 const geistSans = Geist({
@@ -36,9 +36,11 @@ export default function RootLayout({ children }) {
       </head>
       <body className="antialiased mt-[110px]">
         <Toaster />
+        <SpeedInsights />
         <ReduxToolkitProvider>
           <PersistGateProvider>
             <Header />
+
             <Toaster />
             {/* Wrap children with main */}
             <NextTopLoader color="#5fa800" />
