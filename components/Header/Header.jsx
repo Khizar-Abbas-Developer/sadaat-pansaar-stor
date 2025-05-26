@@ -159,7 +159,7 @@ const Header = () => {
             {showDropdown && suggestions.length > 0 && (
               <ul
                 ref={dropdownRef}
-                className="absolute mt-2 bg-white border border-gray-200 rounded-lg shadow z-50 max-h-64 overflow-y-auto animate-scaleFadeIn"
+                className="absolute bg-white border border-gray-200 rounded-lg shadow z-50 max-h-64 overflow-y-auto animate-scaleFadeIn"
                 style={{
                   width: inputRef.current
                     ? inputRef.current.offsetWidth
