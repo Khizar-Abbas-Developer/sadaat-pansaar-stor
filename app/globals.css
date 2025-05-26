@@ -90,3 +90,20 @@ input[type="range"]::-moz-range-thumb {
 .disable-toploader .nextjs-toploader {
   display: none !important;
 }
+
+/* // */
+@keyframes scaleFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scaleFadeIn {
+  animation: scaleFadeIn 0.3s ease forwards;
+  transform-origin: top left;
+}

@@ -1,13 +1,14 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import logo from "@/public/assets/headerK.jpeg";
+import debounce from "lodash.debounce";
 import { navigationList } from "@/public/assets/assets";
 import { RxHamburgerMenu } from "react-icons/rx";
 import "./Header.css";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { usePathname } from "next/navigation"; // Use this for server components
+import { usePathname, useRouter } from "next/navigation"; // Use this for server components
 import { FiHeart } from "react-icons/fi";
 import Link from "next/link";
 import SideBar from "./SideBar";
@@ -16,8 +17,16 @@ import CartSidebar from "../CartSidebar";
 import temporyBackgroundImage from "@/public/assets/munaza/theme.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { setCartStatus } from "@/redux/products/productSlice";
+import axios from "axios";
 
 const Header = () => {
+  const router = useRouter();
+  const [text, setText] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const inputRef = useRef();
   const dispatch = useDispatch();
   const pathname = usePathname(); // Get the current pathname
   const [favoriteItems, setFavoriteItems] = React.useState(0);
@@ -25,6 +34,7 @@ const Header = () => {
   const favouriteProducts = useSelector(
     (state) => state.product.favouriteProducts
   );
+  const URL = process.env.NEXT_PUBLIC_SERVER_URL;
   const cartProducts = useSelector((state) => state.product.cartProducts);
 
   useEffect(() => {
@@ -34,6 +44,72 @@ const Header = () => {
   const handleCheckCartSidebar = () => {
     dispatch(setCartStatus(true));
   };
+
+  const fetchSuggestions = async (keyword) => {
+    if (!keyword.trim()) {
+      setSuggestions([]);
+      setShowDropdown(false);
+      return;
+    }
+
+    try {
+      const res = await axios.get(
+        `${URL}/api/v1/product/products/suggestions?keyword=${encodeURIComponent(
+          keyword
+        )}`
+      );
+      const { success, suggestions } = res.data;
+
+      if (success && suggestions.length > 0) {
+        setSuggestions(suggestions);
+        setShowDropdown(true);
+      } else {
+        setSuggestions([]);
+        setShowDropdown(false);
+      }
+    } catch (error) {
+      console.error("Error fetching suggestions:", error);
+      setSuggestions([]);
+      setShowDropdown(false);
+    }
+  };
+
+  const debouncedFetchSuggestions = useRef(
+    debounce(fetchSuggestions, 300)
+  ).current;
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setText(value);
+
+    if (value.trim() === "") {
+      setSuggestions([]);
+      setShowDropdown(false);
+    } else {
+      debouncedFetchSuggestions(value);
+    }
+  };
+
+  const handleSelectSuggestion = (suggestion) => {
+    console.log("Selected suggestion:", suggestion);
+    router.push(`/product-category/${suggestion.category}`);
+    setText(suggestion.productName);
+    setShowDropdown(false);
+  };
+
+  const handleSearchProduct = (e) => {
+    e.preventDefault();
+    setShowDropdown(false);
+    // Implement your search submit logic here with the current `text`
+    console.log("Searching:", text);
+  };
+
+  // Dynamically set dropdown width
+  useEffect(() => {
+    if (inputRef.current && dropdownRef.current) {
+      dropdownRef.current.style.width = `${inputRef.current.offsetWidth}px`;
+    }
+  }, [suggestions]);
   return (
     <>
       <div className="fixed top-0 left-0 w-full z-50">
@@ -57,14 +133,56 @@ const Header = () => {
             <CartSidebar />
           </div>
           <div />
-          <div className="relative w-full max-w-md mx-auto px-4 hidden lg:block">
+          <form
+            onSubmit={handleSearchProduct}
+            className="relative w-full max-w-xl mx-auto px-4 hidden lg:block"
+          >
             <input
               type="text"
               placeholder="Search..."
+              value={text}
+              ref={inputRef}
+              onChange={(e) => {
+                setText(e.target.value);
+                debouncedFetchSuggestions(e.target.value);
+              }}
+              onFocus={() => {
+                if (!text) {
+                  debouncedFetchSuggestions("a"); // Fetch suggestions with "a" when focused and input is empty
+                  setShowDropdown(true);
+                }
+              }}
               className="w-[644px] py-[5px] pl-[20px] pr-10 rounded-full border border-gray-300 bg-gray-100 outline-none text-[16px] font-medium text-black"
             />
-            <FiSearch className="absolute top-1/2 -right-45 -translate-y-1/2 text-gray-500" />
-          </div>
+            <FiSearch className="absolute top-1/2 -right-16 -translate-y-1/2 text-gray-500" />
+
+            {showDropdown && suggestions.length > 0 && (
+              <ul
+                ref={dropdownRef}
+                className="absolute mt-2 bg-white border border-gray-200 rounded-lg shadow z-50 max-h-64 overflow-y-auto animate-scaleFadeIn"
+                style={{
+                  width: inputRef.current
+                    ? inputRef.current.offsetWidth
+                    : "auto",
+                  left: inputRef.current ? inputRef.current.offsetLeft : 0,
+                  top:
+                    (inputRef.current ? inputRef.current.offsetTop : 0) +
+                    (inputRef.current ? inputRef.current.offsetHeight : 0) +
+                    8,
+                }}
+              >
+                {suggestions.map((item) => (
+                  <li
+                    key={item._id}
+                    onClick={() => handleSelectSuggestion(item)}
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-black"
+                  >
+                    {item.productName}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </form>
           <Link
             href="/"
             className="absolute top-7 lg:hidden flex justify-center items-center w-full left-0 right-0 mx-auto"
