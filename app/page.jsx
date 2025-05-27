@@ -3,6 +3,7 @@ import Banner from "@/components/Home/Banner";
 import CategoryCards from "@/components/Home/CategoryCards";
 import NewArrivalCards from "@/components/Home/NewArrival";
 import ServiceFeatures from "@/components/Home/ServiceFeatures";
+import { usePathname } from "next/navigation";
 
 import FirstLayout from "@/components/Home/FirstLayout";
 import SecondLayout from "@/components/Home/SecondLayout";
@@ -16,36 +17,49 @@ import categorySection3 from "@/public/assets/home-categories/third.png";
 import Feedback from "@/components/Home/Feedback";
 import Shop from "@/components/Home/Shop";
 import { fetchTwentyFourProducts } from "@/lib/products";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setProducts } from "@/redux/products/productSlice";
 import React, { useEffect } from "react";
 import { HashLoader } from "react-spinners";
 import BestSellingProducts from "@/components/Home/BestSellingProducts";
-import useScrollToPosition from "@/lib";
 
 export default function Home() {
-  const [loading, setLoading] = React.useState(true);
+  const products = useSelector((state) => state.product.products);
+  const pathname = usePathname();
+  const [loading, setLoading] = React.useState(
+    products.length < 23 ? true : false
+  );
   const dispatch = useDispatch();
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [loading]);
 
   useEffect(() => {
-    const getProducts = async () => {
-      const products = await fetchTwentyFourProducts();
-      if (Array.isArray(products)) {
-        dispatch(setProducts(products));
+    if (pathname === "/") {
+      const saved = sessionStorage.getItem("scrollPos");
+      if (saved) {
+        window.scrollTo(0, parseInt(saved));
       }
-      setLoading(false);
-    };
-    getProducts();
+    }
+  }, [pathname]);
+
+  useEffect(() => {
+    if (products.length < 23) {
+      const getProducts = async () => {
+        const products = await fetchTwentyFourProducts();
+        if (Array.isArray(products)) {
+          dispatch(setProducts(products));
+        }
+        setLoading(false);
+      };
+      getProducts();
+    }
   }, [dispatch]);
   return (
     <React.Fragment>
       {loading ? (
-        <div className="flex justify-center bg-white items-center h-screen">
-          <HashLoader color="#5fa800" />
-        </div>
+        <>
+          <div className="flex justify-center bg-white items-center h-screen">
+            <HashLoader color="#5fa800" />
+          </div>
+        </>
       ) : (
         <>
           <div className="bg-white min-h-screen px-[10px] sm:px-[20px] md:px-[40px] lg:px-[80px] xl:px-[130px] 2xl:px-[130px]">
