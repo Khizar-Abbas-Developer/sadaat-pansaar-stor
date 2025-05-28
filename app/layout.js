@@ -87,10 +87,13 @@ export default function RootLayout({ children }) {
               href="https://wa.link/vjj9nm"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Chat with us on WhatsApp"
               className="block fixed bottom-8 right-6 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition duration-300"
             >
               <IoLogoWhatsapp className="text-4xl" />
+              <span className="sr-only">Chat with us on WhatsApp</span>
             </a>
+
             <Footer />
           </PersistGateProvider>
         </ReduxToolkitProvider>
