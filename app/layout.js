@@ -73,6 +73,11 @@ export default function RootLayout({ children }) {
           name="twitter:image"
           content="https://www.sadaat-pansaar.store/_next/static/media/headerK.9457981b.jpeg"
         />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4815404807688326"
+          crossorigin="anonymous"
+        ></script>
       </head>
 
       <body className="antialiased bg-white text-gray-900 mt-[110px]">
